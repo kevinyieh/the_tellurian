@@ -27,6 +27,7 @@ class MainPage extends React.Component {
 
     let polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
     polygonSeries.useGeodata = true;
+    debugger;
     polygonSeries.mapPolygons.template.events.on("hit", function(ev) {
       const coords = map.svgPointToGeo(ev.svgPoint);
       const deltaLongitude = -coords.longitude;
