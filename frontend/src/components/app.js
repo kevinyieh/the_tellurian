@@ -9,7 +9,7 @@ const App = () => (
   <div>
     <Switch>
       <Route exact path="/" component={Splash} />
-      <ProtectedRoute exact path="/main" component={MainPage} />
+      <Route exact path="/main" component={MainPage} />
     </Switch>
   </div>
 );
