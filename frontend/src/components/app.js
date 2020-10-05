@@ -8,7 +8,7 @@ import MainPage from './main/main_page';
 const App = () => (
   <div>
     <Switch>
-        <Route exact path="/" component={MainPage} />
+        <Route exact path="/main" component={MainPage} />
     </Switch>
   </div>
 );
