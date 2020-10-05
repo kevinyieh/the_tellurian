@@ -3,13 +3,10 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4themesAnimated from '@amcharts/amcharts4/themes/animated'
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
-import "../../stylesheets/map.css";
+import "../../stylesheets/map.scss";
+
 am4core.useTheme(am4themesAnimated)
-// function centerMapOnSelectedObject() {
-//   var obj = map.selectedObject;
-//   if ('MapArea' == obj.objectType || 'MapData' == obj.objectType) map.zoomToLongLat(map.zoomLevel(), map.getAreaCenterLongitude(obj), map.getAreaCenterLatitude(obj), true);
-//   else if ('MapImage' == obj.objectType) map.zoomToLongLat(map.zoomLevel(), obj.longitude, obj.latitude, true);
-// }
+
 class MainPage extends React.Component {
   componentDidMount() {
     // Set up basic map
