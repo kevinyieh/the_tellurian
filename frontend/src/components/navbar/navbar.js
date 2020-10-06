@@ -18,7 +18,6 @@ export default class NavBar extends React.Component {
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
     handleClickOutside(e){
-        debugger;
         if(this.searchBar && !this.searchBar.contains(e.target)){
             this.setState({
                 dropped: false
