@@ -14,7 +14,6 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     id: req.user.id,
-    handle: req.user.handle,
     email: req.user.email
   });
 })
@@ -35,7 +34,6 @@ router.post('/register', (req, res) => {
       } else {
         // Otherwise create a new user
         const newUser = new User({
-          handle: req.body.handle,
           email: req.body.email,
           password: req.body.password
         })
@@ -45,7 +43,21 @@ router.post('/register', (req, res) => {
             if (err) throw err;
             newUser.password = hash;
             newUser.save()
-              .then(user => res.json(user))
+            .then((user) => {
+              const payload = { id: user.id, email: user.email };
+                jwt.sign(
+                  payload,
+                  keys.secretOrKey,
+                  // Tell the key to expire in one hour
+                  { expiresIn: 3600 },
+                  (err, token) => {
+                    res.json({
+                      success: true,
+                      token: "Bearer " + token
+                    });
+                  }
+                );
+              })
               .catch(err => console.log(err));
           })
         })
@@ -56,8 +68,6 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-
-  console.log(errors);
 
   if (!isValid) {
     return res.status(400).json(errors);
@@ -75,7 +85,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, name: user.name };
+            const payload = { id: user.id, email: user.email };
 
             jwt.sign(
               payload,

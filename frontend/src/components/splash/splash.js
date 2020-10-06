@@ -1,4 +1,5 @@
 import React from "react";
+import SessionFormContainer from '../session/session_form_container';
 import "../../stylesheets/splash.css";
 
 class Splash extends React.Component {
@@ -12,13 +13,13 @@ class Splash extends React.Component {
           </h2>
         </div>
 
-        <div className="session-form">
+        <div className="session-container">
           <img
             className="logo"
             alt="tellurian_logo"
             src={require("../../images/alien_w.png")}
           />
-          <h3>SESSION COMPONENT FORM IMPORTED HERE</h3>
+          <SessionFormContainer />
           <div className="credits">
             Icons made by
             <a
