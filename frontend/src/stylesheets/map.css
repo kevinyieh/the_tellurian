@@ -1,8 +1,13 @@
+.main-page {
+    position: relative;
+    overflow: hidden;
+}
+
 #chartdiv {
     width: 100%;
+    padding: 10px;
     height: calc(100vh - 50px);
     background-color: #1a1a1a;
-    padding: 30px;
     box-sizing: border-box;
     font-family: 'Peddana', serif;
     font-size: 18px;
@@ -34,13 +39,12 @@
 }
 
 .search-bar-input-container {
-    /* background-color: white; */
     display: flex;
     flex-direction: column;
     overflow: visible;
     box-shadow: 0 0 0 transparent;
     transition: box-shadow 0.2s;
-    padding: 0 6px;
+    padding: 3px 6px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     position: relative;
@@ -48,7 +52,7 @@
 .space-shuttle-container {
     font-size: 20px;
     position: absolute;
-    top: 10px;
+    top: 13px;
     left: 13px;
     opacity: 100;
     transition: opacity 0.3s;

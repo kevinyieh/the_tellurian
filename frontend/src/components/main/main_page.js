@@ -16,6 +16,9 @@ class MainPage extends React.Component {
     super(props);
     this.selected = null;
     this.handleHit = this.handleHit.bind(this);
+    this.state = {
+      display: false
+    }
   }
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
@@ -64,10 +67,16 @@ class MainPage extends React.Component {
     const countryTarget = iso2 ? this.polygonSeries.getPolygonById(iso2) : null;
     return ev => {
       this.rotateGlobeAndFocus(cor,ev,countryTarget);
+      this.setState({
+        display: true
+      })
     }
   }
 
   componentDidMount() {
+    this.setState({
+      display: false
+    })
     // Set up basic map
     let map = am4core.create("chartdiv", am4maps.MapChart);
     
@@ -132,7 +141,13 @@ class MainPage extends React.Component {
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
         />
+        <CountryDataContainer
+          display={this.state.display}
+        />
         <div id="chartdiv" />
+        <ArticlesContainer
+          display={this.state.display}
+        />
       </div>
         
     );
