@@ -1,0 +1,41 @@
+.session-form {
+    font-family: 'Tomorrow', sans-serif;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+.session-input {
+  border: 4px solid transparent;
+  color: #39364f;
+  font-size: 14px;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 275px;
+  margin: 5px 0px 10px 0px;
+}
+
+.session-input:focus {
+    border: 4px solid #C47834;
+}
+
+.session-form button {
+    font-family: inherit;
+    border: 0;
+    outline: none;
+    padding: 15px 0px 15px 0px;
+    background-color: black;
+    transition: background-color 0.5s;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+    color: white;
+    width: 300px;
+    margin: 10px 10px 10px 0px;
+}
+
+.session-form button:hover {
+        cursor: pointer;
+        background-color: #C47834;
+        transition: background-color 0.5s;
+        transition-timing-function: ease-out;
+    }

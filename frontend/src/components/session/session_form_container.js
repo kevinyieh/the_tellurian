@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
     signup: user => dispatch(signup(user)),
-    demo: <button onClick={() => dispatch(demo())}>Login as Demo User</button>
+    demo: <button id="demo" onClick={() => dispatch(demo())}>Log In As Demo User</button>
   };
 };
 
