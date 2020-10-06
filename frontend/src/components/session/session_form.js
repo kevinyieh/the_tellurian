@@ -14,6 +14,7 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.openSignup = this.openSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   renderErrors() {
@@ -44,8 +45,9 @@ class SessionForm extends React.Component {
     this.props.clearErrors();
     this.setState({
       isSignup: true,
-      password2: ""
-    })
+      password2: "",
+      errors: {},
+    });
   }
 
   handleSubmit(e) {
@@ -57,20 +59,33 @@ class SessionForm extends React.Component {
         password: this.state.password,
         password2: this.state.password2,
       };
-      this.props.signup(user, this.props.history);
+      debugger;
+      this.props.signup(user).then(this.props.history.push("/main"));
     } else {
       user = {
         email: this.state.email,
         password: this.state.password,
       };
-      this.props.login(user);
+      debugger;
+      this.props.login(user).then(this.props.history.push("/main"));
     }
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    let user;
+      user = {
+        email: "demo@demo.demo",
+        password: "demodemodemo",
+      };
+      debugger;
+      this.props.login(user).then(this.props.history.push("/main"));
   }
 
   login() {
     return (
       <div>
-        <label for="email">Email address</label>
+        <label htmlFor="email">Email address</label>
         <input
           className="session-input"
           id="email"
@@ -82,7 +97,7 @@ class SessionForm extends React.Component {
         />
 
         <br></br>
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           className="session-input"
           id="password"
@@ -100,7 +115,7 @@ class SessionForm extends React.Component {
       <div className="session-form">
         {this.login()}
         <br></br>
-        <label for="confirm">Confirm Password</label>
+        <label htmlFor="confirm">Confirm Password</label>
         <input
           className="session-input"
           id="confirm"
@@ -131,10 +146,11 @@ class SessionForm extends React.Component {
       <div className="session-form">
         <form onSubmit={this.handleSubmit}>
           {this.state.isSignup ? this.signup() : this.login()}
-          <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
           {this.renderErrors()}
+          <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
         </form>
-        {this.props.demo}
+        <button id="demo" onClick={this.handleDemo}>Log In As Demo User</button>
+        {/* {this.props.demo} */}
         {this.signupButton()}
       </div>
     );
