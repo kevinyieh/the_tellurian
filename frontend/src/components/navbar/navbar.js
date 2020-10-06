@@ -1,4 +1,5 @@
 import React from "react";
+import SessionDrop from './session_drop';
 const seeds = require("./seeds.json");
 const allCountries = {}
 Object.keys(seeds).forEach( (key) => {
@@ -93,8 +94,8 @@ export default class NavBar extends React.Component {
                                 { this.renderDropDown() }
                             </div>
                         </div>
-                            
                     </form>
+                    <SessionDrop loggedIn={this.props.loggedIn}/>
                 </div>
             </div>
 
