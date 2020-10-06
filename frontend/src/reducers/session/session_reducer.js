@@ -4,21 +4,22 @@ import {
 } from "../../actions/session_actions";
 
 const initialState = {
-  authenticated: false,
+  isLoggedIn: false,
   user: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
+      const user = Object.assign({}, action.currentUser);
+      delete user.email;
       return {
-        ...state,
-        authenticated: !!action.currentUser,
-        user: action.currentUser,
+        isLoggedIn: !!action.currentUser,
+        user
       };
     case RECEIVE_LOGOUT:
       return {
-        authenticated: false,
+        isLoggedIn: false,
         user: undefined,
       };
     default:
