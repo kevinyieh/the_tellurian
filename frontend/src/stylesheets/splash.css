@@ -10,6 +10,7 @@
     background-image: url('https://suro-seeds.s3.amazonaws.com/stars.gif');
     background-repeat: no-repeat;
     background-size: cover;
+    height: inherit;
 }
 
 
@@ -28,7 +29,7 @@
     font-size: 60px;
     line-height: 0.5;
     margin: 10px 0px 0px 0px;
-    animation: bounce 5s linear infinite alternate;
+    animation: bounce 5s ease infinite alternate;
 }
 .byline {
     /* font-family: 'Peddana', serif; */

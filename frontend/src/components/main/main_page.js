@@ -5,6 +5,9 @@ import am4themesAnimated from '@amcharts/amcharts4/themes/animated'
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import "../../stylesheets/map.css";
 import NavBarContainer from "../navbar/navbar_container";
+import CountryDataContainer from "./country_data/country_data_container";
+import ArticlesContainer from "./articles/articles_container";
+
 
 am4core.useTheme(am4themesAnimated)
 
@@ -13,53 +16,67 @@ class MainPage extends React.Component {
     super(props);
     this.selected = null;
     this.handleHit = this.handleHit.bind(this);
+    this.state = {
+      display: false
+    }
   }
+
+  rotateGlobeAndFocus(cor,ev,countryTarget) {
+    const map = this.map;
+    const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
+    const deltaLongitude = -coords.longitude;
+    const deltaLatitude = -coords.latitude;
+    const inc = 0.3;
+    const longInc = Math.abs((map.deltaLongitude - deltaLongitude)) < Math.abs((deltaLongitude - map.deltaLongitude)) ?  
+                    (map.deltaLongitude - deltaLongitude) * inc : (deltaLongitude - map.deltaLongitude) * inc;
+
+    const latInc = Math.abs((map.deltaLatitude - deltaLatitude)) < Math.abs((deltaLatitude - map.deltaLatitude)) ?  
+                    (map.deltaLatitude - deltaLatitude) * inc : (deltaLatitude - map.deltaLatitude) * inc;
+    const pastLong = (current, destination, direction) => {
+      if (direction) {
+        return current > destination;
+      }else {
+        return current < destination;
+      }
+    }
+    const pastLat = (current, destination, direction) => {
+      if (direction) {
+        return current >= destination;
+      }else {
+        return current <= destination;
+      }
+    }
+    if (this.intervalId) clearInterval(this.intervalId);
+    this.intervalId = setInterval(() => {
+      if(!pastLong(map.deltaLongitude,deltaLongitude,longInc > 0) || !pastLat(map.deltaLatitude,deltaLatitude,latInc > 0)){
+        map.deltaLongitude += longInc;
+        map.deltaLatitude += latInc;
+      }else{
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+        const objToFocus = countryTarget ? countryTarget : ev.target;
+        map.zoomToMapObject(objToFocus,1.4);
+        if(this.selected) this.selected.isActive = false;
+        this.selected = objToFocus;
+        this.selected.isActive = true;
+      }
+    },1)
+  }
+
   handleHit(cor,iso2){
     const countryTarget = iso2 ? this.polygonSeries.getPolygonById(iso2) : null;
     return ev => {
-      const map = this.map;
-      const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
-      const deltaLongitude = -coords.longitude;
-      const deltaLatitude = -coords.latitude;
-      const inc = 0.23;
-      const longInc = Math.abs((map.deltaLongitude - deltaLongitude)) < Math.abs((deltaLongitude - map.deltaLongitude)) ?  
-                      (map.deltaLongitude - deltaLongitude) * inc : (deltaLongitude - map.deltaLongitude) * inc;
-
-      const latInc = Math.abs((map.deltaLatitude - deltaLatitude)) < Math.abs((deltaLatitude - map.deltaLatitude)) ?  
-                      (map.deltaLatitude - deltaLatitude) * inc : (deltaLatitude - map.deltaLatitude) * inc;
-      const pastLong = (current, destination, direction) => {
-        if (direction) {
-          return current > destination;
-        }else {
-          return current < destination;
-        }
-      }
-      const pastLat = (current, destination, direction) => {
-        if (direction) {
-          return current >= destination;
-        }else {
-          return current <= destination;
-        }
-      }
-      if (this.intervalId) clearInterval(this.intervalId);
-      this.intervalId = setInterval(() => {
-        if(!pastLong(map.deltaLongitude,deltaLongitude,longInc > 0) || !pastLat(map.deltaLatitude,deltaLatitude,latInc > 0)){
-          map.deltaLongitude += longInc;
-          map.deltaLatitude += latInc;
-        }else{
-          clearInterval(this.intervalId);
-          this.intervalId = null;
-          const objToFocus = countryTarget ? countryTarget : ev.target;
-          map.zoomToMapObject(objToFocus,1.4);
-          if(this.selected) this.selected.isActive = false;
-          this.selected = objToFocus;
-          this.selected.isActive = true;
-        }
-      },1)
+      this.rotateGlobeAndFocus(cor,ev,countryTarget);
+      this.setState({
+        display: true
+      })
     }
   }
 
   componentDidMount() {
+    this.setState({
+      display: false
+    })
     // Set up basic map
     let map = am4core.create("chartdiv", am4maps.MapChart);
     
@@ -79,7 +96,6 @@ class MainPage extends React.Component {
     graticuleSeries.fitExtent = false;
     // ADD COUNTRIES
     let polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
-    debugger;
     polygonSeries.useGeodata = true;
     this.map = map;
     this.polygonSeries = polygonSeries;
@@ -125,7 +141,13 @@ class MainPage extends React.Component {
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
         />
+        <CountryDataContainer
+          display={this.state.display}
+        />
         <div id="chartdiv" />
+        <ArticlesContainer
+          display={this.state.display}
+        />
       </div>
         
     );

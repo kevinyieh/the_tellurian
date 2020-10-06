@@ -1,0 +1,18 @@
+.articles-container{
+    position: absolute;
+    height: 900px;
+    width: 650px;
+    border-radius: 10px;
+    z-index: 50;
+    top: 58px;
+    background-color: white;
+}
+.articles-container.on-screen {
+    right: 30px;
+    transition: right 2s;
+}
+
+.articles-container.off-screen {
+    right: -700px;
+    transition: right 2s;
+}

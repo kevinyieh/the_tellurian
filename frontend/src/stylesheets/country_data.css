@@ -1,0 +1,18 @@
+.country-data-container {
+    position: absolute;
+    height: 600px;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    top: 200px;
+    z-index: 50;
+}
+.country-data-container.on-screen {
+    left: 160px;
+    transition: left 2s;
+}
+
+.country-data-container.off-screen {
+    left: -600px;
+    transition: left 2s;
+}
