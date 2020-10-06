@@ -36,15 +36,15 @@ const CountrySchema = new Schema({
         required: true 
     },
     gdp: {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     lat: {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     lng : {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     area: {
