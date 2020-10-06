@@ -8,7 +8,7 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 // We will use this to parse the user's session token
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById("root");
