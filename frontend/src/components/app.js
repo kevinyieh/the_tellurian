@@ -9,10 +9,11 @@ import "../stylesheets/index.css";
 const App = () => (
   <div className="app">
     <Switch>
-      <Route exact path="/" component={Splash} />
-      <Route exact path="/main" component={MainPage} />
+      <Route path="/" component={Session} />
+      {/* <Route exact path="/" component={Splash} /> */}
+      {/* <Route exact path="/" component={MainPage} /> */}
     </Switch>
   </div>
-);
+)
 
 export default App;
