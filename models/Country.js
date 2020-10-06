@@ -7,6 +7,10 @@ const CountrySchema = new Schema({
         type: String,
         required: true
     },
+    officialname: {
+        type: String,
+        required: true
+    },
     cca2: {
         type: String,
         required: true 
