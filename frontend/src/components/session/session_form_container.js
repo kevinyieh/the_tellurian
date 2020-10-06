@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { 
   login,
   signup,
-  demo
+  logout,
+  demo,
+  CLEAR_SESSION_ERRORS
 } from "../../actions/session_actions";
 import SessionForm from "./session_form";
 
@@ -18,7 +20,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
     signup: user => dispatch(signup(user)),
-    demo: <button onClick={() => dispatch(demo())}>Login as Demo User</button>
+    clearErrors: () => dispatch({ type: CLEAR_SESSION_ERRORS }),
+    demo: <button onClick={() => dispatch(demo())}>Login as Demo User</button>,
   };
 };
 

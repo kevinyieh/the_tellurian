@@ -40,6 +40,7 @@ class SessionForm extends React.Component {
   }
 
   openSignup() {
+    this.props.clearErrors();
     this.setState({
       isSignup: true,
       password2: ""
@@ -74,6 +75,7 @@ class SessionForm extends React.Component {
           onChange={this.update("email")}
           placeholder="Email"
           />
+        <br />
         <input
           type="password"
           value={this.state.password}

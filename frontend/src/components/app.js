@@ -5,6 +5,7 @@ import Splash from './splash/splash';
 import { Route } from "react-router-dom";
 import MainPage from './main/main_page';
 import "../stylesheets/index.css";
+import Session from './session/session_form_container';
 
 const App = () => (
   <div className="app">
