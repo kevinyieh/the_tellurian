@@ -19,7 +19,7 @@
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: white;
+    background-color: #c97b36;
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@
 }
 
 .search-bar-input-container {
-    background-color: white;
+    /* background-color: white; */
     display: flex;
     flex-direction: column;
     overflow: visible;
@@ -74,8 +74,6 @@
     }
 }
 
-
-
 .search-bar-input-container input {
     border-radius: 20px;
     outline: none;
@@ -84,6 +82,7 @@
     text-indent: 40px;
 }
 .search-bar-input-container.dropped {
+    background-color: white;
     box-shadow: 0 0 3px black;
     position: absolute;
     min-height: 50px;
