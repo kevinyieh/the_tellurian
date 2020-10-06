@@ -7,6 +7,10 @@ const CountrySchema = new Schema({
         type: String,
         required: true
     },
+    officialname: {
+        type: String,
+        required: true
+    },
     cca2: {
         type: String,
         required: true 
@@ -32,15 +36,15 @@ const CountrySchema = new Schema({
         required: true 
     },
     gdp: {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     lat: {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     lng : {
-        type: Decimal128,
+        type: Number,
         required: true
     },
     area: {

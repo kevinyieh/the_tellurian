@@ -6,7 +6,8 @@ let seed = {};
 
 countries.forEach(country => {
     seed[country.cca2] = {
-        name: country.name.official,
+        name: country.name.c,
+        officialname: country.name.official,
         cca2: country.cca2,
         cca3: country.cca3,
         currencies: Object.keys(country.currencies).map(key => JSON.stringify(country.currencies[key])),
@@ -28,8 +29,8 @@ worldbankresponse[1].forEach(obj => {
     }
 })
 
-console.log(seed);
-fs.writeFile('seeds.json', JSON.stringify(seed), (err) => {
-    if (err) throw err;
-    console.log('The file has been saved');
-})
+// console.log(seed);
+// fs.writeFile('seeds.json', JSON.stringify(Object.values(seed)), (err) => {
+//     if (err) throw err;
+//     console.log('The file has been saved');
+// })
