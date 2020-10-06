@@ -4,18 +4,16 @@ import { Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import { Route } from "react-router-dom";
 import MainPage from './main/main_page';
-import Session from './session/session_form_container';
+import "../stylesheets/index.css";
 
-const App = () => {
-  return (
-  <div>
+const App = () => (
+  <div className="app">
     <Switch>
       <Route path="/" component={Session} />
       {/* <Route exact path="/" component={Splash} /> */}
       {/* <Route exact path="/" component={MainPage} /> */}
     </Switch>
   </div>
-  )
-};
+)
 
 export default App;
