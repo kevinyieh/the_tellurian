@@ -128,40 +128,30 @@ body, ul, li, div {
     box-sizing: border-box;
 }
 
-.session-drop {
-  margin-right: 15px;
-}
-
 .session-drop:focus {
   border: none;
 }
 
-.session-drop button {
-  border: none;
-  border-radius: 12px;
+.session-drop{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 15px;
 }
 
 .session-drop-menu {
   position: absolute;
-  top: 13px;
-  right: 45px;
+  right: 50px;
   background-color: transparent;
-  font-size: 9px;
-}
-
-.hamburger {
-  width: 20px;
-  height: 20px;
-  background-image: url("https://tellurian.s3.amazonaws.com/bars-solid.svg");
-  background-color: transparent;
-}
-
-.hamburger:focus {
-  border: none;
+  font-size: 15px;
 }
 
 .logout-button {
   color: #f2f2f2;
   background-color: #000;
-  padding: 5px 8px;
+  padding: 3px 8px;
+  border-radius: 22px;
 }

@@ -35,7 +35,17 @@ class Dropdown extends React.Component {
     if (this.props.loggedIn)
     return (
       <div className="session-drop">
-        <button className="hamburger" onClick={this.show} />
+        <button
+          className={`hamburger hamburger--emphatic ${
+            this.state.show ? "is-active" : ""
+          }`}
+          type="button"
+          onClick={this.show}
+        >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
         {this.state.show ? (
           <div className="session-drop-menu">
             <button className="logout-button" onClick={this.props.logout}>
