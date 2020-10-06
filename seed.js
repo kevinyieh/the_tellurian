@@ -6,7 +6,7 @@ let seed = {};
 
 countries.forEach(country => {
     seed[country.cca2] = {
-        name: country.name.common,
+        name: country.name.c,
         officialname: country.name.official,
         cca2: country.cca2,
         cca3: country.cca3,
@@ -29,8 +29,8 @@ worldbankresponse[1].forEach(obj => {
     }
 })
 
-console.log(seed);
-fs.writeFile('seeds.json', JSON.stringify(Object.values(seed)), (err) => {
-    if (err) throw err;
-    console.log('The file has been saved');
-})
+// console.log(seed);
+// fs.writeFile('seeds.json', JSON.stringify(Object.values(seed)), (err) => {
+//     if (err) throw err;
+//     console.log('The file has been saved');
+// })

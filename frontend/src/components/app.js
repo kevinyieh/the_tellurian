@@ -4,9 +4,10 @@ import { Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import { Route } from "react-router-dom";
 import MainPage from './main/main_page';
+import "../stylesheets/index.css";
 
 const App = () => (
-  <div>
+  <div className="app">
     <Switch>
       <Route exact path="/" component={Splash} />
       <Route exact path="/main" component={MainPage} />
