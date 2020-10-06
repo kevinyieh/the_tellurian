@@ -21,7 +21,7 @@ class MainPage extends React.Component {
       const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
       const deltaLongitude = -coords.longitude;
       const deltaLatitude = -coords.latitude;
-      const inc = 0.23;
+      const inc = 0.3;
       const longInc = Math.abs((map.deltaLongitude - deltaLongitude)) < Math.abs((deltaLongitude - map.deltaLongitude)) ?  
                       (map.deltaLongitude - deltaLongitude) * inc : (deltaLongitude - map.deltaLongitude) * inc;
 
@@ -79,7 +79,6 @@ class MainPage extends React.Component {
     graticuleSeries.fitExtent = false;
     // ADD COUNTRIES
     let polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
-    debugger;
     polygonSeries.useGeodata = true;
     this.map = map;
     this.polygonSeries = polygonSeries;
