@@ -40,6 +40,14 @@ class SessionForm extends React.Component {
       });
   }
 
+  openSignup() {
+    this.props.clearErrors();
+    this.setState({
+      isSignup: true,
+      password2: ""
+    })
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     let user;

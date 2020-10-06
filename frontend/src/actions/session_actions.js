@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
+export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
 export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT";
 
 export const receiveCurrentUser = currentUser => ({
@@ -32,11 +33,37 @@ export const login = user => dispatch =>
       dispatch(receiveErrors(err.response.data));
 });
 
-
-//this don't work right
 export const signup = (user) => (dispatch) =>
-  APIUtil.signup(user).then(login(user));
+  APIUtil.signup(user).then(
+    (res) => {
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      APIUtil.authenticate(token);
+      let decoded = jwt_decode(token);
+      dispatch(receiveCurrentUser(decoded));
+    },
+    (err) => dispatch(receiveErrors(err.response.data))
+);
 
+// export const signup = user => dispatch =>
+//   APIUtil.signup(user)
+//     .then(APIUtil.login(user))
+//     .then((res) => {
+//       const { token } = res.data;
+//       localStorage.setItem("jwtToken", token);
+//       APIUtil.authenticate(token);
+//       let decoded = jwt_decode(token);
+//       dispatch(receiveCurrentUser(decoded));
+//     })
+//     .catch((err) => {
+//       dispatch(receiveErrors(err.response.data));
+// });
+
+// export const signup = (user) => (dispatch) =>
+//   APIUtil.signup(user).then(
+//     () => dispatch(receiveUserSignIn()),
+//     (err) => dispatch(receiveErrors(err.response.data))
+//   );
 
   
 export const logout = () => dispatch => {
