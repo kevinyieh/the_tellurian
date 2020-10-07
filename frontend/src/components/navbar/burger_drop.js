@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 
@@ -34,7 +35,7 @@ class Dropdown extends React.Component {
   render() {
     if (this.props.loggedIn)
     return (
-      <div className="session-drop">
+      <div className="burger-drop">
         <button
           className={`hamburger hamburger--emphatic ${
             this.state.show ? "is-active" : ""
@@ -47,9 +48,29 @@ class Dropdown extends React.Component {
           </span>
         </button>
         {this.state.show ? (
-          <div className="session-drop-menu gradient">
-            <button className="nav-session-button logout-button" onClick={this.props.logout}>
+          <div className="burger-drop-menu gradient">
+            <button
+              className="burger-drop-button logout-button"
+              onClick={this.props.logout}
+            >
               EJECT<i className="fas fa-sign-out-alt"></i>
+            </button>
+            <button className="burger-drop-button below profile-button">
+              <Link to="/profile">
+                <img
+                  src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
+                  alt="profile"
+                />
+              </Link>
+            </button>
+            <button className="burger-drop-button below git-button">
+              <a
+                href="https://github.com/kevinyieh/the_tellurian"
+                target="_blank"
+                rel = "noopener noreferrer"
+              >
+                <i class="fab fa-github"></i>
+              </a>
             </button>
           </div>
         ) : null}
@@ -57,7 +78,6 @@ class Dropdown extends React.Component {
     );
   }
 }
-
 const mDTP = dispatch => ({
   logout: () => dispatch(logout())
 })

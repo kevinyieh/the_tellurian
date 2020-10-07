@@ -1,5 +1,5 @@
 import React from "react";
-import SessionDrop from './session_drop';
+import BurgerDrop from './burger_drop';
 const seeds = require("./seeds.json");
 const allCountries = {}
 Object.keys(seeds).forEach( (key) => {
@@ -96,7 +96,7 @@ export default class NavBar extends React.Component {
                             </div>
                         </div>
                     </form>
-                    <SessionDrop loggedIn={this.props.loggedIn}/>
+                    <BurgerDrop loggedIn={this.props.loggedIn}/>
                 </div>
             </div>
 
