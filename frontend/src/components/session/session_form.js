@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import '../../stylesheets/session_form.css'
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -8,11 +9,12 @@ class SessionForm extends React.Component {
       email: "",
       password: "",
       errors: {},
-      isSignup: false
+      isSignup: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.openSignup = this.openSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   renderErrors() {
@@ -43,8 +45,9 @@ class SessionForm extends React.Component {
     this.props.clearErrors();
     this.setState({
       isSignup: true,
-      password2: ""
-    })
+      password2: "",
+      errors: {},
+    });
   }
 
   handleSubmit(e) {
@@ -54,43 +57,68 @@ class SessionForm extends React.Component {
       user = {
         email: this.state.email,
         password: this.state.password,
-        password2: this.state.password2
+        password2: this.state.password2,
       };
-      this.props.signup(user, this.props.history);
+      debugger;
+      this.props.signup(user).then(this.props.history.push("/main"));
     } else {
       user = {
         email: this.state.email,
         password: this.state.password,
       };
-      this.props.login(user);
+      debugger;
+      this.props.login(user).then(this.props.history.push("/main"));
     }
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    let user;
+      user = {
+        email: "demo@demo.demo",
+        password: "demodemodemo",
+      };
+      debugger;
+      this.props.login(user).then(this.props.history.push("/main"));
   }
 
   login() {
     return (
       <div>
+        <label htmlFor="email">Email address</label>
         <input
-          type="text"
+          className="session-input"
+          id="email"
+          type="email"
+          required
           value={this.state.email}
           onChange={this.update("email")}
           placeholder="Email"
-          />
-        <br />
+        />
+
+        <br></br>
+        <label htmlFor="password">Password</label>
         <input
+          className="session-input"
+          id="password"
           type="password"
           value={this.state.password}
           onChange={this.update("password")}
           placeholder="Password"
-          />
+        />
       </div>
-    )
+    );
   }
 
   signup() {
     return (
-      <div>
+      <div className="session-form">
         {this.login()}
+        <br></br>
+        <label htmlFor="confirm">Confirm Password</label>
         <input
+          className="session-input"
+          id="confirm"
           type="password"
           value={this.state.password2}
           onChange={this.update("password2")}
@@ -102,12 +130,15 @@ class SessionForm extends React.Component {
 
   signupButton() {
     if (!this.state.isSignup) {
-      return (
-        <button onClick={this.openSignup}>
-          Sign up
-        </button>
-      )
+      return <button onClick={this.openSignup}>Sign Up Instead</button>;
     }
+  }
+
+  openSignup() {
+    this.setState({
+      isSignup: true,
+      password2: "",
+    });
   }
 
   render() {
@@ -115,11 +146,12 @@ class SessionForm extends React.Component {
       <div className="session-form">
         <form onSubmit={this.handleSubmit}>
           {this.state.isSignup ? this.signup() : this.login()}
-          <input type="submit" value={this.state.isSignup ? "Sign up" : "Log in"} />
           {this.renderErrors()}
+          <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
         </form>
+        <button id="demo" onClick={this.handleDemo}>Log In As Demo User</button>
+        {/* {this.props.demo} */}
         {this.signupButton()}
-        {this.props.demo}
       </div>
     );
   }

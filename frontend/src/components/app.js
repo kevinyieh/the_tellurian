@@ -1,20 +1,18 @@
 import React from 'react';
-import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute } from "../util/route_util";
+// import { Route } from "react-router-dom";
 import { Switch } from 'react-router-dom';
 import Splash from './splash/splash';
-import { Route } from "react-router-dom";
 import MainPage from './main/main_page';
 import "../stylesheets/index.css";
-import Session from './session/session_form_container';
 
 const App = () => (
   <div className="app">
     <Switch>
-      <Route path="/" component={Session} />
-      {/* <Route exact path="/" component={Splash} /> */}
-      {/* <Route exact path="/" component={MainPage} /> */}
+      <ProtectedRoute path="/main" component={MainPage} />
+      <AuthRoute exact path="/" component={Splash} />
     </Switch>
   </div>
-)
+);
 
 export default App;
