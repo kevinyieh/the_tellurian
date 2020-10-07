@@ -17,9 +17,7 @@ export const receiveCountryErrors = errors => {
     }
 }
 
-
-export const fetchcountry = country => dispatch => 
+export const fetchCountry = country => dispatch => 
     APIUtil.fetchCountry(country)
         .then(country => dispatch(receiveCountry(country.data)))
         .catch(err => dispatch(receiveCountryErrors(err)))
-
