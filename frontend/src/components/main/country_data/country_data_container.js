@@ -3,7 +3,7 @@ import CountryData from "./country_data";
 
 const mSTP = state => {
     return {
-
+        country: state.entities.countries[state.ui.currentCountry]
     }
 }
 
