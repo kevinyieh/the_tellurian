@@ -144,11 +144,11 @@ class SessionForm extends React.Component {
           {this.renderErrors()}
           <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
         </form>
+        {this.altButton()}
         <button id="demo" onClick={this.handleDemo}>
           Log In As Demo User
         </button>
         {/* {this.props.demo} */}
-        {this.altButton()}
       </div>
     );
   }
