@@ -20,7 +20,7 @@ const CountrySchema = new Schema({
         required: true
     },
     capital: {
-        type: String,
+        type: Array,
         required: true
     },
     region: {
