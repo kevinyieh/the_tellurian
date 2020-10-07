@@ -9,8 +9,8 @@ import configureStore from './store/store';
 
 // We will use this to parse the user's session token
 
-import jwt_decode from 'jwt-decode';
-import { fetchcountry } from './actions/country_actions';
+// import jwt_decode from 'jwt-decode';
+import { fetchCountry } from "./actions/country_actions";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.fetchcountry = fetchcountry;
+  window.fetchCountry = fetchCountry;
 
   ReactDOM.render(<Root store={store} />, root);
 });
