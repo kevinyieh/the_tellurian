@@ -1,7 +1,12 @@
 const axios = require("axios");
+const {
+  nytKey,
+  catcherKey,
+ } = require("../config/keys");
 
-//New York Times
-const nytKey = require("../../../config/keys").nytKey;
+ //TODO: remove NYT articles from catcher results
+ //parse url for nyt link?
+
 function nytNormalize(resp) {
   return resp.response.docs.map((result) => {
     let date = new Date(result.pub_date);
@@ -11,27 +16,24 @@ function nytNormalize(resp) {
         ? `https://static01.nyt.com/${result.multimedia[0].url}`
         : "";
     return {
-      headline: result.headline,
+      headline: result.headline.main,
+      body: result.lead_paragraph,
       date,
       articleURL: result.web_url,
-      body: result.lead_paragraph,
       imageUrl,
     };
   });
 }
-export const nytFetch = async (cca2, countryName) => {
+const nytFetch = async (cca2, countryName) => {
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&api-key=${nytKey}`;
-  const { data } = await axios.get(url);
-  const allArticles = nytNormalize(data);
-  return {
-    [cca2]: allArticles,
-  };
+  try {
+    const { data } = await axios.get(url);
+    return nytNormalize(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
-// nytFetch("US", "United States").then(console.log);
 
-
-//NewsCatcher by RapidAPI
-const catcherKey = require("../../../config/keys").catcherKey;
 function catcherNormalize(res) {
   return res.data.articles.map((result) => {
     let date = new Date(result.published_date);
@@ -41,11 +43,11 @@ function catcherNormalize(res) {
       date,
       articleURL: result.link,
       body: result.summary,
-      imageUrl: result.media
+      imageUrl: result.media,
     };
   });
 }
-export const catcherFetch = async (cca2) => {
+const catcherFetch = async (cca2) => {
   return axios({
     method: "GET",
     url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
@@ -59,15 +61,28 @@ export const catcherFetch = async (cca2) => {
       lang: "en",
       country: cca2,
       media: "True",
-    }
+    },
   })
-  .then((response) => {
-    return {
-      [cca2]: catcherNormalize(response),
-    }
-  })
-  .catch((err) => {
-    console.log(err)
-  });
+    .then((response) => {
+      return catcherNormalize(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export default async (cca2, countryName) => {
+  let articles = [];
+  await Promise.allSettled([
+    nytFetch(cca2, countryName)
+      .then((res) => {
+        articles = articles.concat(res)
+    }),
+    catcherFetch(cca2)
+      .then((res) => {
+        articles = articles.concat(res)
+    })
+  ])
+    .catch(console.log);
+  return { [cca2]: articles }
 }
-// catcherFetch("US").then((articles) => console.log(articles));

@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleItem from "./article_item";
+// import ArticleItem from "./article_item";
 import "../../../stylesheets/articles.css";
 
 export default class Articles extends React.Component{

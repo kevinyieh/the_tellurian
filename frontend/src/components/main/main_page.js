@@ -49,6 +49,8 @@ class MainPage extends React.Component {
       }
     }
     if (this.intervalId) clearInterval(this.intervalId);
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+    
     this.intervalId = setInterval(() => {
       if(!pastLong(map.deltaLongitude,deltaLongitude,longInc > 0) || !pastLat(map.deltaLatitude,deltaLatitude,latInc > 0)){
         map.deltaLongitude += longInc;
@@ -62,7 +64,19 @@ class MainPage extends React.Component {
         this.selected = objToFocus;
         this.selected.isActive = true;
       }
-    },1)
+    },1);
+    this.timeoutId = setTimeout(() => {
+      if(this.intervalId) {
+        clearInterval(this.intervalId);
+        this.timeoutId = null;
+        this.intervalId = null;
+        const objToFocus = countryTarget ? countryTarget : ev.target;
+        map.zoomToMapObject(objToFocus,1.4);
+        if(this.selected) this.selected.isActive = false;
+        this.selected = objToFocus;
+        this.selected.isActive = true;
+      }
+    }, 1500);
   }
 
   handleHit(cor,iso2){
@@ -124,7 +138,7 @@ class MainPage extends React.Component {
     let home = map.chartContainer.createChild(am4core.Button);
     home.label.text = "Zoom Out";
     home.fontFamily = "Times New Roman";
-    home.align = "right";
+    home.align = "left";
     home.events.on("hit", function(ev) {
       map.goHome();
     });
