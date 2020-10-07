@@ -74,6 +74,7 @@ export default class NavBar extends React.Component {
         return (
             <div className="navbar-spacer">
                 <div className="navbar-container">
+                  <h1 className="nav-title">The Tellurian</h1>
                     <form className="search-bar-form">
                         <div className={`search-bar-input-container ${this.state.dropped? "dropped" : ""}`}
                             ref={node => this.searchBar = node}

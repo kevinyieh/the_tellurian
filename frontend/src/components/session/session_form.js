@@ -13,7 +13,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
-    this.openSignup = this.openSignup.bind(this);
+    this.switchForm = this.switchForm.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
   }
 
@@ -41,15 +41,6 @@ class SessionForm extends React.Component {
       });
   }
 
-  openSignup() {
-    this.props.clearErrors();
-    this.setState({
-      isSignup: true,
-      password2: "",
-      errors: {},
-    });
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     let user;
@@ -72,11 +63,11 @@ class SessionForm extends React.Component {
   handleDemo(e) {
     e.preventDefault();
     let user;
-      user = {
-        email: "demo@demo.demo",
-        password: "demodemodemo",
-      };
-      this.props.login(user).then(this.props.history.push("/main"));
+    user = {
+      email: "demo@demo.demo",
+      password: "demodemodemo",
+    };
+    this.props.login(user).then(this.props.history.push("/main"));
   }
 
   login() {
@@ -125,10 +116,24 @@ class SessionForm extends React.Component {
     );
   }
 
-  signupButton() {
-    if (!this.state.isSignup) {
-      return <button onClick={this.openSignup}>Sign Up Instead</button>;
-    }
+  switchForm() {
+    this.props.clearErrors();
+    const prev = this.state.isSignup;
+    this.setState({
+      email: "",
+      password: "",
+      password2: "",
+      errors: {},
+      isSignup: !prev,
+    });
+  }
+
+  altButton() {
+    return (
+      <button onClick={this.switchForm}>
+        {this.state.isSignup ? "Back to Login" : "Sign Up Instead"}
+      </button>
+    )
   }
 
   render() {
@@ -139,9 +144,11 @@ class SessionForm extends React.Component {
           {this.renderErrors()}
           <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
         </form>
-        <button id="demo" onClick={this.handleDemo}>Log In As Demo User</button>
+        <button id="demo" onClick={this.handleDemo}>
+          Log In As Demo User
+        </button>
         {/* {this.props.demo} */}
-        {this.signupButton()}
+        {this.altButton()}
       </div>
     );
   }
