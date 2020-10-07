@@ -1,0 +1,133 @@
+.burger-drop:focus {
+  border: none;
+}
+
+.burger-drop{
+  width: 160px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.burger-drop-menu {
+  position: absolute;
+  padding: 10px;
+  font-size: 15px;
+  right: 20px;
+  top: 60px;
+  flex-direction: column;
+}
+
+.burger-drop-button {
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-width: 2px;
+  border-style: outset;
+  border-color: -light-dark(rgb(118, 118, 118), rgb(195, 195, 195));
+  border-image: initial;
+}
+
+.burger-drop-button.below {
+  margin-top: 10px;
+}
+
+.logout-button {
+  color: #f2f2f2;
+  background-color: rgb(200, 0, 0);
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.logout-button i{
+  padding-right: 5px;
+  transform: rotate(-90deg);
+}
+
+.profile-button {
+  background-image: url("https://suro-seeds.s3.amazonaws.com/stars.gif");
+  background-position: center;
+}
+
+.profile-button img {
+  height: 38px;
+  width: 42px;
+  filter: invert(1);
+}
+
+.profile-button:hover img {
+  height: 40px;
+  width: 44px;
+  filter: invert(1) brightness(3) drop-shadow(0 0 1px rgb(226, 131, 255));
+}
+
+.git-button {
+  background-color: rgb(80,80,80);
+}
+
+.git-button a {
+  font-size: 38px;
+  color: rgb(195, 121, 52);
+  -webkit-text-stroke: 1px #f2f2f2;
+}
+
+.git-button a:hover {
+  color: rgb(255,255,101);
+}
+
+@keyframes shine { 
+  0% {
+      transform:translateX(-100%) translateY(-100%) rotate(30deg);
+  }
+  80% {transform:translateX(-100%) translateY(-100%) rotate(30deg);}
+	100% {transform:translateX(100%) translateY(100%) rotate(30deg);}
+}
+
+.gradient {
+  border-radius: 6px;
+  display:flex;
+  z-index:0;
+  overflow:hidden;
+  background:linear-gradient( to bottom, #bcc6cc, #eee, #bcc6cc);
+
+  outline: none;
+  
+  background-color: hsl(0,0%,90%);
+  box-shadow: inset hsla(0,0%,15%,  1) 0  0px 0px 2px, /* border */
+    inset hsla(0,0%,15%, .8) 0 0px 2px 3px, /* soft SD */
+    inset hsla(0,0%,0%, .25) 0 1px 0px 4px, /* bottom SD */
+    inset hsla(0,0%,100%,.7) 0  0px 1px 5px, /* top HL */
+    
+    hsla(0,0%, 0%,.15) 0 -5px 6px 4px, /* outer SD */
+    hsla(0,0%,100%,.5) 0  0px 9px 3px;
+  
+  transition: color .2s;
+}
+  
+.gradient:after {
+  content:'';
+  top:0;
+  transform:translateX(100%) rotate(30deg);
+  width:300%;
+  height:300%;
+  position: absolute;
+  z-index:1;
+  animation: shine 9s infinite ease-in;
+  background:
+    linear-gradient( to right, 
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.8) 50%,
+      rgba(128,186,232,0) 99%,
+      rgba(128,186,232,0) 100%);
+}

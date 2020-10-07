@@ -27,9 +27,16 @@
     background-color: #c97b36;
     z-index: 10;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     overflow: visible;
+}
+
+.nav-title {
+  font-family: 'Codystar', cursive;
+  font-size: 30px;
+  color: #f2f2f2;
+  margin-left: 10px;
 }
 
 .search-bar-form {
@@ -64,6 +71,7 @@
     animation: travel 5s ease;
     transition-delay: 1s;
 }
+
 @keyframes travel {
     0% {
         transform: translateY(0%) translateX(0%);
@@ -126,37 +134,4 @@ body, ul, li, div {
     padding: 0;
     list-style: none;
     box-sizing: border-box;
-}
-
-.session-drop:focus {
-  border: none;
-}
-
-.session-drop{
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  right: 15px;
-}
-
-.session-drop-menu {
-  position: absolute;
-  right: 50px;
-  background-color: transparent;
-  font-size: 15px;
-}
-
-.logout-button {
-  color: #f2f2f2;
-  background-color: #000;
-  border-radius: 20px;
-  padding: 5px 5px;
-}
-
-.logout-button:hover {
-  background-color: #f00;
-  color: #000;
 }
