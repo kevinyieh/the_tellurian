@@ -5,6 +5,7 @@ import am4themesAnimated from '@amcharts/amcharts4/themes/animated'
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import "../../stylesheets/map.css";
 import "../../stylesheets/hamburgers.css";
+import "../../stylesheets/nav_dropdown.css";
 import NavBarContainer from "../navbar/navbar_container";
 import CountryDataContainer from "./country_data/country_data_container";
 import ArticlesContainer from "./articles/articles_container";
