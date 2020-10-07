@@ -5,7 +5,7 @@ const CountriesReducer = (state = {}, action) => {
    
     switch(action.type) {
         case RECEIVE_COUNTRY:
-            return Object.assign({}, action.country)
+            return Object.assign({}, state, { [action.country.cca2]: action.country })
 
         default: 
             return state;
