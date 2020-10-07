@@ -49,13 +49,7 @@ class Dropdown extends React.Component {
         </button>
         {this.state.show ? (
           <div className="burger-drop-menu gradient">
-            <button
-              className="burger-drop-button logout-button"
-              onClick={this.props.logout}
-            >
-              EJECT<i className="fas fa-sign-out-alt"></i>
-            </button>
-            <button className="burger-drop-button below profile-button">
+            <button className="burger-drop-button profile-button">
               <Link to="/profile">
                 <img
                   src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
@@ -67,10 +61,16 @@ class Dropdown extends React.Component {
               <a
                 href="https://github.com/kevinyieh/the_tellurian"
                 target="_blank"
-                rel = "noopener noreferrer"
+                rel="noopener noreferrer"
               >
                 <i class="fab fa-github"></i>
               </a>
+            </button>
+            <button
+              className="burger-drop-button below logout-button"
+              onClick={this.props.logout}
+            >
+              EJECT<i className="fas fa-sign-out-alt"></i>
             </button>
           </div>
         ) : null}
