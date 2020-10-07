@@ -20,7 +20,6 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 
 //Protected: users can only access if they are logged in
 const Protected = ({ component: Component, loggedIn, ...rest }) => {
-    debugger;
     return (<Route
         {...rest}
         render={(props) =>

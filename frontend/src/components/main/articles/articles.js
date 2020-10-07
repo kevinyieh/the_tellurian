@@ -16,7 +16,6 @@ export default class Articles extends React.Component{
         });
     }
     componentDidUpdate(_,prevState) {
-        debugger;
         if(prevState.hidden){
             this.setState({
                 hidden: false
