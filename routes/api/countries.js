@@ -3,7 +3,6 @@ const router = express.Router();
 const Country = require("../../models/Country");
 
 router.post("/", (req, res) => {
-
     Country.findOne({ cca2: req.body.cca2 })
         .then(country => {
             if (country) {
@@ -18,3 +17,4 @@ router.post("/", (req, res) => {
 router.get("/test", (req, res) => res.json({ msg: "This is the countries route" }));
 
 module.exports = router;
+
