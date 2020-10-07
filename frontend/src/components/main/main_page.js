@@ -159,6 +159,7 @@ class MainPage extends React.Component {
         <NavBarContainer 
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
+          map={this.map}
         />
         <CountryDataContainer
           display={this.state.display}

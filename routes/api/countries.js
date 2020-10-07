@@ -15,6 +15,15 @@ router.post("/", (req, res) => {
        
 })
 
+router.post("/search", (req, res) => {
+    let searchparams = new RegExp('^' + req.body.searchparams, 'i')
+    debugger;
+    Country.find({ name: { $regex: searchparams } })
+        .then(matches => {
+            return res.json(matches)
+        })
+})
+
 router.get("/test", (req, res) => res.json({ msg: "This is the countries route" }));
 
 module.exports = router;
