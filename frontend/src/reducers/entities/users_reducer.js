@@ -1,4 +1,3 @@
-// import { bindActionCreators } from "redux";
 import {
   RECEIVE_CURRENT_USER,
   RECEIVE_LOGOUT
