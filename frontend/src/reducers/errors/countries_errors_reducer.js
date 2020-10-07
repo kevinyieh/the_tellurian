@@ -5,14 +5,14 @@ const _nullErrors = [];
 const CountryErrorsReducer = (state = _nullErrors, action) => {
     Object.freeze(state);
 
-    switch(action.type) {
+    switch (action.type) {
         case RECEIVE_COUNTRY_ERRORS:
             return action.errors;
 
         case RECEIVE_COUNTRY:
             return _nullErrors;
 
-        default: 
+        default:
             return state;
     }
 }

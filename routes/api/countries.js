@@ -16,13 +16,10 @@ router.post("/", (req, res) => {
 
 router.post("/search", (req, res) => {
     let searchparams = new RegExp( '^' + req.body.searchparams, 'i')
+    debugger;
     Country.find({ name: { $regex: searchparams  } })
         .then(matches => {
-            if (matches.length > 0) {
                 return res.json(matches)
-            } else {
-                return res.status(404).json({ countries: "No countries found" })
-            }
         })
 })
 

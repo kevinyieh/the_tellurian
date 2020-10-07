@@ -1,24 +1,22 @@
 import React from "react";
 import SessionDrop from './session_drop';
-const seeds = require("./seeds.json");
-const allCountries = {}
-Object.keys(seeds).forEach( (key) => {
-    allCountries[seeds[key].name] = key;
-})
-const countryNames = Object.keys(allCountries);
+import { searchCountries } from '../../util/countries_api_util';
+
 export default class NavBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             search: "",
             selected: false,
-            dropped: false
+            dropped: false,
+            searchResults: {}
         }
         this.map = this.props.map;
         this.handleClick = this.handleClick.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
     handleClickOutside(e){
+ 
         if(this.searchBar && !this.searchBar.contains(e.target)){
             this.setState({
                 dropped: false
@@ -33,43 +31,60 @@ export default class NavBar extends React.Component {
     }
     update(field){
         return e => {
+            
             e.preventDefault();
             this.setState({
                 [field]: e.target.value,
                 selected: false,
                 dropped: true
+            }, () => {
+              
+                searchCountries({ searchparams: this.state.search})
+                    .then(response => {
+                        let results = {};
+                        response.data.forEach(country => {
+                            results[country.name] = country
+                        })
+                    
+                        this.setState({
+                            searchResults: results
+                        })
+                    })
             })
         }
     }
 
     handleClick(e){
-        const iso2 = allCountries[e.target.innerText];
-        let cor = {latitude: seeds[iso2].lat,
-                    longitude:  seeds[iso2].lng};
+        const selected = this.state.searchResults[e.target.innerText]
+        const iso2 = selected.cca2
+        const cor = { latitude: selected.lat, longitude: selected.lng }
         this.setState({
-            search: e.target.innerText,
-            selected: true,
-            dropped: false
+                search: e.target.innerText,
+                selected: true,
+                dropped: false
         })
-        this.props.selectCountry(cor,iso2)();
+        debugger;
+        this.props.selectCountry(cor, iso2)();
+    }
+
+    updateSearchResults() {
+        let results = []
+        searchCountries({ searchparams: this.state.search })
+            .then(response => {
+                let results = [];
+                response.data.forEach(country => {
+                    results.push(country);
+                })
+                this.setState({ searchResults: results });
+            })
     }
 
     renderDropDown(){
         if(this.state.selected) return null;
-        const searchResults = countryNames.filter(country => {
-                                const len = this.state.search.length;
-                                return country.slice(0,len).toLowerCase() === this.state.search.toLowerCase()
-                            })
-                            .sort()
-                            .map( country => { return (<div key={country} 
-                                                className="search-result"
-                                                onClick={this.handleClick}> 
-                                                    {country} 
-                                            </div>) })
-                            .slice(0,10)
-        if(searchResults.length < 1) return <div key="no-results" className="search-result"> No results for this search </div>
-        return searchResults;
+        if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result"> No results for this search </div>
+        return Object.keys(this.state.searchResults).map(key => (<div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>)).slice(0, 10)
     }
+
     render(){
         return (
             <div className="navbar-spacer">
