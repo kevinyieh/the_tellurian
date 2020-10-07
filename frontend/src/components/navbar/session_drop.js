@@ -49,7 +49,7 @@ class Dropdown extends React.Component {
         {this.state.show ? (
           <div className="session-drop-menu">
             <button className="logout-button" onClick={this.props.logout}>
-              Log out
+              Eject!<i class="fas fa-sign-out-alt"></i>
             </button>
           </div>
         ) : null}
