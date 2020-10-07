@@ -44,58 +44,113 @@ export default class CountryData extends React.Component {
   }
 
   langConverter(langs) {
-      if (langs.length > 1) {
-        return (
-          <p className="country-data">
-            Languages:{" "}
-            {langs.map((lang, i) => (
-              <li className="lang" key={i}>
-                {lang}
-              </li>
-            ))}
-          </p>
-        );
-      } else {
-        return <p className="country-data">Language: {langs[0]}</p>;
-      }
-  }
-
-  gdpConverter(gdp) {
-    let newGdp = (gdp / 1000000000);
-    return newGdp.toFixed(2);
-  }
-
-  currencyConverter(currencies) {
-    let curr = JSON.parse(currencies);
-    let currArr = Object.values(curr);
-    if (currArr.length > 1) {
+    if (langs.length > 1) {
       return (
         <p className="country-data">
-          Currencies:{" "}
-          {currArr.map((c, i) => (
-            <li key={i}>{c.name}</li>
+          <i className="fas fa-volume-up"></i> Languages:{" "}
+          {langs.map((lang, i) => (
+            <li className="lang" key={i}>
+              {lang}
+            </li>
           ))}
         </p>
       );
     } else {
-        return <p className="country-data">Currency: {currArr[0].name}</p>;
+      return (
+        <p className="country-data">
+          <i className="fas fa-volume-up"></i> Language: {langs[0]}
+        </p>
+      );
+    }
+  }
+
+  gdpConverter(gdp) {
+    let newGdp = gdp / 1000000000;
+    return newGdp.toFixed(2);
+  }
+
+  popConverter(population) {
+      debugger;
+      if (population.toString().split("").length > 9) {
+        let newPop = population / 1000000000;
+        return (
+          <div>
+            <p className="country-data">
+              <i className="fas fa-user-friends"></i> Population:{" "}
+            </p>
+            <p>{newPop.toFixed(2)} billion</p>
+          </div>
+        );
+      } else {
+        let newPop = population / 1000000;
+        return (
+          <p className="country-data">
+            <i className="fas fa-user-friends"></i>  Population:{" "}
+            {newPop.toFixed(2)} million
+          </p>
+        );
+      }
+      
+  }
+
+  currencyConverter(currencies) {
+    // ["{"name":"Bhutanese ngultrum","symbol":"Nu."}", "{"name":"Indian rupee","symbol":"₹"}"]
+    let parsed = currencies.map((c) => JSON.parse(c));
+    debugger;
+    if (parsed.length > 1) {
+      return (
+        <p className="country-data">
+          {" "}
+          <i className="fas fa-coins"></i>
+          Currencies:{" "}
+          {parsed.map((curr, i) => (
+            <li key={i}>
+              {curr.name}, {curr.symbol}
+            </li>
+          ))}
+        </p>
+      );
+    } else {
+      let curr = parsed[0];
+      return (
+        <p className="country-data">
+          {" "}
+          <i className="fas fa-coins"></i>
+          Currency: {curr.name}, {curr.symbol}
+        </p>
+      );
     }
   }
 
   render() {
     const { country } = this.props;
+    if (!country) return null;
+    debugger;
     return (
       <div className={this.onOrOffScreen()}>
-        <div className="articles">
-          <div className="hide-country-data" onClick={this.handleHide}>
-            <i className="fas fa-angle-left" />
+        <div className="hide-country-data" onClick={this.handleHide}>
+          <i className="fas fa-angle-left" />
+          <div className="country-data-text">
             <h1>{country.name}</h1>
-            <p className="country-data">Official name: {country.officalname}</p>
-            <p className="country-data">Region: {country.region}</p>
-            <p className="country-data">Population: {country.population}</p>
-            <p className="country-data">Capital: {country.capital}</p>
-            <p className="country-data"> GDP: {this.gdpConverter(country.gdp)} billion</p>
+            <p className="country-data" id="o-name">
+              {" "}
+              {country.officialname}{" "}
+            </p>
+            
+            {this.popConverter(country.population)}
+            
+            <p className="country-data">
+              <i className="fas fa-globe"></i>Region: {country.region}
+            </p>
+            <p className="country-data">
+              <i className="fas fa-map-pin"></i>Capital: {country.capital[0]}
+            </p>
             {this.langConverter(country.languages)}
+            <p className="country-data">
+              {" "}
+              <i className="fas fa-database"></i> GDP: $
+              {this.gdpConverter(country.gdp)} billion
+            </p>
             {this.currencyConverter(country.currencies)}
           </div>
         </div>

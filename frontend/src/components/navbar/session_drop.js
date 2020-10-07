@@ -42,14 +42,14 @@ class Dropdown extends React.Component {
           type="button"
           onClick={this.show}
         >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
+          <span className="hamburger-box">
+            <span className="hamburger-inner"></span>
           </span>
         </button>
         {this.state.show ? (
           <div className="session-drop-menu">
             <button className="logout-button" onClick={this.props.logout}>
-              Eject!<i class="fas fa-sign-out-alt"></i>
+              Eject!<i className="fas fa-sign-out-alt"></i>
             </button>
           </div>
         ) : null}
