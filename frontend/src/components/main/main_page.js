@@ -137,7 +137,7 @@ class MainPage extends React.Component {
     let home = map.chartContainer.createChild(am4core.Button);
     home.label.text = "Zoom Out";
     home.fontFamily = "Times New Roman";
-    home.align = "right";
+    home.align = "left";
     home.events.on("hit", function(ev) {
       map.goHome();
     });
