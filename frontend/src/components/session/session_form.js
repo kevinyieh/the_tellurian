@@ -59,14 +59,12 @@ class SessionForm extends React.Component {
         password: this.state.password,
         password2: this.state.password2,
       };
-      debugger;
       this.props.signup(user).then(this.props.history.push("/main"));
     } else {
       user = {
         email: this.state.email,
         password: this.state.password,
       };
-      debugger;
       this.props.login(user).then(this.props.history.push("/main"));
     }
   }
@@ -78,7 +76,6 @@ class SessionForm extends React.Component {
         email: "demo@demo.demo",
         password: "demodemodemo",
       };
-      debugger;
       this.props.login(user).then(this.props.history.push("/main"));
   }
 
@@ -132,13 +129,6 @@ class SessionForm extends React.Component {
     if (!this.state.isSignup) {
       return <button onClick={this.openSignup}>Sign Up Instead</button>;
     }
-  }
-
-  openSignup() {
-    this.setState({
-      isSignup: true,
-      password2: "",
-    });
   }
 
   render() {

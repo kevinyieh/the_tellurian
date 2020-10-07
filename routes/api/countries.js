@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Country = require("../../models/Country");
 
-router.get("/", (req, res) => {
-  
+router.post("/", (req, res) => {
+
     Country.findOne({ cca2: req.body.cca2 })
         .then(country => {
             if (country) {
