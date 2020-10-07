@@ -18,7 +18,8 @@ class MainPage extends React.Component {
     this.selected = null;
     this.handleHit = this.handleHit.bind(this);
     this.state = {
-      display: false
+      display: false,
+      mapJustClicked: false
     }
   }
 
@@ -69,7 +70,8 @@ class MainPage extends React.Component {
     return ev => {
       this.rotateGlobeAndFocus(cor,ev,countryTarget);
       this.setState({
-        display: true
+        display: true,
+        mapJustClicked: true
       })
     }
   }
@@ -141,6 +143,7 @@ class MainPage extends React.Component {
         <NavBarContainer 
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
+          map={this.map}
         />
         <CountryDataContainer
           display={this.state.display}

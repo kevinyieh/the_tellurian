@@ -16,7 +16,7 @@ export default class NavBar extends React.Component {
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
     handleClickOutside(e){
- 
+        
         if(this.searchBar && !this.searchBar.contains(e.target)){
             this.setState({
                 dropped: false
@@ -26,9 +26,20 @@ export default class NavBar extends React.Component {
     componentDidMount(){
         document.addEventListener("mousedown",this.handleClickOutside)
     }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.map && this.props.map) {
+            debugger;
+            this.props.map.events.on('hit', () => {
+                this.setState({ dropped: false })
+            })
+        }
+    }
+
     componentWillUnmount(){
         document.removeEventListener("mousedown",this.handleClickOutside)
     }
+
     update(field){
         return e => {
             
@@ -92,6 +103,7 @@ export default class NavBar extends React.Component {
                     <form className="search-bar-form">
                         <div className={`search-bar-input-container ${this.state.dropped? "dropped" : ""}`}
                             ref={node => this.searchBar = node}
+                            onBlur={this.handleClickOutside}
                         >
                             <div className="search-bar">
                                 <input onChange={this.update("search")} 
