@@ -44,80 +44,139 @@ export default class CountryData extends React.Component {
   }
 
   langConverter(langs) {
+      if (langs === "No data") {
+        return (
+          <div className="country-data">
+            <p className="data-type">
+              <i className="fas fa-volume-up"></i> Languages:
+            </p>
+            <p className="data">No Data</p>
+          </div>
+        );
+      }
     if (langs.length > 1) {
       return (
-        <p className="country-data">
-          <i className="fas fa-volume-up"></i> Languages:{" "}
-          {langs.map((lang, i) => (
-            <li className="lang" key={i}>
-              {lang}
-            </li>
-          ))}
-        </p>
+        <div className="country-data">
+            <p className="data-type">
+              <i className="fas fa-volume-up"></i>  Languages:
+            </p>
+            <p className="data">{langs.map((lang, i) => (
+                <li className="lang" key={i}>
+                {lang}
+                </li>
+                ))}
+          </p>
+        </div>
       );
     } else {
       return (
-        <p className="country-data">
-          <i className="fas fa-volume-up"></i> Language: {langs[0]}
-        </p>
+        <div className="country-data">
+          <p className="data-type">
+            <i className="fas fa-volume-up"></i>  Language:{" "}
+          </p>
+          <p className="data">{langs[0]}</p>
+        </div>
       );
     }
   }
 
   gdpConverter(gdp) {
-    let newGdp = gdp / 1000000000;
-    return newGdp.toFixed(2);
+
+     if (gdp === "No data") {
+       return (
+         <div className="country-data">
+           <p className="data-type">
+             <i className="fas fa-database"></i> GDP:
+           </p>
+           <p className="data">No Data</p>
+         </div>
+       );
+     }
+
+    let newGDP;
+    if (gdp.toString().split("").length > 9) {
+      let bil = gdp / 1000000000;
+      newGDP = <p className="data">{bil.toFixed(2)} billion</p>;
+    } else {
+      let mil = gdp / 1000000;
+      newGDP = <p className="data">{mil.toFixed(2)} million</p>;
+    }
+
+    return (
+      <div className="country-data">
+        <p className="data-type">
+          <i className="fas fa-database"></i> GDP:{" "}
+        </p>
+        {newGDP}
+      </div>
+    );   
   }
 
   popConverter(population) {
-      debugger;
-      if (population.toString().split("").length > 9) {
-        let newPop = population / 1000000000;
-        return (
-          <div>
-            <p className="country-data">
-              <i className="fas fa-user-friends"></i> Population:{" "}
+      if (population === "No data") {
+          return (
+          <div className="country-data">
+            <p className="data-type">
+              <i className="fas fa-user-friends"></i>  Population:{" "}
             </p>
-            <p>{newPop.toFixed(2)} billion</p>
-          </div>
-        );
-      } else {
-        let newPop = population / 1000000;
-        return (
-          <p className="country-data">
-            <i className="fas fa-user-friends"></i>  Population:{" "}
-            {newPop.toFixed(2)} million
-          </p>
-        );
+            <p className="data">No Data</p>
+            </div>
+          )
       }
-      
+        let pop;
+        if (population.toString().split("").length > 9) {
+          let newPop = population / 1000000000;
+          pop = <p className="data">{newPop.toFixed(2)} billion</p>;
+        } else if (population.toString().split("").length > 6) {
+          let newPop = population / 1000000;
+          pop = <p className="data">{newPop.toFixed(2)} million</p>;
+        } else {
+          let newPop = population / 1000;
+          pop = <p className="data">{newPop.toFixed(2)} thousand</p>;
+        }
+      return (
+          <div className="country-data">
+            <p className="data-type"><i className="fas fa-user-friends"></i> Population:{" "}
+            </p>
+            {pop}
+            </div>
+      )   
   }
 
   currencyConverter(currencies) {
+
+    if (currencies === "No data") {
+      return (
+        <div className="country-data">
+          <p className="data-type"><i className="fas fa-coins"></i>  Currencies:</p>
+          <p className="data">No Data</p>
+        </div>
+      );
+    }
+
     // ["{"name":"Bhutanese ngultrum","symbol":"Nu."}", "{"name":"Indian rupee","symbol":"₹"}"]
     let parsed = currencies.map((c) => JSON.parse(c));
-    debugger;
+    // debugger;
     if (parsed.length > 1) {
       return (
-        <p className="country-data">
-          {" "}
-          <i className="fas fa-coins"></i>
-          Currencies:{" "}
-          {parsed.map((curr, i) => (
-            <li key={i}>
-              {curr.name}, {curr.symbol}
-            </li>
-          ))}
-        </p>
+        <div className="country-data">
+            <p className="data-type"><i className="fas fa-coins"></i>  Currencies:</p>
+            <p className="data">{parsed.map((curr, i) => (
+                <li key={i}>
+                {curr.name}, {curr.symbol}
+                </li>
+            ))}
+            </p>
+        </div>
       );
     } else {
       let curr = parsed[0];
       return (
-        <p className="country-data">
-          {" "}
-          <i className="fas fa-coins"></i>
-          Currency: {curr.name}, {curr.symbol}
+        <div className="country-data">
+          <p className="data-type"><i className="fas fa-coins"></i>  Currency: </p>
+          <p className="data">{curr.name}, {curr.symbol}
         </p>
+        </div>
       );
     }
   }
@@ -126,32 +185,61 @@ export default class CountryData extends React.Component {
     const { country } = this.props;
     if (!country) return null;
     debugger;
+
+    const officialname = country.officialname || country.name;
+    const population = country.population
+      ? this.popConverter(country.population)
+      : this.popConverter("No data");
+    const region = country.region || 'No data';
+    const capital = country.capital[0] ? country.capital : ['No Data'];
+    const languages =
+      country.languages.length > 0
+        ? this.langConverter(country.languages)
+        : this.langConverter("No data");
+    const gdp = country.gdp
+      ? this.gdpConverter(country.gdp)
+      : this.gdpConverter("No data");
+    const currency =
+      country.currencies.length > 0
+        ? this.currencyConverter(country.currencies)
+        : this.currencyConverter("No data");
+
     return (
       <div className={this.onOrOffScreen()}>
-        <div className="hide-country-data" onClick={this.handleHide}>
-          <i className="fas fa-angle-left" />
-          <div className="country-data-text">
+        <div className="country-data-text">
+          <div className="header-flex">
+            <div className="hide-country-data" onClick={this.handleHide}>
+              <i className="fas fa-angle-left" />
+            </div>
             <h1>{country.name}</h1>
-            <p className="country-data" id="o-name">
-              {" "}
-              {country.officialname}{" "}
-            </p>
-            
-            {this.popConverter(country.population)}
-            
-            <p className="country-data">
-              <i className="fas fa-globe"></i>Region: {country.region}
-            </p>
-            <p className="country-data">
-              <i className="fas fa-map-pin"></i>Capital: {country.capital[0]}
-            </p>
-            {this.langConverter(country.languages)}
-            <p className="country-data">
-              {" "}
-              <i className="fas fa-database"></i> GDP: $
-              {this.gdpConverter(country.gdp)} billion
-            </p>
-            {this.currencyConverter(country.currencies)}
+            <div> </div>
+          </div>
+
+          <div className="data-scroll">
+            <p className="o-name"> {officialname} </p>
+
+            {population}
+
+            <div className="country-data">
+              <p className="data-type">
+                <i className="fas fa-globe"></i> Region:{" "}
+              </p>
+              <p className="data">{region} </p>
+            </div>
+
+            <div className="country-data">
+              <p className="data-type">
+                <i className="fas fa-map-pin"></i> Capital:{" "}
+              </p>
+              <p className="data">{capital[0]}</p>
+            </div>
+
+            {languages}
+
+            {gdp}
+
+            {currency}
+
           </div>
         </div>
       </div>
