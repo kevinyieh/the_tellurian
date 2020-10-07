@@ -1,6 +1,8 @@
 import React from "react";
+
 import SessionDrop from './session_drop';
 import { searchCountries } from '../../util/countries_api_util';
+import BurgerDrop from './burger_drop';
 
 export default class NavBar extends React.Component {
     constructor(props){
@@ -100,6 +102,7 @@ export default class NavBar extends React.Component {
         return (
             <div className="navbar-spacer">
                 <div className="navbar-container">
+                  <h1 className="nav-title">The Tellurian</h1>
                     <form className="search-bar-form">
                         <div className={`search-bar-input-container ${this.state.dropped? "dropped" : ""}`}
                             ref={node => this.searchBar = node}
@@ -122,7 +125,7 @@ export default class NavBar extends React.Component {
                             </div>
                         </div>
                     </form>
-                    <SessionDrop loggedIn={this.props.loggedIn}/>
+                    <BurgerDrop loggedIn={this.props.loggedIn}/>
                 </div>
             </div>
 
