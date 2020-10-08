@@ -32,6 +32,7 @@ g {
     justify-content: space-between;
     align-items: center;
     overflow: visible;
+    z-index: 10000;
 }
 
 .nav-title {

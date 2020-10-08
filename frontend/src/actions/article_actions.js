@@ -12,5 +12,5 @@ const receiveArticles = articles => {
 
 export const fetchArticles = (cca2, countryName) => dispatch => {
     return NewsFetchAPI(cca2,countryName)
-        .then((articles) => dispatch(receiveArticles(articles)))
+        .then(({data}) => dispatch(receiveArticles(data)))
 }
