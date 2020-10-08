@@ -28,7 +28,7 @@ export default class NavBar extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.map && this.props.map) {
-            debugger;
+            
             this.props.map.events.on('hit', () => {
                 this.setState({ dropped: false })
             })
@@ -73,12 +73,12 @@ export default class NavBar extends React.Component {
             selected: true,
             dropped: false
         })
-        debugger;
+        
         this.props.selectCountry(cor, iso2)();
     }
 
     renderDropDown() {
-        debugger;
+        
         if (this.state.selected) return null;
         if (Object.keys(this.state.searchResults).length < 1 || !this.state.search ) return <div key="no-results" className="search-result"> No results for this search </div>
         return Object.keys(this.state.searchResults).map(key => (<div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>)).slice(0, 10)
