@@ -1,0 +1,51 @@
+/* 
+rgb(255,255,101) yellow
+rgb(195, 121, 52) orange
+
+rgb(80,80,80) dark like
+*/
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .5);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.modal-dialog {
+  position: relative;
+  background-image: url("https://suro-seeds.s3.amazonaws.com/stars.gif");
+  background-position: center;
+  max-width: 700px;
+  width: calc(100% - 20px);
+  margin: 70px auto 0;
+  border: 4px solid #bcc6cc;
+  box-shadow: 0 0 3px rgb(226, 131, 255);
+  border-radius: 15px;
+  outline: none;
+  opacity: 1;
+}
+
+.modal-content {
+  padding: 10px;
+  /* background: rgba(255, 255, 255, 0.5); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content img {
+  opacity: .3;
+}
+
+#hello {
+  color: rgb(195, 121, 52);
+  text-align: center;
+  font-size: 28px;
+  margin: 10px 0 30px;
+}

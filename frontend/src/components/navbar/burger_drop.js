@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
+import { openModal } from '../../actions/modal_actions';
 
 class Dropdown extends React.Component {
   constructor(props) {
@@ -49,13 +49,13 @@ class Dropdown extends React.Component {
         </button>
         {this.state.show ? (
           <div className="burger-drop-menu gradient">
-            <button className="burger-drop-button profile-button">
-              <Link to="/profile">
-                <img
-                  src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
-                  alt="profile"
-                />
-              </Link>
+            <button 
+              className="burger-drop-button profile-button"
+              onClick={this.props.openModal}>
+              <img
+                src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
+                alt="profile"
+              />
             </button>
             <button className="burger-drop-button below git-button">
               <a
@@ -79,7 +79,8 @@ class Dropdown extends React.Component {
   }
 }
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  openModal: () => dispatch(openModal())
 })
 
 export default connect(null, mDTP)(Dropdown)
