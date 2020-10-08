@@ -33,7 +33,7 @@ const nytFetch = async (cca2, countryName) => {
   month = month < 10 ? `0${month}` : month;
   const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
   const begin_date = `${now.getFullYear()}${month}${day}`;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  const url = `https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
   // const headers = {
   //   "Access-Control-Allow-Headers": "*"
   // }
