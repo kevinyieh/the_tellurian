@@ -5,8 +5,10 @@
     border-radius: 10px;
     z-index: 50;
     top: 58px;
-    background-color: #f2f2f2;
-    padding: 30px;
+    background-color: rgba(242, 242, 242, 0.85);
+    padding: 15px 0px 15px 15px;
+    font-family: 'Titillium Web', sans-serif;
+    box-shadow: 0 3px 30px 10px rgba(0, 0, 0, .25);
 }
 .articles-container.on-screen {
     right: 30px;
@@ -16,4 +18,54 @@
 .articles-container.off-screen {
     right: -700px;
     transition: right 2s;
+}
+
+.fa-angle-right {
+    font-size: 30px;
+    color: #505050;
+}
+
+.fa-angle-right:hover {
+    cursor: pointer;
+    color: #C47834;
+}
+
+.articles-index-text {
+    padding: 10px;
+}
+
+.article-item {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    height: 175px !important;
+
+}
+
+.headline {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* potential button to open/close article */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.article-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
 }

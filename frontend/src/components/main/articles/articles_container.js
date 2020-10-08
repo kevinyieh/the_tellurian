@@ -3,14 +3,15 @@ import Articles from "./articles";
 
 const mSTP = state => {
     return {
-
+        articles: state.entities.articles[state.ui.currentCountry],
+        country: state.entities.countries[state.ui.currentCountry]
     }
 }
 
-const mDTP = dispatch => {
-    return {
+// const mDTP = dispatch => {
+//     return {
 
-    }
-}
+//     }
+// }
 
-export default connect(mSTP,mDTP)(Articles);
+export default connect(mSTP,null)(Articles);
