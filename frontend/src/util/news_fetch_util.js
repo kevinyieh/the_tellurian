@@ -42,9 +42,7 @@ const nytFetch = async (countryName) => {
     const { data } = await axios({
                                     method:"GET",
                                     url,
-                                    headers: {
-                                        "Access-Control-Allow-Headers": "*"
-                                      }
+                                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
                                   })
     return nytNormalize(data);
   } catch (error) {
