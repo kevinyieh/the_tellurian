@@ -158,20 +158,23 @@ export default class CountryData extends React.Component {
     let parsed = currencies.map((c) => JSON.parse(c));
     if (parsed.length > 1) {
       return (
-        <div className="country-data">
-            <p className="data-type"><i className="fas fa-coins"></i>  Currencies:</p>
-            <p className="data">{parsed.map((curr, i) => (
-                <li key={i}>
+        <div className="country-data-last">
+          <p className="data-type">
+            <i className="fas fa-coins"></i> Currencies:
+          </p>
+          <p className="data">
+            {parsed.map((curr, i) => (
+              <li key={i}>
                 {curr.name}, {curr.symbol}
-                </li>
+              </li>
             ))}
-            </p>
+          </p>
         </div>
       );
     } else {
       let curr = parsed[0];
       return (
-        <div className="country-data">
+        <div className="country-data-last">
           <p className="data-type"><i className="fas fa-coins"></i>  Currency: </p>
           <p className="data">{curr.name}, {curr.symbol}
         </p>
@@ -183,7 +186,6 @@ export default class CountryData extends React.Component {
   render() {
     const { country } = this.props;
     if (!country) return null;
-
     const officialname = country.officialname || country.name;
     const population = country.population
       ? this.popConverter(country.population)
@@ -202,6 +204,7 @@ export default class CountryData extends React.Component {
         ? this.currencyConverter(country.currencies)
         : this.currencyConverter("No data");
 
+    debugger;
     return (
       <div className={this.onOrOffScreen()}>
         <div className="country-data-text">
@@ -210,11 +213,10 @@ export default class CountryData extends React.Component {
               <i className="fas fa-angle-left" />
             </div>
             <h1>{country.name}</h1>
-            {/* <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img>  */}
-            <div> </div>
+            <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
           </div>
 
-          <div className="data-scroll">
+          <div className="container-scroll">
             <p className="o-name"> {officialname} </p>
 
             {population}
@@ -238,7 +240,6 @@ export default class CountryData extends React.Component {
             {gdp}
 
             {currency}
-
           </div>
         </div>
       </div>
