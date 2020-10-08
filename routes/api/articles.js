@@ -3,7 +3,6 @@ const router = express.Router();
 const Article = require('../../models/Article');
 
 router.post("/", (req, res) => {
-  debugger;
   let url = req.body.url;
   Article.findOne({ articleURL: url })
     .then(article => {
@@ -31,14 +30,21 @@ router.post("/", (req, res) => {
 
 router.get("/", (req, res) => {
     
-    Article.findById(req.body.id)
-        .then(article => {
-            if (article)
-                return res.json(article);
-            else {
-                return res.status(404).json({ article: 'Article not found' });
-            }
-        })
+    // Article.findById(req.body.id)
+    //     .then(article => {
+    //         if (article)
+    //             return res.json(article);
+    //         else {
+    //             return res.status(404).json({ article: 'Article not found' });
+    //         }
+    //     })
+
+    const articleIds = req.body.articleIds.split(",");
+    Article.find({ _id: { $in: articleIds } })
+      .then(articles => {
+        return res.json(articles);
+      })
+      .catch(console.log);
 });
 
 module.exports = router;
