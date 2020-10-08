@@ -204,7 +204,6 @@ export default class CountryData extends React.Component {
         ? this.currencyConverter(country.currencies)
         : this.currencyConverter("No data");
 
-    debugger;
     return (
       <div className={this.onOrOffScreen()}>
         <div className="country-data-text">
