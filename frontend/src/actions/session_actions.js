@@ -8,30 +8,30 @@ export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT";
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
-  currentUser,
+  currentUser
 });
 
 export const receiveErrors = errors => ({
   type: RECEIVE_SESSION_ERRORS,
-  errors,
+  errors
 });
 
 export const logoutUser = () => ({
-  type: RECEIVE_LOGOUT,
+  type: RECEIVE_LOGOUT
 });
 
 export const login = user => dispatch => {
-    return APIUtil.login(user)
-      .then((res) => {
-        const { token } = res.data;
-        localStorage.setItem("jwtToken", token);
-        APIUtil.authenticate(token);
-        let decoded = jwt_decode(token);
-        dispatch(receiveCurrentUser(decoded));
-      })
-      .catch((err) => {
-        debugger;
-        dispatch(receiveErrors(err.response.data));
+  return APIUtil.login(user)
+    .then((res) => {
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      APIUtil.authenticate(token);
+      let decoded = jwt_decode(token);
+      dispatch(receiveCurrentUser(decoded));
+    })
+    .catch((err) => {
+      debugger;
+      dispatch(receiveErrors(err.response.data));
     });
 }
 
@@ -45,7 +45,13 @@ export const signup = (user) => (dispatch) =>
       dispatch(receiveCurrentUser(decoded));
     },
     (err) => dispatch(receiveErrors(err.response.data))
-);
+)
+
+export const logout = () => dispatch => {
+  localStorage.removeItem('jwtToken');
+  APIUtil.authenticate(false);
+  dispatch(logoutUser());
+}
 
 // export const signup = user => dispatch =>
 //   APIUtil.signup(user)
@@ -66,13 +72,6 @@ export const signup = (user) => (dispatch) =>
 //     () => dispatch(receiveUserSignIn()),
 //     (err) => dispatch(receiveErrors(err.response.data))
 //   );
-
-  
-export const logout = () => dispatch => {
-  localStorage.removeItem("jwtToken");
-  APIUtil.authenticate(false);
-  dispatch(logoutUser());
-};
 
 const demoUser = {
   email: "demo@demo.demo",

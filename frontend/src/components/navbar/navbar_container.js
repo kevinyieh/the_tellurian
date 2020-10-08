@@ -3,14 +3,8 @@ import NavBar from "./navbar";
 
 const mSTP = state => {
     return {
-      loggedIn: state.session.isLoggedIn,
+      loggedIn: state.session.isLoggedIn
     };
 }
 
-const mDTP = dispatch => {
-    return {
-
-    }
-}
-
-export default connect(mSTP,mDTP)(NavBar);
+export default connect(mSTP)(NavBar);

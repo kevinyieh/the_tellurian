@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
-  user: {},
+  user: {}
 };
 
 export default (state = initialState, action) => {
