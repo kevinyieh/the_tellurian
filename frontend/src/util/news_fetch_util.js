@@ -47,7 +47,6 @@ const nytFetch = async (cca2, countryName) => {
     console.log(error);
   }
 };
-nytFetch("US","United States").then(console.log);
 function catcherNormalize(res) {
   return res.data.articles.map((result) => {
     let date = new Date(result.published_date);

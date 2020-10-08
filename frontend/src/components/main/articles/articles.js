@@ -1,6 +1,7 @@
 import React from "react";
 import ArticleItem from "./article_item";
 import "../../../stylesheets/articles.css";
+import "../../../images/alien.png";
 
 export default class Articles extends React.Component{
     constructor(props){
@@ -34,27 +35,42 @@ export default class Articles extends React.Component{
 
     render(){
         const { articles, country } = this.props;
-        if (!articles) return null;
-
-        return (
-          <div className={this.onOrOffScreen()}>
-            <div className="articles-index-text">
-              <div className="header-flex">
-                <div className="hide-articles" onClick={this.handleHide}>
-                  <i className="fas fa-angle-right" />
+        if (!articles) {
+            return (
+              <div className={`${this.onOrOffScreen()} loading`}>
+                <div className="articles-index-text">
+                  <div className="header-flex">
+                    <div className="hide-articles" onClick={this.handleHide}>
+                      <i className="fas fa-angle-right" />
+                    </div>
+                    <h1>Today's Top Stories</h1>
+                    <div> </div>
+                  </div>
                 </div>
-                <h1>Today's Top Stories in {country.name}</h1>
-                <div> </div>
+                  <img className="article-load" src={require("../../../images/loading.svg")} alt="loading" />
               </div>
-
-              <div className="container-scroll">
-                {articles.map((article, i) => (
-                    <ArticleItem key={i} article={article} />
-                ))}
+            );
+        } else {
+            return (
+              <div className={this.onOrOffScreen()}>
+                <div className="articles-index-text">
+                  <div className="header-flex">
+                    <div className="hide-articles" onClick={this.handleHide}>
+                      <i className="fas fa-angle-right" />
+                    </div>
+                    <h1>Today's Top Stories in {country.name}</h1>
+                    <div> </div>
+                  </div>
+    
+                  <div className="article-scroll">
+                    {articles.map((article, i) => (
+                        <ArticleItem key={i} article={article} />
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
+            );
+        }
     }
 }
 

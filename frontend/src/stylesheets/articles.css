@@ -1,6 +1,6 @@
 .articles-container{
     position: absolute;
-    height: 900px;
+    height: 830px;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
@@ -35,19 +35,18 @@
 }
 
 .article-item {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: inherit;
-    height: 175px !important;
-
 }
 
 .headline {
     font-weight: 600;
-    font-size: 30px;
+    font-size: 25px;
     margin: 0;
     letter-spacing: 0.5px;
-    text-align: center;
+    text-align: left;
 }
 
 /* potential button to open/close article */
@@ -68,4 +67,71 @@
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+
+.article-content {
+    font-size: 16px;
+    width: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.article-content.display {
+    width: inherit;
+    height: auto;
+    max-height: 400px;
+    margin-bottom: 10px;
+    display: block;
+    overflow: visible;
+}
+
+.flex-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fa-chevron-down {
+    font-size: 20px;
+    padding: 10px;
+    color: #505050;
+    align-self: flex-start;
+}
+
+.fa-chevron-down:hover {
+    cursor: pointer;
+    color: #C47834;
+}
+
+.fa-chevron-down.rotate {
+    transform: rotate(180deg);
+}
+
+.article-scroll {
+    height: 700px;
+    overflow: scroll;
+    padding-right: 15px;
+}
+
+.article-load {
+    margin: 75px;
+    height: 75px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.article-link {
+    font-size: 14px;
 }
