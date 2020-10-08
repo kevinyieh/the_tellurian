@@ -29,7 +29,6 @@ export default class NavBar extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.map && this.props.map) {
-            debugger;
             this.props.map.events.on('hit', () => {
                 this.setState({ dropped: false })
             })
@@ -78,7 +77,6 @@ export default class NavBar extends React.Component {
             selected: true,
             dropped: false
         })
-        debugger;
         this.props.selectCountry(cor, iso2)();
     }
 

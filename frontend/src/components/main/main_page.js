@@ -12,6 +12,24 @@ import ArticlesContainer from "./articles/articles_container";
 
 am4core.useTheme(am4themesAnimated)
 
+const sign = num => {
+  return num < 0 ? -1 : 1;
+}
+
+const deltaLongCalc = (current,destination,inc) => {
+  if(sign(current) === sign(destination)){
+    return current > destination ?  
+          -Math.abs(current - destination) * inc : Math.abs(destination - current) * inc;
+  }else {
+    // Can simplify expression, but clearer this way
+    let crossDist = sign(destination) === 1 ? 180 - destination + (current + 180) : destination + 180 + (180 - current);
+    let crossDirection = sign(destination) === 1 ? -1 : 1;
+    return crossDist < Math.abs(current - destination) ? 
+                  crossDirection * crossDist * inc :
+                 -crossDirection * Math.abs(current-destination) * inc;
+  }
+}
+
 class MainPage extends React.Component {
   constructor(props){
     super(props);
@@ -24,67 +42,43 @@ class MainPage extends React.Component {
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
     const map = this.map;
+    debugger;
     const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
-    const inc = 0.3;
-    const longInc = Math.abs((map.deltaLongitude - deltaLongitude)) < Math.abs((deltaLongitude - map.deltaLongitude)) ?  
-                    (map.deltaLongitude - deltaLongitude) * inc : (deltaLongitude - map.deltaLongitude) * inc;
+    const inc = 0.2;
+    
+    const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
 
     const latInc = Math.abs((map.deltaLatitude - deltaLatitude)) < Math.abs((deltaLatitude - map.deltaLatitude)) ?  
                     (map.deltaLatitude - deltaLatitude) * inc : (deltaLatitude - map.deltaLatitude) * inc;
-    const pastLong = (current, destination, direction) => {
-      if (direction) {
-        return current > destination;
-      }else {
-        return current < destination;
-      }
-    }
-    const pastLat = (current, destination, direction) => {
-      if (direction) {
-        return current >= destination;
-      }else {
-        return current <= destination;
-      }
+    
+    const closeEnough = (current, destination, error) => {
+      return Math.abs(Math.abs(current) - Math.abs(destination)) <= Math.abs(error)
     }
     if (this.intervalId) clearInterval(this.intervalId);
-    if (this.timeoutId) clearTimeout(this.timeoutId);
-    
     this.intervalId = setInterval(() => {
-      if(!pastLong(map.deltaLongitude,deltaLongitude,longInc > 0) || !pastLat(map.deltaLatitude,deltaLatitude,latInc > 0)){
+      if((!closeEnough(map.deltaLongitude,deltaLongitude,longInc) || !closeEnough(map.deltaLatitude,deltaLatitude, latInc))
+      ){
         map.deltaLongitude += longInc;
         map.deltaLatitude += latInc;
       }else{
         clearInterval(this.intervalId);
         this.intervalId = null;
         const objToFocus = countryTarget ? countryTarget : ev.target;
-        map.zoomToMapObject(objToFocus,1.4);
+        map.zoomToMapObject(objToFocus);
         if(this.selected) this.selected.isActive = false;
         this.selected = objToFocus;
         this.selected.isActive = true;
       }
-    },1);
-    this.timeoutId = setTimeout(() => {
-      if(this.intervalId) {
-        clearInterval(this.intervalId);
-        this.timeoutId = null;
-        this.intervalId = null;
-        const objToFocus = countryTarget ? countryTarget : ev.target;
-        map.zoomToMapObject(objToFocus,1.4);
-        if(this.selected) this.selected.isActive = false;
-        this.selected = objToFocus;
-        this.selected.isActive = true;
-      }
-    }, 1500);
+    },10);
   }
 
   handleHit(cor,iso2){
     const countryTarget = iso2 ? this.polygonSeries.getPolygonById(iso2) : null;
-    debugger;
     return ev => {
       let cca2 = iso2 || ev.target.dataItem.dataContext.id;
       this.rotateGlobeAndFocus(cor,ev,countryTarget);
-      debugger;
       this.props.fetchCountry({ cca2 });
       this.setState({
         display: true
@@ -102,11 +96,12 @@ class MainPage extends React.Component {
     map.geodata = am4geodata_worldLow;
     map.projection = new am4maps.projections.Orthographic();
     map.panBehavior = "rotateLongLat";
-    // map.adapter.add("deltaLatitude", function(delatLatitude){
-    //   return am4core.math.fitToRange(delatLatitude, -90, 90);
-    // })
+    map.adapter.add("deltaLatitude", function(delatLatitude){
+      return am4core.math.fitToRange(delatLatitude, -90, 90);
+    })
     map.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#cccccc");
     map.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.3;
+    map.zoomDuration = 1500;
 
     // ADD GRID LINES
     let graticuleSeries = map.series.push(new am4maps.GraticuleSeries());
