@@ -33,7 +33,8 @@ const nytFetch = async (countryName) => {
   month = month < 10 ? `0${month}` : month;
   const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
   const begin_date = `${now.getFullYear()}${month}${day}`;
-  const url = `https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  // const url = `https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
   // const headers = {
   //   "Access-Control-Allow-Headers": "*"
   // }
@@ -41,12 +42,16 @@ const nytFetch = async (countryName) => {
     const { data } = await axios({
                                     method:"GET",
                                     url,
+                                    headers: {
+                                        "Access-Control-Allow-Headers": "*"
+                                      }
                                   })
     return nytNormalize(data);
   } catch (error) {
     console.log(error);
   }
 };
+
 function catcherNormalize(res) {
   return res.data.articles.map((result) => {
     let date = new Date(result.published_date);

@@ -13,12 +13,10 @@ class ArticleItem extends React.Component {
 
   toggleContent(e) {
     e.preventDefault();
-    debugger;
     this.setState({ collapsed: !this.state.collapsed });
   }
 
   imageRender(url) {
-    debugger;
     let image = this.props.article.imageUrl;
     if (!image && !url) {
       return null;
@@ -41,7 +39,6 @@ class ArticleItem extends React.Component {
 
   render() {
     const { article } = this.props;
-    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
