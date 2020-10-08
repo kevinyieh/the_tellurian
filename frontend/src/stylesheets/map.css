@@ -111,6 +111,8 @@ g {
 
 .search-dropdown {
     padding: 6px;
+    display: flex;
+    flex-direction: column;
 }
 
 .search-dropdown .search-result {
@@ -126,6 +128,25 @@ g {
 .search-dropdown .search-result:hover {
     background-color: #f2f2f2;
     cursor: pointer;
+}
+
+.buffering {
+    justify-self: center;
+    align-self: center;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 70px;
+}
+.fa-search {
+    animation: buffer 1.5s linear infinite;
+}
+
+@keyframes buffer {
+    from { transform: rotate(0deg) translateX(10px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(10px) rotate(-360deg)}
 }
 
 .hidden {
