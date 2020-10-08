@@ -87,19 +87,19 @@ const catcherFetch = async (cca2) => {
     });
 };
 
-// export default async (cca2, countryName) => {
-//   let articles = [];
-//   await Promise.allSettled([
-//     nytFetch(cca2, countryName)
-//       .then((res) => {
-//         debugger;
-//         articles = res ? articles.concat(res) : articles;
-//     }),
-//     catcherFetch(cca2)
-//       .then((res) => {
-//         articles = res ? articles.concat(res) : articles;
-//     })
-//   ])
-//     .catch(console.log);
-//   return { [cca2]: articles }
-// }
+export default async (cca2, countryName) => {
+  let articles = [];
+  await Promise.allSettled([
+    nytFetch(cca2, countryName)
+      .then((res) => {
+        debugger;
+        articles = res ? articles.concat(res) : articles;
+    }),
+    catcherFetch(cca2)
+      .then((res) => {
+        articles = res ? articles.concat(res) : articles;
+    })
+  ])
+    .catch(console.log);
+  return { [cca2]: articles }
+}
