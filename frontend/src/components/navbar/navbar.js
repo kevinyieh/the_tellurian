@@ -9,7 +9,8 @@ export default class NavBar extends React.Component {
             search: "",
             selected: false,
             dropped: false,
-            searchResults: {}
+            searchResults: {},
+            loading: false
         }
         this.map = this.props.map;
         this.handleClick = this.handleClick.bind(this);
@@ -41,15 +42,16 @@ export default class NavBar extends React.Component {
 
     update(field) {
         return e => {
-
             e.preventDefault();
             this.setState({
                 [field]: e.target.value,
                 selected: false,
-                dropped: true
+                dropped: true,
+                loading: true
             }, () => {
-
-                searchCountries({ searchparams: this.state.search })
+                if (this.queue) clearTimeout(this.queue);
+                this.queue = setTimeout(() => {
+                    searchCountries({ searchparams: this.state.search })
                     .then(response => {
                         let results = {};
                         response.data.forEach(country => {
@@ -57,9 +59,12 @@ export default class NavBar extends React.Component {
                         })
 
                         this.setState({
-                            searchResults: results
-                        })
+                            searchResults: results,
+                            loading: false
+                        }, () => this.queue = null)
                     })
+                },400)
+                
             })
         }
     }
@@ -81,6 +86,7 @@ export default class NavBar extends React.Component {
         
         if (this.state.selected) return null;
         if (Object.keys(this.state.searchResults).length < 1 || !this.state.search ) return <div key="no-results" className="search-result"> No results for this search </div>
+
         return Object.keys(this.state.searchResults).map(key => (<div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>)).slice(0, 10)
     }
 
