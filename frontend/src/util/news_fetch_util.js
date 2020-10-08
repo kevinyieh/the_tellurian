@@ -27,7 +27,10 @@ function nytNormalize(resp) {
 const nytFetch = async (cca2, countryName) => {
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&api-key=${nytKey}`;
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios({
+                                    method:"GET",
+                                    header:{ 'Content-Type': 'application/x-www-form-urlencoded' },
+                                    url})
     return nytNormalize(data);
   } catch (error) {
     console.log(error);

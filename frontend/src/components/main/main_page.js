@@ -80,11 +80,9 @@ class MainPage extends React.Component {
 
   handleHit(cor,iso2){
     const countryTarget = iso2 ? this.polygonSeries.getPolygonById(iso2) : null;
-    debugger;
     return ev => {
       let cca2 = iso2 || ev.target.dataItem.dataContext.id;
       this.rotateGlobeAndFocus(cor,ev,countryTarget);
-      debugger;
       this.props.fetchCountry({ cca2 });
       this.setState({
         display: true
