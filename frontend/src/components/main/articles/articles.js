@@ -33,7 +33,7 @@ export default class Articles extends React.Component{
     }
 
     render(){
-        const { articles, country } = this.props.articles;
+        const { articles, country } = this.props;
         if (!articles) return null;
 
         return (

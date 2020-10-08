@@ -82,11 +82,16 @@ class MainPage extends React.Component {
     const countryTarget = iso2 ? this.polygonSeries.getPolygonById(iso2) : null;
     return ev => {
       let cca2 = iso2 || ev.target.dataItem.dataContext.id;
-      this.rotateGlobeAndFocus(cor,ev,countryTarget);
-      this.props.fetchCountry({ cca2 });
+      this.rotateGlobeAndFocus(cor, ev, countryTarget);
+      this.props
+        .fetchCountry({ cca2 })
+        .then((country) => {
+          debugger;
+          this.props.fetchArticles(country.cca2, country.name)});
+      debugger;
       this.setState({
-        display: true
-      })
+        display: true,
+      });
     }
   }
 
