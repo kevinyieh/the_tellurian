@@ -49,7 +49,6 @@ class MainPage extends React.Component {
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
     const map = this.map;
-    debugger;
     const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
@@ -61,10 +60,8 @@ class MainPage extends React.Component {
   
     if (this.intervalId) clearInterval(this.intervalId);
     this.intervalId = setInterval(() => {
-      debugger;
       if((!closeEnough(map.deltaLongitude,deltaLongitude,longInc) || !closeEnough(map.deltaLatitude,deltaLatitude, latInc))
       ){
-        debugger;
         map.deltaLongitude += longInc;
         map.deltaLatitude += latInc;
       }else{
@@ -87,9 +84,7 @@ class MainPage extends React.Component {
       this.props
         .fetchCountry({ cca2 })
         .then((country) => {
-          debugger;
-          this.props.fetchArticles(country.cca2, country.name)});
-      debugger;
+          return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
       this.setState({
         display: true,
       });

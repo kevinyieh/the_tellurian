@@ -35,7 +35,8 @@ router.post('/register', (req, res) => {
         // Otherwise create a new user
         const newUser = new User({
           email: req.body.email,
-          password: req.body.password
+          password: req.body.password,
+          savedArticleIds: []
         })
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -44,7 +45,7 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
             .then((user) => {
-              const payload = { id: user.id, email: user.email };
+              const payload = { id: user.id, email: user.email, savedArticleIds: user.savedArticleIds  };
                 jwt.sign(
                   payload,
                   keys.secretOrKey,
@@ -85,7 +86,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, email: user.email };
+            const payload = { id: user.id, email: user.email, savedArticleIds: user.savedArticleIds };
 
             jwt.sign(
               payload,
@@ -109,15 +110,16 @@ router.patch('/articles', (req, res) => {
   const { userId, articleId } = req.body;
   User.findById(userId)
     .then(user => {
-      if (user.savedArticles.includes(articleId)) {
-        user.savedArticles.splice(user.savedArticles.indexOf(articleId), 1);
+      if (user.savedArticleIds.includes(articleId)) {
+        user.savedArticleIds.splice(user.savedArticleIds.indexOf(articleId), 1);
       } else {
-        user.savedArticles.push(articleId);
+        user.savedArticleIds.push(articleId);
       }
-      user.save();
-      return res.json(user.savedArticles);
+      user.save()
+        .then(savedUser => {
+          return res.json({ savedArticleIds: savedUser.savedArticleIds});
+        })
     })
-    .catch(console.log)
 })
 
 module.exports = router;

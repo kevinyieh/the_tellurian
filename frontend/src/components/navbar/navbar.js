@@ -1,4 +1,3 @@
-
 import React from "react";
 import BurgerDrop from './burger_drop';
 import { searchCountries } from '../../util/countries_api_util';
