@@ -5,14 +5,17 @@ import {
 
 const initialState = {
   isLoggedIn: false,
-  user: {},
+  user: {}
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       const user = Object.assign({}, action.currentUser);
+      console.log(user);
       delete user.email;
+      console.log(state);
+      console.log(user);
       return {
         isLoggedIn: !!action.currentUser,
         user

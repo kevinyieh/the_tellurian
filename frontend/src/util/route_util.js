@@ -19,20 +19,19 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 );
 
 //Protected: users can only access if they are logged in
-const Protected = ({ component: Component, loggedIn, ...rest }) => {
-    return (<Route
-        {...rest}
-        render={(props) =>
-            loggedIn ? (
-                <Component {...props} />
-            ) : (
-                    // Redirect to the login page if the user is already authenticated
-                    <Redirect to="/" />
-                )
-        }
-    />)
-};
-
+const Protected = ({ component: Component, loggedIn, ...rest }) => (
+  <Route
+      {...rest}
+      render={(props) =>
+          loggedIn ? (
+              <Component {...props} />
+          ) : (
+                  // Redirect to the login page if the user is already authenticated
+                  <Redirect to="/" />
+              )
+      }
+  />
+);
 
 const mapStateToProps = (state) => ({
   loggedIn: state.session.isLoggedIn,
