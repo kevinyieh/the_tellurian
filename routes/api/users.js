@@ -115,7 +115,7 @@ router.patch('/articles', (req, res) => {
         user.savedArticles.push(articleId);
       }
       user.save();
-      return res.json(user);
+      return res.json(user.savedArticles);
     })
     .catch(console.log)
 })
