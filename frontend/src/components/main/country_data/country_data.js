@@ -156,7 +156,6 @@ export default class CountryData extends React.Component {
 
     // ["{"name":"Bhutanese ngultrum","symbol":"Nu."}", "{"name":"Indian rupee","symbol":"₹"}"]
     let parsed = currencies.map((c) => JSON.parse(c));
-    // debugger;
     if (parsed.length > 1) {
       return (
         <div className="country-data">
@@ -184,7 +183,6 @@ export default class CountryData extends React.Component {
   render() {
     const { country } = this.props;
     if (!country) return null;
-    debugger;
 
     const officialname = country.officialname || country.name;
     const population = country.population
@@ -212,6 +210,7 @@ export default class CountryData extends React.Component {
               <i className="fas fa-angle-left" />
             </div>
             <h1>{country.name}</h1>
+            {/* <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img>  */}
             <div> </div>
           </div>
 
