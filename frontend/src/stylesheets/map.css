@@ -70,7 +70,7 @@ g {
 }
 .space-shuttle-container.dropped {
     opacity: 0;
-    animation: travel 5s ease;
+    animation: travel 2s ease;
     transition-delay: 1s;
 }
 
@@ -85,7 +85,7 @@ g {
         transform: translateY(400%) translateX(-1000%) rotate(-200deg);
     } */
     100% {
-        transform: translateX(-8000%)
+        transform: translateY(-450%)
     }
 }
 
