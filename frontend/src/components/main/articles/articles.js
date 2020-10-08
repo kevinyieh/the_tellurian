@@ -41,13 +41,17 @@ export default class Articles extends React.Component{
                 <div className="articles-index-text">
                   <div className="header-flex">
                     <div className="hide-articles" onClick={this.handleHide}>
-                      <i className="fas fa-angle-right" />
+                      <i className="fas fa-caret-square-right"></i>
                     </div>
                     <h1>Today's Top Stories</h1>
                     <div> </div>
                   </div>
                 </div>
-                  <img className="article-load" src={require("../../../images/loading.svg")} alt="loading" />
+                <img
+                  className="article-load"
+                  src={require("../../../images/loading.svg")}
+                  alt="loading"
+                />
               </div>
             );
         } else {
@@ -56,15 +60,15 @@ export default class Articles extends React.Component{
                 <div className="articles-index-text">
                   <div className="header-flex">
                     <div className="hide-articles" onClick={this.handleHide}>
-                      <i className="fas fa-angle-right" />
+                      <i className="fas fa-caret-square-right"></i>
                     </div>
-                    <h1>Today's Top Stories in {country.name}</h1>
+                    <h1>Top Stories in {country.name}</h1>
                     <div> </div>
                   </div>
-    
+
                   <div className="article-scroll">
                     {articles.map((article, i) => (
-                        <ArticleItem key={i} article={article} />
+                      <ArticleItem key={i} article={article} />
                     ))}
                   </div>
                 </div>

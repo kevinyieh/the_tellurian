@@ -91,7 +91,7 @@ export default async (cca2, countryName) => {
   await Promise.allSettled([
     nytFetch(cca2, countryName)
       .then((res) => {
-        debugger;
+        // debugger;
         articles = res ? articles.concat(res) : articles;
     }),
     catcherFetch(cca2)

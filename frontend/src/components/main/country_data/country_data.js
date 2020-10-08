@@ -95,7 +95,6 @@ export default class CountryData extends React.Component {
 
     let newGDP;
     if (gdp.toString().split(".")[0].length > 9) {
-            debugger;
       let bil = gdp / 1000000000;
       newGDP = <p className="data">{bil.toFixed(2)} billion</p>;
     } else {
@@ -211,10 +210,14 @@ export default class CountryData extends React.Component {
         <div className="country-data-text">
           <div className="header-flex">
             <div className="hide-country-data" onClick={this.handleHide}>
-              <i className="fas fa-angle-left" />
+              <i className="fas fa-caret-square-left"></i>
             </div>
             <h1>{country.name}</h1>
-            <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
+            <img
+              className="country-flag"
+              alt="country-flag"
+              src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}
+            ></img>
           </div>
 
           <div className="container-scroll">
