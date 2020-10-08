@@ -33,7 +33,7 @@ const nytFetch = async (cca2, countryName) => {
   month = month < 10 ? `0${month}` : month;
   const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
   const begin_date = `${now.getFullYear()}${month}${day}`;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  const url = `https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
   // const headers = {
   //   "Access-Control-Allow-Headers": "*"
   // }
@@ -47,7 +47,6 @@ const nytFetch = async (cca2, countryName) => {
     console.log(error);
   }
 };
-nytFetch("US","United States").then(console.log);
 function catcherNormalize(res) {
   return res.data.articles.map((result) => {
     let date = new Date(result.published_date);
@@ -87,19 +86,19 @@ const catcherFetch = async (cca2) => {
     });
 };
 
-// export default async (cca2, countryName) => {
-//   let articles = [];
-//   await Promise.allSettled([
-//     nytFetch(cca2, countryName)
-//       .then((res) => {
-//         debugger;
-//         articles = res ? articles.concat(res) : articles;
-//     }),
-//     catcherFetch(cca2)
-//       .then((res) => {
-//         articles = res ? articles.concat(res) : articles;
-//     })
-//   ])
-//     .catch(console.log);
-//   return { [cca2]: articles }
-// }
+export default async (cca2, countryName) => {
+  let articles = [];
+  await Promise.allSettled([
+    nytFetch(cca2, countryName)
+      .then((res) => {
+        debugger;
+        articles = res ? articles.concat(res) : articles;
+    }),
+    catcherFetch(cca2)
+      .then((res) => {
+        articles = res ? articles.concat(res) : articles;
+    })
+  ])
+    .catch(console.log);
+  return { [cca2]: articles }
+}
