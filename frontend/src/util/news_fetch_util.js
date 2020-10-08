@@ -26,7 +26,7 @@ function nytNormalize(resp) {
     };
   });
 }
-const nytFetch = async (cca2, countryName) => {
+const nytFetch = async (countryName) => {
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&api-key=${nytKey}`;
   try {
     const { data } = await axios({
@@ -81,7 +81,7 @@ const catcherFetch = async (cca2) => {
 export default async (cca2, countryName) => {
   let articles = [];
   await Promise.allSettled([
-    nytFetch(cca2, countryName)
+    nytFetch(countryName)
       .then((res) => {
         articles = articles.concat(res)
     }),
