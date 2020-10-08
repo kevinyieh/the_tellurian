@@ -94,10 +94,12 @@ export default class CountryData extends React.Component {
      }
 
     let newGDP;
-    if (gdp.toString().split("").length > 9) {
+    if (gdp.toString().split(".")[0].length > 9) {
+            debugger;
       let bil = gdp / 1000000000;
       newGDP = <p className="data">{bil.toFixed(2)} billion</p>;
     } else {
+      debugger;
       let mil = gdp / 1000000;
       newGDP = <p className="data">{mil.toFixed(2)} million</p>;
     }
