@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require("./routes/api/users");
 const countries = require("./routes/api/countries");
+const articles = require("./routes/api/articles");
 const path = require('path');
 
 if (process.env.NODE_ENV === 'production') {
@@ -33,3 +34,4 @@ app.use(bodyParser.json());
 
 app.use("/api/users", users);
 app.use("/api/countries", countries);
+app.use("/api/articles", articles);
