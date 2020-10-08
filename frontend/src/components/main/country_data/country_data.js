@@ -210,6 +210,7 @@ export default class CountryData extends React.Component {
               <i className="fas fa-angle-left" />
             </div>
             <h1>{country.name}</h1>
+            {/* <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img>  */}
             <div> </div>
           </div>
 
