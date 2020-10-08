@@ -48,17 +48,19 @@
     margin-bottom: 10px;
 }
 
-.fa-angle-left {
+.fa-caret-square-left {
     font-size: 30px;
     padding: 10px;
     margin-right: 40px;
     color: #505050;
     align-self: flex-start;
+    transition: 2s color ease-in-out;
 }
 
-.fa-angle-left:hover {
+.fa-caret-square-left:hover {
     cursor: pointer;
     color: #C47834;
+    transition: 2s color ease-in-out;
 }
 
 .country-data-container h1 {

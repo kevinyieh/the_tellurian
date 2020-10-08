@@ -208,9 +208,8 @@ export default class CountryData extends React.Component {
       <div className={this.onOrOffScreen()}>
         <div className="country-data-text">
           <div className="header-flex">
-          <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
+          <img className="country-flag" alt="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
             <h1>{country.name}</h1>
-            
           </div>
 
           <div className="container-scroll">
