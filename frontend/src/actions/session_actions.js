@@ -21,16 +21,18 @@ export const logoutUser = () => ({
 });
 
 export const login = user => dispatch => {
-  return APIUtil.login(user)
-    .then((res) => {
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
-      APIUtil.authenticate(token);
-      let decoded = jwt_decode(token);
-      dispatch(receiveCurrentUser(decoded));
-    })
-    .catch((err) => {
-      dispatch(receiveErrors(err.response.data));
+
+    return APIUtil.login(user)
+      .then((res) => {
+        const { token } = res.data;
+        localStorage.setItem("jwtToken", token);
+        APIUtil.authenticate(token);
+        let decoded = jwt_decode(token);
+        dispatch(receiveCurrentUser(decoded));
+      })
+      .catch((err) => {
+        dispatch(receiveErrors(err.response.data));
+
     });
 }
 
