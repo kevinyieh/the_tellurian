@@ -6,9 +6,11 @@ import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import "../../stylesheets/map.css";
 import "../../stylesheets/hamburgers.css";
 import "../../stylesheets/nav_dropdown.css";
+import "../../stylesheets/feed.css";
 import NavBarContainer from "../navbar/navbar_container";
 import CountryDataContainer from "./country_data/country_data_container";
 import ArticlesContainer from "./articles/articles_container";
+import FeedModal from "../feed/modal";
 
 am4core.useTheme(am4themesAnimated)
 
@@ -156,6 +158,7 @@ class MainPage extends React.Component {
   render() {
     return (  
       <div className="main-page">
+        <FeedModal />
         <NavBarContainer 
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
