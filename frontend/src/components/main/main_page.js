@@ -84,7 +84,7 @@ class MainPage extends React.Component {
       this.props
         .fetchCountry({ cca2 })
         .then((country) => {
-          this.props.fetchArticles(country.cca2, country.name)});
+          return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
       this.setState({
         display: true,
       });
