@@ -78,8 +78,9 @@ export default class NavBar extends React.Component {
     }
 
     renderDropDown() {
+        debugger;
         if (this.state.selected) return null;
-        if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result"> No results for this search </div>
+        if (Object.keys(this.state.searchResults).length < 1 || !this.state.search ) return <div key="no-results" className="search-result"> No results for this search </div>
         return Object.keys(this.state.searchResults).map(key => (<div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>)).slice(0, 10)
     }
 
