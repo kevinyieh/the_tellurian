@@ -184,7 +184,7 @@ export default class CountryData extends React.Component {
   render() {
     const { country } = this.props;
     if (!country) return null;
-    debugger;
+    // debugger;
 
     const officialname = country.officialname || country.name;
     const population = country.population
@@ -215,7 +215,7 @@ export default class CountryData extends React.Component {
             <div> </div>
           </div>
 
-          <div className="data-scroll">
+          <div className="container-scroll">
             <p className="o-name"> {officialname} </p>
 
             {population}
@@ -239,7 +239,6 @@ export default class CountryData extends React.Component {
             {gdp}
 
             {currency}
-
           </div>
         </div>
       </div>
