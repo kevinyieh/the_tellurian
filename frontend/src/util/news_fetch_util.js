@@ -21,6 +21,8 @@ function nytNormalize(resp) {
       date,
       articleURL: result.web_url,
       imageUrl,
+      source: "New York Times",
+      author: result.author
     };
   });
 }
@@ -47,6 +49,8 @@ function catcherNormalize(res) {
       articleURL: result.link,
       body: result.summary,
       imageUrl: result.media,
+      source: result.clean_url,
+      author: result.author
     };
   });
 }

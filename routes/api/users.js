@@ -105,4 +105,19 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.patch('/articles', (req, res) => {
+  const { userId, articleId } = req.body;
+  User.findById(userId)
+    .then(user => {
+      if (user.savedArticles.includes(articleId)) {
+        user.savedArticles.splice(user.savedArticles.indexOf(articleId), 1);
+      } else {
+        user.savedArticles.push(articleId);
+      }
+      user.save();
+      return res.json(user);
+    })
+    .catch(console.log)
+})
+
 module.exports = router;

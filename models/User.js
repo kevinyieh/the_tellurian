@@ -13,7 +13,13 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  savedArticles : [
+    {
+      type: Schema.Types.ObjectId,
+      red: 'Article'
+    }
+  ]
 })
 
 module.exports = User = mongoose.model('users', UserSchema);
