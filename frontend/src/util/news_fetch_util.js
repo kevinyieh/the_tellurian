@@ -63,8 +63,8 @@ const catcherFetch = async (cca2) => {
     params: {
       lang: "en",
       country: cca2,
-      media: "True",
-    },
+      media: "True"
+    }
   })
     .then((response) => {
       return catcherNormalize(response);
