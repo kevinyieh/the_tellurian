@@ -30,6 +30,13 @@ const deltaLongCalc = (current,destination,inc) => {
   }
 }
 
+const deltaLatCalc = (current,destination,inc) => {
+  return current > destination ? -Math.abs(current-destination) * inc : Math.abs(current-destination) * inc;
+}
+const closeEnough = (current, destination, error) => {
+  return Math.abs(current - destination) <= Math.abs(error);
+}
+
 class MainPage extends React.Component {
   constructor(props){
     super(props);
@@ -46,20 +53,18 @@ class MainPage extends React.Component {
     const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
-    const inc = 0.2;
+    const inc = 0.26;
     
     const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
 
-    const latInc = Math.abs((map.deltaLatitude - deltaLatitude)) < Math.abs((deltaLatitude - map.deltaLatitude)) ?  
-                    (map.deltaLatitude - deltaLatitude) * inc : (deltaLatitude - map.deltaLatitude) * inc;
-    
-    const closeEnough = (current, destination, error) => {
-      return Math.abs(Math.abs(current) - Math.abs(destination)) <= Math.abs(error)
-    }
+    const latInc = deltaLatCalc(map.deltaLatitude,deltaLatitude,inc);
+  
     if (this.intervalId) clearInterval(this.intervalId);
     this.intervalId = setInterval(() => {
+      debugger;
       if((!closeEnough(map.deltaLongitude,deltaLongitude,longInc) || !closeEnough(map.deltaLatitude,deltaLatitude, latInc))
       ){
+        debugger;
         map.deltaLongitude += longInc;
         map.deltaLatitude += latInc;
       }else{
@@ -71,7 +76,7 @@ class MainPage extends React.Component {
         this.selected = objToFocus;
         this.selected.isActive = true;
       }
-    },10);
+    },15);
   }
 
   handleHit(cor,iso2){
@@ -101,7 +106,7 @@ class MainPage extends React.Component {
     })
     map.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#cccccc");
     map.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.3;
-    map.zoomDuration = 1500;
+    map.zoomDuration = 1333;
 
     // ADD GRID LINES
     let graticuleSeries = map.series.push(new am4maps.GraticuleSeries());
