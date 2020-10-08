@@ -165,3 +165,51 @@ body, ul, li, div {
     list-style: none;
     box-sizing: border-box;
 }
+
+.show-left, .show-right {
+    position: absolute;
+    background-color:  white;
+    width: 90px;
+    height: 80px;
+    border-radius: 10px;
+    top:5%;
+    font-size: 40px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: filter 0.3s, left 1s, right 1s;
+    box-sizing: border-box;
+    z-index: 50;
+    overflow: visible;
+}
+.show-left:hover, .show-right:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+.show-left {
+    right: -45px;
+    justify-content: flex-end;
+    transition: transform 1s linear, background-color 2s ease, height 1s linear, width 1s linear, right 1s linear;
+}
+
+.show-right{
+    left: -45px;
+    transition: transform 1s linear, background-color 2s ease, height 1s linear, width 1s linear, left 1s linear;
+}
+
+.show-right.tucked {
+    transform: rotate(180deg);
+    background-color: transparent;
+    height: 0px;
+    width: 0px;
+    left: 10px;
+}
+
+.show-left.tucked {
+    transform: rotate(180deg);
+    background-color: transparent;
+    height: 0px;
+    width: 0px;
+    right: 10px;
+}

@@ -16,7 +16,7 @@
 }
 
 .articles-container.off-screen {
-    right: -700px;
+    right: -670px;
     transition: right 2s;
 }
 
