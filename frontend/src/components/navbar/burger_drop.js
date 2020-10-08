@@ -63,7 +63,7 @@ class Dropdown extends React.Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fab fa-github"></i>
+                <i className="fab fa-github"></i>
               </a>
             </button>
             <button
