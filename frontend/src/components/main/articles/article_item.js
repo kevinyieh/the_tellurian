@@ -12,7 +12,7 @@ class ArticleItem extends React.Component {
                 </a>
                 <p>{article.date}</p>
                 <i className="fas fa-chevron-down"></i>;
-              <div class="article-content">
+              <div className="article-content">
                 <p>{article.body}</p>
               </div>
             </div>
