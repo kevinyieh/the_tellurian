@@ -83,8 +83,15 @@ export default class NavBar extends React.Component {
     renderDropDown() {
         if (this.state.selected) return null;
         if (this.state.loading) return <div className="buffering"> <i className="fas fa-search" /> </div>
-        if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result"> No results for this search </div>
-        return Object.keys(this.state.searchResults).map(key => (<div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>)).slice(0, 10)
+        if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result-container"> No results for this search </div>
+        return Object.keys(this.state.searchResults).map(key => {
+            return (
+                    <div className="search-result-container">
+                        <img className="search-country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}></img> 
+                        <div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>
+                    </div>
+                )}
+            ).slice(0, 10)
     }
 
     render() {
@@ -104,7 +111,7 @@ export default class NavBar extends React.Component {
                                     placeholder="Navigate to a country..."
                                 />
                                 <div className={`space-shuttle-container ${this.state.dropped ? "dropped" : ""}`}>
-                                    <i className="fas fa-space-shuttle fa-flip-horizontal" />
+                                    <i className="fas fa-space-shuttle fa-rotate-270" />
                                 </div>
 
                             </div>

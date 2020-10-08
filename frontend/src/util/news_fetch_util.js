@@ -27,7 +27,7 @@ function nytNormalize(resp) {
     };
   });
 }
-const nytFetch = async (cca2, countryName) => {
+const nytFetch = async (countryName) => {
   let now = new Date();
   let month = now.getMonth() === 0 ? 12 : now.getMonth();
   month = month < 10 ? `0${month}` : month;
@@ -89,9 +89,8 @@ const catcherFetch = async (cca2) => {
 export default async (cca2, countryName) => {
   let articles = [];
   await Promise.allSettled([
-    nytFetch(cca2, countryName)
+    nytFetch(countryName)
       .then((res) => {
-        // debugger;
         articles = res ? articles.concat(res) : articles;
     }),
     catcherFetch(cca2)
