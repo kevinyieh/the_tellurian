@@ -26,15 +26,6 @@ class ArticleItem extends React.Component {
         return (
           <div className="article-item">
             <div className="article-text">
-<<<<<<< HEAD
-                <a className="headline" href={article.articleURL}>
-                  {article.headline}
-                </a>
-                <p>{article.date}</p>
-                <i className="fas fa-chevron-down"></i>;
-              <div className="article-content">
-                <p>{article.body}</p>
-=======
               <div className="flex-head">
                 <i
                   className={`fas fa-chevron-down ${
@@ -44,7 +35,6 @@ class ArticleItem extends React.Component {
                 ></i>
                 <h1 className="headline">{article.headline}</h1>
                 {this.imageRender(article.imageURL)}
->>>>>>> 5c7a03a355973ca700987f84808a75531928c414
               </div>
               <p>{article.date}</p>
               <p
