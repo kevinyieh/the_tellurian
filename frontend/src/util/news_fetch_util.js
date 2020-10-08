@@ -15,6 +15,7 @@ function nytNormalize(resp) {
       result.multimedia.length > 0
         ? `https://static01.nyt.com/${result.multimedia[0].url}`
         : "";
+    const fullName = result.byline.person.length > 0 ? `${result.byline.person[0].firstname} ${result.byline.person[0].lastname}` : "";
     return {
       headline: result.headline.main,
       body: result.lead_paragraph,
@@ -22,7 +23,7 @@ function nytNormalize(resp) {
       articleURL: result.web_url,
       imageUrl,
       source: "New York Times",
-      author: result.author
+      author: fullName
     };
   });
 }
@@ -32,18 +33,20 @@ const nytFetch = async (countryName) => {
   month = month < 10 ? `0${month}` : month;
   const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
   const begin_date = `${now.getFullYear()}${month}${day}`;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  const url = `https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:("${countryName}")&begin_date=${begin_date}&api-key=${nytKey}`;
+  // const headers = {
+  //   "Access-Control-Allow-Headers": "*"
+  // }
   try {
     const { data } = await axios({
                                     method:"GET",
-                                    header:{ 'Content-Type': 'application/x-www-form-urlencoded' },
-                                    url})
+                                    url,
+                                  })
     return nytNormalize(data);
   } catch (error) {
     console.log(error);
   }
 };
-
 function catcherNormalize(res) {
   return res.data.articles.map((result) => {
     let date = new Date(result.published_date);
@@ -88,11 +91,12 @@ export default async (cca2, countryName) => {
   await Promise.allSettled([
     nytFetch(countryName)
       .then((res) => {
-        articles = articles.concat(res)
+        debugger;
+        articles = res ? articles.concat(res) : articles;
     }),
     catcherFetch(cca2)
       .then((res) => {
-        articles = articles.concat(res)
+        articles = res ? articles.concat(res) : articles;
     })
   ])
     .catch(console.log);
