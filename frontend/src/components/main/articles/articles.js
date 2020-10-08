@@ -50,9 +50,6 @@ export default class Articles extends React.Component{
               <div className={`${this.onOrOffScreen()} loading`}>
                 <div className="articles-index-text">
                   <div className="header-flex">
-                    <div className="hide-articles" onClick={this.handleHide}>
-                      <i className="fas fa-caret-square-right"></i>
-                    </div>
                     <h1>Today's Top Stories</h1>
                     <div> </div>
                   </div>
