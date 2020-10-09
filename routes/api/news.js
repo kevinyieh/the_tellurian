@@ -52,44 +52,44 @@ const nytFetch = async (countryName) => {
   }
 };
 
-function catcherNormalize(res) {
-  return res.data.articles.map((result) => {
-    let date = new Date(result.published_date);
-    date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    return {
-      headline: result.title,
-      date,
-      articleURL: result.link,
-      body: result.summary,
-      imageUrl: result.media,
-      source: result.clean_url,
-      author: result.author
-    };
-  });
-}
-const catcherFetch = async (cca2) => {
-  return axios({
-    method: "GET",
-    url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
-    headers: {
-      "content-type": "application/octet-stream",
-      "x-rapidapi-host": "newscatcher.p.rapidapi.com",
-      "x-rapidapi-key": catcherKey,
-      useQueryString: true,
-    },
-    params: {
-      lang: "en",
-      country: cca2,
-      media: "True"
-    }
-  })
-    .then((response) => {
-      return catcherNormalize(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// function catcherNormalize(res) {
+//   return res.data.articles.map((result) => {
+//     let date = new Date(result.published_date);
+//     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+//     return {
+//       headline: result.title,
+//       date,
+//       articleURL: result.link,
+//       body: result.summary,
+//       imageUrl: result.media,
+//       source: result.clean_url,
+//       author: result.author
+//     };
+//   });
+// }
+// const catcherFetch = async (cca2) => {
+//   return axios({
+//     method: "GET",
+//     url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
+//     headers: {
+//       "content-type": "application/octet-stream",
+//       "x-rapidapi-host": "newscatcher.p.rapidapi.com",
+//       "x-rapidapi-key": catcherKey,
+//       useQueryString: true,
+//     },
+//     params: {
+//       lang: "en",
+//       country: cca2,
+//       media: "True"
+//     }
+//   })
+//     .then((response) => {
+//       return catcherNormalize(response);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
 function newsapiNormalize(res) {
   return res.data.articles.map((result) => {
@@ -132,10 +132,10 @@ const fetchAll = async (req,res) => {
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
         })
-      await catcherFetch(cca2)
-        .then((resp) => {
-          articles = resp ? articles.concat(resp) : articles;
-      })
+      // await catcherFetch(cca2)
+      //   .then((resp) => {
+      //     articles = resp ? articles.concat(resp) : articles;
+      // })
     // ]).catch(console.log);
     res.json({ [cca2]: articles });
 }
