@@ -13,7 +13,7 @@ router.post("/save", (req, res) => {
               date: req.body.date,
               articleURL: req.body.articleURL,
               imageURL:
-              req.body.imageURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAwurA8BsiO6T-998tQkdMdHkfzFu-ONxzhw&usqp=CAU",
+              req.body.imageURL || "https://unsplash.com/photos/uhjiu8FjnsQ",
               headline: req.body.headline,
               body: req.body.body || "none",
               source: req.body.source,
