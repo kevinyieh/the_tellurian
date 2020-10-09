@@ -59,13 +59,15 @@ class Feed extends React.Component {
           <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}, ${this.props.currentUser.email}!`}</h3>
           { !this.props.currentUser.savedArticleIds.length || !this.props.SavedArticles ? 
             <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img> :
-            Object.keys(this.props.savedArticles).map(key => (
-              <div>
-                  this.props.savedArticles[key].headline
-              </div>
+            Object.keys(this.props.savedArticles).map(key => {
+              return (
+                <div>
+                    {this.props.savedArticles[key].headline}
+                </div>
               )
-            )
-          }
+              
+            })
+          }   
       </div>
     )
   }
