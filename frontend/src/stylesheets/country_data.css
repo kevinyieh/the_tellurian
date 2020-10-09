@@ -65,10 +65,12 @@
 
 .country-data-container h1 {
     font-weight: 600;
-    font-size: 30px;
+    font-size: 28px;
     margin: 0;
     letter-spacing: 0.5px;
     text-align: center;
+    line-height: 1.1;
+    width: 240px;
 }
 
 .country-flag {
