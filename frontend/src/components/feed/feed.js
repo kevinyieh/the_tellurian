@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  connect
-} from 'react-redux';
-import {
-  fetchSavedArticles,
-  unSaveArticle
-} from '../../actions/bookmark_actions';
+import {connect} from 'react-redux';
+import {fetchSavedArticles, unSaveArticle, saveArticle } from "../../actions/bookmark_actions";
+import ArticleItem from '../main/articles/article_item';
 
 class Feed extends React.Component {
   constructor(props) {
@@ -23,7 +19,7 @@ class Feed extends React.Component {
       "Ciao", //Italian
       "God dag", //Danish
       "Kamusta", //Filipino
-      "Namaste", //Hindi
+      "नमस्ते", //Hindi (formerly Namaste)
       "Olá", //Portugese
       "Salut", //Romanian
       "γεια", //Greek
@@ -54,29 +50,50 @@ class Feed extends React.Component {
   }
 
   render() {
+    const {
+      currentUser,
+      savedArticles,
+      saveArticle,
+      fetchSavedArticles,
+    } = this.props;
+    debugger;
+    const myArticles = Object.values(savedArticles);
     return (
       <div className="">
         <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}`}</h3>
-        <p className="click">Click me!</p>
+        {/* <p className="click">Click me!</p> */}
+          <img
+            className="pointer"
+            alt="pointer-finger"
+            src={require("../../images/pointer.png")}
+          />
 
-        <h3 id="user-id">{this.props.currentUser.email}</h3>
-        {!this.props.currentUser.savedArticleIds.length ||
-        !this.props.SavedArticles ? (
+        
+
+        <h3 id="user-id">{currentUser.email}</h3>
+        {!currentUser.savedArticleIds.length || !savedArticles ? (
           <div>
-            <p>No articles currently bookmarked!</p>
-            <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"
-            alt="bookmark-article"></img>
+            <p className="no-bookmarks">No articles currently bookmarked!</p>
+            <img
+              src="https://image.flaticon.com/icons/svg/2909/2909488.svg"
+              alt="bookmark-article"
+            ></img>
           </div>
         ) : (
-          Object.keys(this.props.savedArticles).map((key) => (
-            <div>this.props.savedArticles[key].headline</div>
+          myArticles.map((article, i) => (
+            <ArticleItem
+              key={i}
+              article={article}
+              saveArticle={saveArticle}
+              fetchSavedArticles={fetchSavedArticles}
+              savedArticles={savedArticles}
+              userId={currentUser.id}
+            />
           ))
         )}
       </div>
     );
   }
-
-
 }
 
 const mSTP = state => ({
@@ -84,9 +101,10 @@ const mSTP = state => ({
   currentUser: state.session.user
 })
 
-const mDTP = dispatch => ({
-  fetchSavedArticles: articleIds => dispatch(fetchSavedArticles(articleIds)),
-  unSaveArticle: (userId, articleId) => dispatch(unSaveArticle(userId, articleId))
-})
+const mDTP = (dispatch) => ({
+  fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
+  unSaveArticle: (userId, articleId) => dispatch(unSaveArticle(userId, articleId)),
+  saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
+});
 
 export default connect(mSTP, mDTP)(Feed);

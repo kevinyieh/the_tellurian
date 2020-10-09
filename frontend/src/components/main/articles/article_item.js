@@ -18,11 +18,12 @@ class ArticleItem extends React.Component {
   }
 
   imageRender(url) {
-    let image = this.props.article.imageUrl;
+    let image = this.props.article.imageURL;
+    debugger;
     if (!image && !url) {
       return null;
     } else {
-      return <img className="article-image" src={image} alt={this.props.article.headline} />;
+      return <img className="article-image" src={url} alt={this.props.article.headline} />;
     }
   }
 
@@ -57,6 +58,7 @@ class ArticleItem extends React.Component {
 
   render() {
     const { article } = this.props;
+    debugger;
     return (
       <div className="article-item">
         <div className="article-text">

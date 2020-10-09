@@ -15,7 +15,7 @@ function nytNormalize(resp) {
   return resp.response.docs.map((result) => {
     let date = new Date(result.pub_date);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    let imageUrl =
+    let imageURL =
       result.multimedia.length > 0
         ? `https://static01.nyt.com/${result.multimedia[0].url}`
         : "";
@@ -25,9 +25,9 @@ function nytNormalize(resp) {
       body: result.lead_paragraph,
       date,
       articleURL: result.web_url,
-      imageUrl,
+      imageURL,
       source: "New York Times",
-      author: fullName
+      author: fullName,
     };
   });
 }
@@ -61,9 +61,9 @@ function catcherNormalize(res) {
       date,
       articleURL: result.link,
       body: result.summary,
-      imageUrl: result.media,
+      imageURL: result.media,
       source: result.clean_url,
-      author: result.author
+      author: result.author,
     };
   });
 }
@@ -100,9 +100,9 @@ function newsapiNormalize(res) {
       date,
       articleURL: result.url,
       body: result.content,
-      imageUrl: result.urlToImage,
+      imageURL: result.urlToImage,
       source: result.source.name,
-      author: result.author
+      author: result.author,
     };
   });
 }
@@ -120,25 +120,32 @@ const newsapiFetch = async (cca2) => {
     });
 };
 
-const fetchAll = async (req,res) => {
-    const {cca2, countryName} = req.body;
-    let articles = [];
-    await Promise.allSettled([
-      nytFetch(countryName)
-        .then((resp) => {
-          articles = resp ? articles.concat(resp) : articles;
-      }),
-      newsapiFetch(cca2)
-        .then((resp) => {
-          articles = resp ? articles.concat(resp) : articles;
-        })
-      // catcherFetch(cca2)
-      //   .then((resp) => {
-      //     articles = resp ? articles.concat(resp) : articles;
-      // })
-    ]).catch(console.log);
-    res.json({ [cca2]: articles });
-}
+const fetchAll = async (req, res) => {
+  const { cca2, countryName } = req.body;
+  let articles = [];
+  // await Promise.allSettled([
+  //   nytFetch(countryName)
+  //     .then((resp) => {
+  //       articles = resp ? articles.concat(resp) : articles;
+  //   })
+  // newsapiFetch(cca2)
+  //   .then((resp) => {
+  //     articles = resp ? articles.concat(resp) : articles;
+  //   })
+  // catcherFetch(cca2)
+  //   .then((resp) => {
+  //     articles = resp ? articles.concat(resp) : articles;
+  // })
+  // ]).catch(console.log);
+  await newsapiFetch(cca2)
+    .then((resp) => {
+      articles = resp ? articles.concat(resp) : articles;
+    })
+  await nytFetch(countryName).then((resp) => {
+    articles = resp ? articles.concat(resp) : articles;
+  });
+  res.json({ [cca2]: articles });
+};;
 
 router.post("/",fetchAll);
 
