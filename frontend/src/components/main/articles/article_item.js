@@ -1,5 +1,6 @@
 import React from 'react';
 import copy from "copy-to-clipboard";  
+// import { head } from '../../../../../routes/api/news';
 
 class ArticleItem extends React.Component {
   constructor(props) {
@@ -55,6 +56,11 @@ class ArticleItem extends React.Component {
       }
   }
 
+  renderHeadline(headline) {
+    if(headline.length < 90) return headline;
+    return headline.slice(0,90) + "..."
+  }
+
   render() {
     const { article } = this.props;
     return (
@@ -67,7 +73,7 @@ class ArticleItem extends React.Component {
               }`}
               onClick={this.toggleContent}
             ></i>
-            <h1 className="headline">{article.headline}</h1>
+            <h1 className="headline">{this.renderHeadline(article.headline)}</h1>
             {this.imageRender(article.imageURL)}
           </div>
 
