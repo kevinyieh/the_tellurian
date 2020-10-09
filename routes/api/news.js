@@ -101,7 +101,7 @@ function newsapiNormalize(res) {
       articleURL: result.url,
       body: result.content,
       imageUrl: result.urlToImage,
-      source: result.soruce.name,
+      source: result.source.name,
       author: result.author
     };
   });
@@ -131,11 +131,11 @@ const fetchAll = async (req,res) => {
       newsapiFetch(cca2)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
-        }),
-      catcherFetch(cca2)
-        .then((resp) => {
-          articles = resp ? articles.concat(resp) : articles;
-      })
+        })
+      // catcherFetch(cca2)
+      //   .then((resp) => {
+      //     articles = resp ? articles.concat(resp) : articles;
+      // })
     ]).catch(console.log);
     res.json({ [cca2]: articles });
 }
