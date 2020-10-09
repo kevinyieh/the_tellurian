@@ -34,7 +34,6 @@ class ArticleItem extends React.Component {
   }
 
   handleBookmark(e) {
-    debugger;
      e.preventDefault();
      this.props.saveArticle(this.props.userId, this.props.article);
     //  this.setState({ bookmarked: !this.state.bookmarked });
@@ -42,7 +41,6 @@ class ArticleItem extends React.Component {
 
   renderBookmark() {
     const {savedArticles, article} = this.props;
-    debugger;
     let myArticles = Object.values(savedArticles);
     let found;
     myArticles.forEach(a => a.articleURL === article.articleURL ? found = true : null)
@@ -59,7 +57,6 @@ class ArticleItem extends React.Component {
 
   render() {
     const { article } = this.props;
-    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
