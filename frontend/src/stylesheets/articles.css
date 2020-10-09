@@ -1,10 +1,10 @@
 .articles-container{
     position: absolute;
-    height: 720px;
+    height: 800px;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
-    top: 58px;
+    top: 85px;
     background-color: rgba(242, 242, 242, 0.9);
     padding: 15px 0px 15px 15px;
     font-family: 'Titillium Web', sans-serif;

@@ -3,12 +3,25 @@ import SessionFormContainer from '../session/session_form_container';
 import "../../stylesheets/splash.css";
 
 class Splash extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      mount: false
+    }
+  }
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({
+        mount: true
+      })
+    }, 100)  
+  }
   render() {
     return (
       <div className="splash">
         <div className="header">
-          <h1 className="title">The Tellurian</h1>
-          <h2 className="byline">
+          <h1 className={`title ${this.state.mount? "fade-in":""}`}>The Tellurian</h1>
+          <h2 className={`byline ${this.state.mount? "fade-in":""}`}>
             All the news you need on the world. On the world.
           </h2>
         </div>
