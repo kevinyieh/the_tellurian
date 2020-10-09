@@ -64,7 +64,8 @@ class Feed extends React.Component {
         !this.props.SavedArticles ? (
           <div>
             <p>No articles currently bookmarked!</p>
-            <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img>
+            <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"
+            alt="bookmark-article"></img>
           </div>
         ) : (
           Object.keys(this.props.savedArticles).map((key) => (
