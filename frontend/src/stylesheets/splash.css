@@ -60,6 +60,17 @@
     }
 }
 
+.splash-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.splash-info {
+    background-color: rgba(26, 29, 33, 0.8);
+    font-family: 'Tomorrow', sans-serif;
+}
 
 .logo {
     height: 100px;
