@@ -6,6 +6,7 @@ import MainPage from './main_page';
 
 const mSTP = (state) => ({
   country: state.entities.countries[state.ui.currentCountry],
+  articles: state.entities.articles
 });
 
 const mDTP = dispatch => {
