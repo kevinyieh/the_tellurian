@@ -1,6 +1,10 @@
 import {connect} from 'react-redux';
 import { fetchCountry } from "../../actions/country_actions";
-import { fetchArticles } from "../../actions/article_actions";
+import {
+  fetchArticles,
+} from "../../actions/article_actions";
+import {  fetchSavedArticles,
+} from '../../actions/bookmark_actions';
 
 import MainPage from './main_page';
 
@@ -12,7 +16,10 @@ const mSTP = (state) => ({
 const mDTP = dispatch => {
     return {
       fetchCountry: (country) => dispatch(fetchCountry(country)),
-      fetchArticles: (cca2, countryName) => dispatch(fetchArticles(cca2, countryName))
+      fetchArticles: (cca2, countryName) =>
+        dispatch(fetchArticles(cca2, countryName)),
+      fetchSavedArticles: (articleURLs) =>
+        fetchSavedArticles(articleURLs)(dispatch),
     };
 };
 

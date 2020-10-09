@@ -68,6 +68,7 @@ export default class Articles extends React.Component{
           country,
           savedArticles,
           saveArticle,
+          unSaveArticle,
           fetchSavedArticles,
           currentUser,
         } = this.props;
@@ -90,9 +91,11 @@ export default class Articles extends React.Component{
             );
         } else {
             return (
-              <div onMouseOver={this.stopGlobeSpin} 
+              <div
+                onMouseOver={this.stopGlobeSpin}
                 onMouseOut={this.startGlobeSpin}
-                className={this.onOrOffScreen()}>
+                className={this.onOrOffScreen()}
+              >
                 <div className="articles-index-text">
                   <div className="header-flex">
                     <h1>Top Stories in {country.name}</h1>
@@ -112,6 +115,7 @@ export default class Articles extends React.Component{
                           saveArticle={saveArticle}
                           fetchSavedArticles={fetchSavedArticles}
                           savedArticles={savedArticles}
+                          unSaveArticle={unSaveArticle}
                           userId={currentUser.id}
                         />
                       ))

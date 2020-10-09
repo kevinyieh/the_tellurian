@@ -15,7 +15,7 @@ function nytNormalize(resp) {
   return resp.response.docs.map((result) => {
     let date = new Date(result.pub_date);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    let imageUrl =
+    let imageURL =
       result.multimedia.length > 0
         ? `https://static01.nyt.com/${result.multimedia[0].url}`
         : "";
@@ -25,9 +25,9 @@ function nytNormalize(resp) {
       body: result.lead_paragraph,
       date,
       articleURL: result.web_url,
-      imageUrl,
+      imageURL,
       source: "New York Times",
-      author: fullName
+      author: fullName,
     };
   });
 }
@@ -100,9 +100,9 @@ function newsapiNormalize(res) {
       date,
       articleURL: result.url,
       body: result.content,
-      imageUrl: result.urlToImage,
+      imageURL: result.urlToImage,
       source: result.source.name,
-      author: result.author
+      author: result.author,
     };
   });
 }
