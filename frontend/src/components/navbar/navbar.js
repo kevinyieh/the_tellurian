@@ -87,7 +87,9 @@ export default class NavBar extends React.Component {
         return Object.keys(this.state.searchResults).map(key => {
             return (
                     <div key={this.state.searchResults[key].cca2} className="search-result-container">
-                        <img className="search-country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}></img> 
+                        <img className="search-country-flag" 
+                            alt={`${this.state.searchResults[key].cca3}`}
+                            src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}/>
                         <div className="search-result" onClick={this.handleClick}>{key}</div>
                     </div>
                 )}
