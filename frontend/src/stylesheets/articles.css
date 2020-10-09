@@ -51,16 +51,13 @@
     letter-spacing: 0.5px;
     text-align: left;
     margin-right: 5px;
+    flex-grow: 1;
 }
 
 .article-image {
     height: inherit;
     object-fit: contain;
     max-width: 200px;
-}
-
-.no-image {
-    
 }
 
 /* potential button to open/close article */
@@ -104,13 +101,13 @@
     margin-top: 10px;
 }
 
-.no-image {
+/* .no-image {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     max-height: 150px;
     margin-top: 10px;
-}
+} */
 
 .fa-chevron-down {
     font-size: 20px;
@@ -181,6 +178,11 @@
     transition: 0.2s color ease-in-out;
 }
 
+.fa-bookmark {
+    padding: 10px;
+    transition: 0.2s color ease-in-out;
+}
+
 .fa-link:hover {
     cursor: pointer;
     color: #C47834;
@@ -210,4 +212,9 @@
     color: #C47834;
     margin: 0;
     align-self: center;
+}
+
+.no-news {
+    text-align: center;
+    font-size: 18px;
 }
