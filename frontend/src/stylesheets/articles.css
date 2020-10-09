@@ -1,6 +1,6 @@
 .articles-container{
     position: absolute;
-    height: 830px;
+    height: 720px;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
@@ -34,6 +34,7 @@
 
 .articles-index-text {
     padding: 10px;
+    height: 100%;
 }
 
 .article-item {
@@ -96,6 +97,10 @@
     overflow: visible;
 }
 
+.header-flex {
+    height: 10%;
+}
+
 .flex-head {
     display: flex;
     flex-direction: row;
@@ -131,7 +136,7 @@
 }
 
 .article-scroll {
-    height: 700px;
+    height: 90%;
     overflow: scroll;
     padding-right: 15px;
 }
