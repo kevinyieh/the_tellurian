@@ -15,7 +15,7 @@ const mSTP = (state,ownProps) => {
 const mDTP = dispatch => {
     return {
       saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
-      fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
+      fetchSavedArticles: (articleURLs) => dispatch(fetchSavedArticles(articleURLs)),
     };
 }
 

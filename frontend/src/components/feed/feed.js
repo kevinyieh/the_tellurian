@@ -19,7 +19,11 @@ class Feed extends React.Component {
       "Ciao", //Italian
       "God dag", //Danish
       "Kamusta", //Filipino
+<<<<<<< HEAD
       "नमस्ते", //Hindi (formerly Namaste)
+=======
+      "नमस्ते", //Hindi
+>>>>>>> master
       "Olá", //Portugese
       "Salut", //Romanian
       "γεια", //Greek
@@ -40,7 +44,7 @@ class Feed extends React.Component {
 
   componentDidMount() {
     this.props.fetchSavedArticles(
-      this.props.currentUser.savedArticleIds
+      this.props.currentUser.savedArticles
     );
   }
 
@@ -68,10 +72,16 @@ class Feed extends React.Component {
             src={require("../../images/pointer.png")}
           />
 
+<<<<<<< HEAD
         
 
         <h3 id="user-id">{currentUser.email}</h3>
         {!currentUser.savedArticleIds.length || !savedArticles ? (
+=======
+        <h3 id="user-id">{this.props.currentUser.email}</h3>
+        {!this.props.currentUser.savedArticles.length ||
+        !this.props.SavedArticles ? (
+>>>>>>> master
           <div>
             <p className="no-bookmarks">No articles currently bookmarked!</p>
             <img
@@ -101,10 +111,17 @@ const mSTP = state => ({
   currentUser: state.session.user
 })
 
+<<<<<<< HEAD
 const mDTP = (dispatch) => ({
   fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
   unSaveArticle: (userId, articleId) => dispatch(unSaveArticle(userId, articleId)),
   saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
 });
+=======
+const mDTP = dispatch => ({
+  fetchSavedArticles: articleURLs => dispatch(fetchSavedArticles(articleURLs)),
+  unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL))
+})
+>>>>>>> master
 
 export default connect(mSTP, mDTP)(Feed);

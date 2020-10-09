@@ -11,7 +11,7 @@ export default class Articles extends React.Component{
         }
         // this.handleHide = this.handleHide.bind(this);
         this.toggleHide = this.toggleHide.bind(this);
-        this.handleShow = this.handleShow.bind(this);
+        // this.handleShow = this.handleShow.bind(this);
         this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
         this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
@@ -19,7 +19,7 @@ export default class Articles extends React.Component{
         this.setState({
             hidden: false
         });
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
     }
     componentWillReceiveProps(nextProps) {
       this.setState({ hidden: nextProps.hidden });  
@@ -33,10 +33,10 @@ export default class Articles extends React.Component{
       }
 
       if (
-        prevProps.currentUser.savedArticleIds.length !==
-        this.props.currentUser.savedArticleIds.length
+        prevProps.currentUser.savedArticles.length !==
+        this.props.currentUser.savedArticles.length
       ) {
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
       }
     }
     
@@ -45,11 +45,11 @@ export default class Articles extends React.Component{
             hidden: !this.state.hidden
         })
     }
-    handleShow(){
-      this.setState({
-          hidden: false
-      })
-    }
+    // handleShow(){
+    //   this.setState({
+    //       hidden: false
+    //   })
+    // }
 
     onOrOffScreen(){
       return `articles-container ${this.state.hidden ? "off-screen" : this.props.display ? "on-screen" : "off-screen"}`;
