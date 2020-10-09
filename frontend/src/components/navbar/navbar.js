@@ -86,9 +86,9 @@ export default class NavBar extends React.Component {
         if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result-container"> No results for this search </div>
         return Object.keys(this.state.searchResults).map(key => {
             return (
-                    <div className="search-result-container">
+                    <div key={this.state.searchResults[key].cca2} className="search-result-container">
                         <img className="search-country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}></img> 
-                        <div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>
+                        <div className="search-result" onClick={this.handleClick}>{key}</div>
                     </div>
                 )}
             ).slice(0, 10)

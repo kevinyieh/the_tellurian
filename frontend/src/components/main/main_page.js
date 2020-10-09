@@ -146,6 +146,7 @@ class MainPage extends React.Component {
     // CREATE GO HOME BUTTOn
     let home = map.chartContainer.createChild(am4core.Button);
     home.label.text = "Reset";
+    home.marginLeft = 10;
     home.fontFamily = "Times New Roman";
     home.align = "left";
     home.events.on("hit", function(ev) {
