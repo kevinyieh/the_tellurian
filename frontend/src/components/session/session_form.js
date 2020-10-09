@@ -8,9 +8,10 @@ class SessionForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: {},
-      isSignup: false,
+      password2: "",
+      formType: "login",
     };
+   
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.switchForm = this.switchForm.bind(this);
@@ -20,18 +21,19 @@ class SessionForm extends React.Component {
   renderErrors() {
     return (
       <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.state.errors[error]}</li>
+        {Object.keys(this.props.errors).map((key, i) => (
+          <li key={`error-${i}`}>{this.props.errors[key]}</li>
         ))}
       </ul>
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
+  componentDidUpdate() {
+    if (Object.keys(this.props.currentUser).length !== 0) {
+      debugger;
+      this.props.clearErrors();
       this.props.history.push("/main");
     }
-    this.setState({ errors: nextProps.errors });
   }
 
   update(field) {
@@ -44,19 +46,19 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user;
-    if (this.state.isSignup) {
+    if (this.state.formType === "signup") {
       user = {
         email: this.state.email,
         password: this.state.password,
         password2: this.state.password2,
       };
-      this.props.signup(user).then(this.props.history.push("/main"));
+      this.props.signup(user)
     } else {
       user = {
         email: this.state.email,
         password: this.state.password,
       };
-      this.props.login(user).then(this.props.history.push("/main"));
+      this.props.login(user)
     }
   }
 
@@ -67,7 +69,7 @@ class SessionForm extends React.Component {
       email: "demo@demo.demo",
       password: "demodemodemo",
     };
-    this.props.login(user).then(this.props.history.push("/main"));
+    this.props.login(user)
   }
 
   login() {
@@ -118,37 +120,37 @@ class SessionForm extends React.Component {
 
   switchForm() {
     this.props.clearErrors();
-    const prev = this.state.isSignup;
+    const formType = this.state.formType === "login" ? "signup" : "login";
     this.setState({
       email: "",
       password: "",
       password2: "",
-      errors: {},
-      isSignup: !prev,
+      formType,
     });
   }
 
   altButton() {
     return (
       <button onClick={this.switchForm}>
-        {this.state.isSignup ? "Back to Login" : "Sign Up Instead"}
+        {this.state.formType === "login" ? "Sign Up Instead" : "Back to Login" }
       </button>
     )
   }
 
   render() {
+    debugger;
     return (
       <div className="session-form">
         <form onSubmit={this.handleSubmit}>
-          {this.state.isSignup ? this.signup() : this.login()}
+          {this.state.formType === "login" ? this.login() : this.signup()}
           {this.renderErrors()}
-          <button>{this.state.isSignup ? "Sign Up" : "Log In"}</button>
+          <button>{this.state.formType === "login" ? "Log In" : "Sign Up"}</button>
         </form>
         {this.altButton()}
         <button id="demo" onClick={this.handleDemo}>
           Log In As Demo User
         </button>
-        {/* {this.props.demo} */}
+        {this.props.demo}
       </div>
     );
   }
