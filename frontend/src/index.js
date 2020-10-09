@@ -5,13 +5,13 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { authenticate } from './util/session_util';
 import { logout } from './actions/session_actions';
-import { fetchCountry } from './actions/country_actions';
-import { fetchArticles } from "./actions/article_actions";
-import { 
-  fetchSavedArticles,
-  saveArticle,
-  unSaveArticle
-} from "./actions/bookmark_actions"
+// import { fetchCountry } from './actions/country_actions';
+// import { fetchArticles } from "./actions/article_actions";
+// import { 
+//   fetchSavedArticles,
+//   saveArticle,
+//   unSaveArticle
+// } from "./actions/bookmark_actions";
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.getElementById("root");
 
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.fetchCountry = fetchCountry;
-  window.fetchArticles = fetchArticles;
-  window.saveArticle = saveArticle;
-  window.unSaveArticle = unSaveArticle;
-  window.fetchSavedArticles = fetchSavedArticles;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
+  // window.fetchCountry = fetchCountry;
+  // window.fetchArticles = fetchArticles;
+  // window.saveArticle = saveArticle;
+  // window.unSaveArticle = unSaveArticle;
+  // window.fetchSavedArticles = fetchSavedArticles;
   ReactDOM.render(<Root store={store} />, root);
 });
