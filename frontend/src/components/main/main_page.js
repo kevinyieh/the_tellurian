@@ -43,10 +43,15 @@ class MainPage extends React.Component {
   constructor(props){
     super(props);
     this.selected = null;
-    this.handleHit = this.handleHit.bind(this);
+    
     this.state = {
-      display: false
+      display: false,
+      countryHidden: false,
+      articlesHidden: false
     }
+    this.handleHit = this.handleHit.bind(this);
+    this.handleHideArticles = this.handleHideArticles.bind(this);
+    this.handleHideCountry = this.handleHideCountry.bind(this);
   }
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
@@ -141,7 +146,7 @@ class MainPage extends React.Component {
     activeState.properties.fill = am4core.color("#ffff66");
     // CREATE GO HOME BUTTOn
     let home = map.chartContainer.createChild(am4core.Button);
-    home.label.text = "Zoom Out";
+    home.label.text = "Reset";
     home.fontFamily = "Times New Roman";
     home.align = "left";
     home.events.on("hit", function(ev) {
@@ -153,6 +158,18 @@ class MainPage extends React.Component {
     if (this.chart) {
       this.chart.dispose();
     }
+  }
+  handleHideCountry(e){
+    // e.preventDefault();
+    this.setState({
+      countryHidden: false
+    })
+  }
+  handleHideArticles(e){
+    // e.preventDefault();
+    this.setState({
+      articlesHidden: false
+    })
   }
 
   render() {
@@ -166,10 +183,12 @@ class MainPage extends React.Component {
         />
         <CountryDataContainer
           display={this.state.display}
+          hidden={this.state.countryHidden}
         />
         <div id="chartdiv" />
         <ArticlesContainer
           display={this.state.display}
+          hidden={this.state.articlesHidden}
         />
       </div>
         

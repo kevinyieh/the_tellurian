@@ -7,7 +7,7 @@ export default class CountryData extends React.Component {
     this.state = {
       hidden: false,
     };
-    this.handleHide = this.handleHide.bind(this);
+    this.toggleHide = this.toggleHide.bind(this);
     this.gdpConverter = this.gdpConverter.bind(this);
     this.currencyConverter = this.currencyConverter.bind(this);
     this.langConverter = this.langConverter.bind(this);
@@ -19,18 +19,18 @@ export default class CountryData extends React.Component {
     });
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.hidden) {
-      this.setState({
-        hidden: false,
-      });
+  componentDidUpdate(prevProps,prevState) {
+    if (prevProps.hidden !== this.props.hidden){
+      this.setState({ hidden: this.props.hidden })
+    }else {
+      if(prevState.hidden) this.setState({ hidden: false });
     }
   }
 
-  handleHide() {
+  toggleHide() {
     this.setState({
-      hidden: true,
-    });
+      hidden: !this.state.hidden
+  })
   }
 
   onOrOffScreen() {
@@ -95,11 +95,9 @@ export default class CountryData extends React.Component {
 
     let newGDP;
     if (gdp.toString().split(".")[0].length > 9) {
-            debugger;
       let bil = gdp / 1000000000;
       newGDP = <p className="data">{bil.toFixed(2)} billion</p>;
     } else {
-      debugger;
       let mil = gdp / 1000000;
       newGDP = <p className="data">{mil.toFixed(2)} million</p>;
     }
@@ -210,11 +208,8 @@ export default class CountryData extends React.Component {
       <div className={this.onOrOffScreen()}>
         <div className="country-data-text">
           <div className="header-flex">
-            <div className="hide-country-data" onClick={this.handleHide}>
-              <i className="fas fa-angle-left" />
-            </div>
+          <img className="country-flag" alt="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
             <h1>{country.name}</h1>
-            <img className="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 
           </div>
 
           <div className="container-scroll">
@@ -242,6 +237,9 @@ export default class CountryData extends React.Component {
 
             {currency}
           </div>
+        </div>
+        <div onClick={this.toggleHide} className={`show-left ${this.state.hidden ? "" : "tucked"}`}>
+          <i className="fas fa-sort-up fa-rotate-90" />
         </div>
       </div>
     );
