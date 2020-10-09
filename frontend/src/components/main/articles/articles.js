@@ -12,6 +12,8 @@ export default class Articles extends React.Component{
         // this.handleHide = this.handleHide.bind(this);
         this.toggleHide = this.toggleHide.bind(this);
         this.handleShow = this.handleShow.bind(this);
+        this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
+        this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
     componentDidMount() {
         this.setState({
@@ -37,10 +39,17 @@ export default class Articles extends React.Component{
       this.setState({
           hidden: false
       })
-  }
+    }
 
     onOrOffScreen(){
       return `articles-container ${this.state.hidden ? "off-screen" : this.props.display ? "on-screen" : "off-screen"}`;
+    }
+
+    stopGlobeSpin(e){
+      if( this.props.map.panBehavior !== "none" ) this.props.map.panBehavior = "none";
+    }
+    startGlobeSpin(e){
+      if( this.props.map.panBehavior !== "rotateLongLat" ) this.props.map.panBehavior = "rotateLongLat";
     }
 
     render(){
@@ -48,21 +57,24 @@ export default class Articles extends React.Component{
         if (!articles) {
             return (
               <div className={`${this.onOrOffScreen()} loading`}>
-                <div className="articles-index-text">
+                <div className="articles-index-text loading">
                   <div className="header-flex">
                     <h1>Today's Top Stories</h1>
                     <div> </div>
                   </div>
+                  <img className="article-load" src={require("../../../images/loading.svg")} alt="loading" />
                 </div>
                   <div onClick={this.toggleHide} className={`show-right ${this.state.hidden ? "" : "tucked"}`}>
                     <i className="fas fa-sort-up fa-rotate-270" />
                   </div>
-                  <img className="article-load" src={require("../../../images/loading.svg")} alt="loading" />
+                  
               </div>
             );
         } else {
             return (
-              <div className={this.onOrOffScreen()}>
+              <div onMouseOver={this.stopGlobeSpin} 
+                onMouseOut={this.startGlobeSpin}
+                className={this.onOrOffScreen()}>
                 <div className="articles-index-text">
                   <div className="header-flex">
                     <h1>Top Stories in {country.name}</h1>

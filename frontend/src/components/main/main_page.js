@@ -171,10 +171,9 @@ class MainPage extends React.Component {
       articlesHidden: false
     })
   }
-
   render() {
     return (  
-      <div className="main-page">
+      <div  className="main-page">
         <FeedModal />
         <NavBarContainer 
           selectCountry={this.handleHit}
@@ -184,11 +183,13 @@ class MainPage extends React.Component {
         <CountryDataContainer
           display={this.state.display}
           hidden={this.state.countryHidden}
+          map={this.map}
         />
         <div id="chartdiv" />
         <ArticlesContainer
           display={this.state.display}
           hidden={this.state.articlesHidden}
+          map={this.map}
         />
       </div>
         

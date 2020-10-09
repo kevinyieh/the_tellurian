@@ -157,6 +157,9 @@
     flex-direction: column;
     align-content: center;
 }
+.articles-index-text.loading {
+    align-items: center;
+}
 
 .article-link {
     font-size: 14px;
