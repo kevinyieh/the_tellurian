@@ -4,11 +4,12 @@ import copy from "copy-to-clipboard";
 class ArticleItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { collapsed: true, copied: false };
+    this.state = { collapsed: true, copied: false, bookmarked: false };
     this.toggleContent = this.toggleContent.bind(this);
     this.imageRender = this.imageRender.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
     this.handleBookmark = this.handleBookmark.bind(this);
+    this.renderBookmark = this.renderBookmark.bind(this);
   }
 
   toggleContent(e) {
@@ -21,7 +22,7 @@ class ArticleItem extends React.Component {
     if (!image && !url) {
       return null;
     } else {
-      return <img className="article-image" src={image} alt="article" />;
+      return <img className="article-image" src={image} alt={this.props.article.headline} />;
     }
   }
 
@@ -33,16 +34,36 @@ class ArticleItem extends React.Component {
   }
 
   handleBookmark(e) {
+    debugger;
      e.preventDefault();
-     //
+     this.props.saveArticle(this.props.userId, this.props.article);
+    //  this.setState({ bookmarked: !this.state.bookmarked });
+  }
+
+  renderBookmark() {
+    const {savedArticles, article} = this.props;
+    debugger;
+    let myArticles = Object.values(savedArticles);
+    let found;
+    myArticles.forEach(a => a.articleURL === article.articleURL ? found = true : null)
+      if (myArticles && found) {
+        return (
+          <i className="fas fa-bookmark" onClick={this.handleBookmark}></i>
+        );
+      } else {
+        return (
+          <i className="far fa-bookmark" onClick={this.handleBookmark}></i>
+        );
+      }
   }
 
   render() {
     const { article } = this.props;
+    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
-          <div className={article.imageURL ? "flex-head" : "no-image"}>
+          <div className="flex-head">
             <i
               className={`fas fa-chevron-down ${
                 this.state.collapsed ? "" : "rotate"
@@ -62,7 +83,7 @@ class ArticleItem extends React.Component {
             <div className="article-icons">
               <p className={this.state.copied ? "copied" : "hide"}>Copied!</p>
               <i className="fas fa-link" onClick={this.copyToClipboard}></i>
-              <i className="far fa-bookmark" onClick={this.handleBookmark}></i>
+              {this.renderBookmark()}
             </div>
           </div>
           <p
