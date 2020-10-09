@@ -4,7 +4,7 @@ const axios = require("axios");
 const {
   nytKey,
   catcherKey,
- } = require("../../frontend/src/config/keys");
+ } = require('../../config/keys');
 const { response } = require("express");
 
  //TODO: remove NYT articles from catcher results
