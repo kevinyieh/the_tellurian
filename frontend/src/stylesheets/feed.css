@@ -16,7 +16,9 @@ rgb(80,80,80) dark like
   overflow-y: auto;
   z-index: 100;
 }
-
+.no-bookmarks {
+  text-align: center;
+}
 .modal-dialog {
   position: relative;
   background-color: rgba(242, 242, 242, 1);
@@ -37,7 +39,6 @@ rgb(80,80,80) dark like
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   font-family: 'Titillium Web', sans-serif;
   overflow: scroll;
   width: inherit;

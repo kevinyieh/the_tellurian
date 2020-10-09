@@ -123,20 +123,22 @@ const newsapiFetch = async (cca2) => {
 const fetchAll = async (req,res) => {
     const {cca2, countryName} = req.body;
     let articles = [];
-    // await Promise.allSettled([
-      await nytFetch(countryName)
+    await Promise.allSettled([
+      nytFetch(countryName)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
-      })
-      await newsapiFetch(cca2)
+      }),
+      newsapiFetch(cca2)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
         })
+      ])
+      .catch(console.log);
       // await catcherFetch(cca2)
       //   .then((resp) => {
       //     articles = resp ? articles.concat(resp) : articles;
       // })
-    // ]).catch(console.log);
+    
     res.json({ [cca2]: articles });
 }
 
