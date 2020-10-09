@@ -26,8 +26,9 @@ export const receiveArticles = articles => {
 }
 
 export const fetchSavedArticles = articleURLs => dispatch => {
-  Bookmark.fetchSavedArticles(articleURLs)
+  return Bookmark.fetchSavedArticles(articleURLs)
     .then(articles => {
+          debugger;
       return dispatch(receiveArticles(articles.data))
     })
     .catch(err => {
@@ -36,8 +37,9 @@ export const fetchSavedArticles = articleURLs => dispatch => {
 }
 
 export const saveArticle = (userId, article) => dispatch => {
-    Bookmark.saveArticle(userId, article)
+    return Bookmark.saveArticle(userId, article)
       .then((response) => {
+            debugger;
         return dispatch(receiveSavedURLs(response.data.savedURLs));
       })
       .catch((err) => {
@@ -46,7 +48,7 @@ export const saveArticle = (userId, article) => dispatch => {
 }
 
 export const unSaveArticle = (userId, articleURL) => dispatch => {
-  Bookmark.unSaveArticle(userId, articleURL)
+    return Bookmark.unSaveArticle(userId, articleURL)
     .then((response) => {
       return dispatch(receiveSavedURLs(response.data.savedURLs));
     })

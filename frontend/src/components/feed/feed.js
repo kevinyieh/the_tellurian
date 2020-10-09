@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchSavedArticles, unSaveArticle, saveArticle } from "../../actions/bookmark_actions";
+import {fetchSavedArticles, unSaveArticle } from "../../actions/bookmark_actions";
 import ArticleItem from '../main/articles/article_item';
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = { articlesFetched: false }
     this.hellos = [
       "Hello", //English
       "Hallå", //Swedish
@@ -19,11 +19,7 @@ class Feed extends React.Component {
       "Ciao", //Italian
       "God dag", //Danish
       "Kamusta", //Filipino
-<<<<<<< HEAD
       "नमस्ते", //Hindi (formerly Namaste)
-=======
-      "नमस्ते", //Hindi
->>>>>>> master
       "Olá", //Portugese
       "Salut", //Romanian
       "γεια", //Greek
@@ -38,14 +34,14 @@ class Feed extends React.Component {
       "Здравствуйте", //Russian
       "გამარჯობა", //Georgian
     ];
-
     this.handleHello = this.handleHello.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchSavedArticles(
-      this.props.currentUser.savedArticles
-    );
+    debugger;
+    this.props
+      .fetchSavedArticles(this.props.currentUser.savedArticles)
+      .then(() => this.setState({ articlesFetched: true }));
   }
 
   handleHello() {
@@ -57,31 +53,25 @@ class Feed extends React.Component {
     const {
       currentUser,
       savedArticles,
-      saveArticle,
       fetchSavedArticles,
+      unSaveArticle,
     } = this.props;
     debugger;
     const myArticles = Object.values(savedArticles);
+    debugger;
+
     return (
       <div className="">
         <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}`}</h3>
         {/* <p className="click">Click me!</p> */}
-          <img
-            className="pointer"
-            alt="pointer-finger"
-            src={require("../../images/pointer.png")}
-          />
-
-<<<<<<< HEAD
-        
+        <img
+          className="pointer"
+          alt="pointer-finger"
+          src={require("../../images/pointer.png")}
+        />
 
         <h3 id="user-id">{currentUser.email}</h3>
-        {!currentUser.savedArticleIds.length || !savedArticles ? (
-=======
-        <h3 id="user-id">{this.props.currentUser.email}</h3>
-        {!this.props.currentUser.savedArticles.length ||
-        !this.props.SavedArticles ? (
->>>>>>> master
+        {!currentUser.savedArticles.length || !savedArticles ? (
           <div>
             <p className="no-bookmarks">No articles currently bookmarked!</p>
             <img
@@ -94,8 +84,8 @@ class Feed extends React.Component {
             <ArticleItem
               key={i}
               article={article}
-              saveArticle={saveArticle}
               fetchSavedArticles={fetchSavedArticles}
+              unSaveArticle={unSaveArticle}
               savedArticles={savedArticles}
               userId={currentUser.id}
             />
@@ -111,17 +101,9 @@ const mSTP = state => ({
   currentUser: state.session.user
 })
 
-<<<<<<< HEAD
-const mDTP = (dispatch) => ({
-  fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
-  unSaveArticle: (userId, articleId) => dispatch(unSaveArticle(userId, articleId)),
-  saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
-});
-=======
 const mDTP = dispatch => ({
-  fetchSavedArticles: articleURLs => dispatch(fetchSavedArticles(articleURLs)),
+  fetchSavedArticles: articleURLs => fetchSavedArticles(articleURLs)(dispatch),
   unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL))
 })
->>>>>>> master
 
 export default connect(mSTP, mDTP)(Feed);
