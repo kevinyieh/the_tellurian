@@ -19,7 +19,8 @@ rgb(80,80,80) dark like
 
 .modal-dialog {
   position: relative;
-  background-image: url("https://cabins-seeds.s3.amazonaws.com/smooth_stars.gif");
+  background-color: rgba(242, 242, 242, 1);
+  /* background-image: url("https://cabins-seeds.s3.amazonaws.com/smooth_stars.gif"); */
   background-position: center;
   max-width: 700px;
   width: calc(100% - 20px);
@@ -36,12 +37,17 @@ rgb(80,80,80) dark like
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   font-family: 'Titillium Web', sans-serif;
+  overflow: scroll;
+  width: inherit;
+  overflow: scroll;
+  margin-bottom: 20px;
 }
 
-.modal-content img {
+/* .modal-content img {
   opacity: .3;
-}
+} */
 
 .click {
   margin: 0;
@@ -50,36 +56,52 @@ rgb(80,80,80) dark like
   left: 210px;
   box-shadow: 0 0 black;
   padding: 0;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease-in-out;
   display: block;
   font-size: 14px;
   transform: rotate(-25deg);
-  color: white;
+  color: #C47834;
+}
+
+.pointer {
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  right: 434px;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  width: 34px;
+  transform: rotate(160deg);
+}
+
+#hello:hover + .pointer {
+  opacity: 0.3;
+  transition: opacity 0.2s ease-in-out;
 }
 
 
+
 #hello {
-  color: #f2f2f2;
+  color: #C47834;
   text-align: center;
   font-family: 'Codystar', cursive;
   font-size: 45px;
   margin: 10px 0 0 0;
+  line-height: 1;
+  padding-left: 20px;
 }
 
 #hello:hover {
   cursor: pointer;
 }
 
-#hello:hover + .click {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
 #user-id {
-  color: #f2f2f2;
+  color: #C47834;
   text-align: center;
   font-size: 30px;
   font-family: 'Codystar', cursive;
   margin: 0;
+  padding-left: 20px;
 }

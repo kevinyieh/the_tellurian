@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Articles from "./articles";
-import { fetchSavedArticles, saveArticle } from "../../../actions/bookmark_actions";
+import { fetchSavedArticles, saveArticle, unSaveArticle } from "../../../actions/bookmark_actions";
 
 const mSTP = (state,ownProps) => {
     return {
@@ -15,7 +15,9 @@ const mSTP = (state,ownProps) => {
 const mDTP = dispatch => {
     return {
       saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
-      fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
+      fetchSavedArticles: (articleURLs) =>
+        dispatch(fetchSavedArticles(articleURLs)),
+        unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL)),
     };
 }
 

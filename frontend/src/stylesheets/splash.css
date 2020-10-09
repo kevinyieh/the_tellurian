@@ -1,8 +1,9 @@
 .splash {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
-    width: 100%;
+    right: 0;
+    left: 0;
     margin-bottom: -10px;
     z-index: 2;
     letter-spacing: 0.5px;
@@ -60,6 +61,19 @@
     }
 }
 
+.splash-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  max-width: 900px;
+  margin: 50px auto 0;
+}
+
+.splash-info {
+    font-family: 'Tomorrow', sans-serif;
+    max-width: 400px;
+}
 
 .logo {
     height: 100px;
@@ -69,9 +83,6 @@
     /* background-color: #1A1D21; */
     background-color: rgba(26, 29, 33, 0.8);
     color: white;
-    margin-top: 50px;
-    margin-right: auto;
-    margin-left: auto;
     border-radius: 10px;
     width: 400px;
     padding: 40px;

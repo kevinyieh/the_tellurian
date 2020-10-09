@@ -15,7 +15,7 @@ function nytNormalize(resp) {
   return resp.response.docs.map((result) => {
     let date = new Date(result.pub_date);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    let imageUrl =
+    let imageURL =
       result.multimedia.length > 0
         ? `https://static01.nyt.com/${result.multimedia[0].url}`
         : "";
@@ -25,9 +25,9 @@ function nytNormalize(resp) {
       body: result.lead_paragraph,
       date,
       articleURL: result.web_url,
-      imageUrl,
+      imageURL,
       source: "New York Times",
-      author: fullName
+      author: fullName,
     };
   });
 }
@@ -52,44 +52,44 @@ const nytFetch = async (countryName) => {
   }
 };
 
-function catcherNormalize(res) {
-  return res.data.articles.map((result) => {
-    let date = new Date(result.published_date);
-    date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    return {
-      headline: result.title,
-      date,
-      articleURL: result.link,
-      body: result.summary,
-      imageUrl: result.media,
-      source: result.clean_url,
-      author: result.author
-    };
-  });
-}
-const catcherFetch = async (cca2) => {
-  return axios({
-    method: "GET",
-    url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
-    headers: {
-      "content-type": "application/octet-stream",
-      "x-rapidapi-host": "newscatcher.p.rapidapi.com",
-      "x-rapidapi-key": catcherKey,
-      useQueryString: true,
-    },
-    params: {
-      lang: "en",
-      country: cca2,
-      media: "True"
-    }
-  })
-    .then((response) => {
-      return catcherNormalize(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// function catcherNormalize(res) {
+//   return res.data.articles.map((result) => {
+//     let date = new Date(result.published_date);
+//     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+//     return {
+//       headline: result.title,
+//       date,
+//       articleURL: result.link,
+//       body: result.summary,
+//       imageUrl: result.media,
+//       source: result.clean_url,
+//       author: result.author
+//     };
+//   });
+// }
+// const catcherFetch = async (cca2) => {
+//   return axios({
+//     method: "GET",
+//     url: "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
+//     headers: {
+//       "content-type": "application/octet-stream",
+//       "x-rapidapi-host": "newscatcher.p.rapidapi.com",
+//       "x-rapidapi-key": catcherKey,
+//       useQueryString: true,
+//     },
+//     params: {
+//       lang: "en",
+//       country: cca2,
+//       media: "True"
+//     }
+//   })
+//     .then((response) => {
+//       return catcherNormalize(response);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
 function newsapiNormalize(res) {
   return res.data.articles.map((result) => {
@@ -100,9 +100,9 @@ function newsapiNormalize(res) {
       date,
       articleURL: result.url,
       body: result.content,
-      imageUrl: result.urlToImage,
+      imageURL: result.urlToImage,
       source: result.source.name,
-      author: result.author
+      author: result.author,
     };
   });
 }
@@ -123,20 +123,20 @@ const newsapiFetch = async (cca2) => {
 const fetchAll = async (req,res) => {
     const {cca2, countryName} = req.body;
     let articles = [];
-    await Promise.allSettled([
-      nytFetch(countryName)
+    // await Promise.allSettled([
+      await nytFetch(countryName)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
-      }),
-      newsapiFetch(cca2)
+      })
+      await newsapiFetch(cca2)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
         })
-      // catcherFetch(cca2)
+      // await catcherFetch(cca2)
       //   .then((resp) => {
       //     articles = resp ? articles.concat(resp) : articles;
       // })
-    ]).catch(console.log);
+    // ]).catch(console.log);
     res.json({ [cca2]: articles });
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import copy from "copy-to-clipboard";  
-// import { head } from '../../../../../routes/api/news';
+import { formatDate } from "../../../util/format_date_util";
 
 class ArticleItem extends React.Component {
   constructor(props) {
@@ -9,7 +9,8 @@ class ArticleItem extends React.Component {
     this.toggleContent = this.toggleContent.bind(this);
     this.imageRender = this.imageRender.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
-    this.handleBookmark = this.handleBookmark.bind(this);
+    this.unsaveBookmark = this.unsaveBookmark.bind(this);
+    this.saveBookmark = this.saveBookmark.bind(this);
     this.renderBookmark = this.renderBookmark.bind(this);
   }
 
@@ -19,41 +20,54 @@ class ArticleItem extends React.Component {
   }
 
   imageRender(url) {
-    let image = this.props.article.imageUrl;
+    let image = this.props.article.imageURL;
+    debugger;
     if (!image && !url) {
       return null;
     } else {
-      return <img className="article-image" src={image} alt={this.props.article.headline} />;
+      return (
+        <img
+          className="article-image"
+          src={url}
+          alt={this.props.article.headline}
+        />
+      );
     }
   }
 
   copyToClipboard(e) {
     e.preventDefault();
     copy(this.props.article.articleURL);
-    this.setState({ copied: true })
-    setTimeout(() => {this.setState({ copied: false })}, 1000);
+    this.setState({ copied: true });
+    setTimeout(() => {
+      this.setState({ copied: false });
+    }, 1000);
   }
 
-  handleBookmark(e) {
-     e.preventDefault();
-     this.props.saveArticle(this.props.userId, this.props.article);
+  unsaveBookmark(e) {
+    e.preventDefault();
+    this.props.unSaveArticle(this.props.userId, this.props.article.articleURL);
+    //  this.setState({ bookmarked: !this.state.bookmarked });
+  }
+
+  saveBookmark(e) {
+    e.preventDefault();
+    this.props.saveArticle(this.props.userId, this.props.article);
     //  this.setState({ bookmarked: !this.state.bookmarked });
   }
 
   renderBookmark() {
-    const {savedArticles, article} = this.props;
+    const { savedArticles, article } = this.props;
     let myArticles = Object.values(savedArticles);
     let found;
-    myArticles.forEach(a => a.articleURL === article.articleURL ? found = true : null)
-      if (myArticles && found) {
-        return (
-          <i className="fas fa-bookmark" onClick={this.handleBookmark}></i>
-        );
-      } else {
-        return (
-          <i className="far fa-bookmark" onClick={this.handleBookmark}></i>
-        );
-      }
+    myArticles.forEach((a) =>
+      a.articleURL === article.articleURL ? (found = true) : null
+    );
+    if (myArticles && found) {
+      return <i className="fas fa-bookmark" onClick={this.unsaveBookmark}></i>;
+    } else {
+      return <i className="far fa-bookmark" onClick={this.saveBookmark}></i>;
+    }
   }
 
   renderHeadline(headline) {
@@ -71,6 +85,7 @@ class ArticleItem extends React.Component {
 
   render() {
     const { article } = this.props;
+    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
@@ -88,7 +103,7 @@ class ArticleItem extends React.Component {
           <div className="article-midline">
             <div className="attributes">
               {article.author ? `By ${article.author}, on` : null}{" "}
-              {article.date}.{" "}
+              {formatDate(article.date)}.{" "}
               <p className="italicize">Source: {article.source} </p>
             </div>
             <div className="article-icons">

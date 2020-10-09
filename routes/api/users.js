@@ -9,7 +9,7 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
-router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
+// router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
         const newUser = new User({
           email: req.body.email,
           password: req.body.password,
-          savedArticleIds: []
+          savedArticles: []
         })
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
             .then((user) => {
-              const payload = { id: user.id, email: user.email, savedArticleIds: user.savedArticleIds  };
+              const payload = { id: user.id, email: user.email, savedArticles: user.savedArticles  };
                 jwt.sign(
                   payload,
                   keys.secretOrKey,
@@ -86,8 +86,8 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, email: user.email, savedArticleIds: user.savedArticleIds };
-
+            const payload = { id: user.id, email: user.email, savedArticles: user.savedArticles };
+            debugger;
             jwt.sign(
               payload,
               keys.secretOrKey,
@@ -107,17 +107,17 @@ router.post('/login', (req, res) => {
 })
 
 router.patch('/articles', (req, res) => {
-  const { userId, articleId } = req.body;
+  const { userId, articleURL } = req.body;
   User.findById(userId)
     .then(user => {
-      if (user.savedArticleIds.includes(articleId)) {
-        user.savedArticleIds.splice(user.savedArticleIds.indexOf(articleId), 1);
+      if (user.savedArticles.includes(articleURL)) {
+        user.savedArticles.splice(user.savedArticles.indexOf(articleURL), 1);
       } else {
-        user.savedArticleIds.push(articleId);
+        user.savedArticles.push(articleURL);
       }
       user.save()
         .then(savedUser => {
-          return res.json({ savedArticleIds: savedUser.savedArticleIds});
+          return res.json({ savedURLs: savedUser.savedArticles});
         })
     })
 })

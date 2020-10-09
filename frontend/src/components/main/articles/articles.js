@@ -10,7 +10,7 @@ export default class Articles extends React.Component{
             hidden: false
         }
         this.toggleHide = this.toggleHide.bind(this);
-        this.handleShow = this.handleShow.bind(this);
+        // this.handleShow = this.handleShow.bind(this);
         this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
         this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
@@ -19,7 +19,7 @@ export default class Articles extends React.Component{
         this.setState({
             hidden: false
         });
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
     }
     
     componentDidUpdate(prevProps,prevState) {
@@ -28,10 +28,10 @@ export default class Articles extends React.Component{
       }
 
       if (
-        prevProps.currentUser.savedArticleIds.length !==
-        this.props.currentUser.savedArticleIds.length
+        prevProps.currentUser.savedArticles.length !==
+        this.props.currentUser.savedArticles.length
       ) {
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
       }
     }
     
@@ -40,11 +40,11 @@ export default class Articles extends React.Component{
             hidden: !this.state.hidden
         })
     }
-    handleShow(){
-      this.setState({
-          hidden: false
-      })
-    }
+    // handleShow(){
+    //   this.setState({
+    //       hidden: false
+    //   })
+    // }
 
     onOrOffScreen(){
       return `articles-container ${this.state.hidden ? "off-screen" : this.props.display ? "on-screen" : "off-screen"}`;
@@ -63,6 +63,7 @@ export default class Articles extends React.Component{
           country,
           savedArticles,
           saveArticle,
+          unSaveArticle,
           fetchSavedArticles,
           currentUser,
         } = this.props;
@@ -85,9 +86,11 @@ export default class Articles extends React.Component{
             );
         } else {
             return (
-              <div onMouseOver={this.stopGlobeSpin} 
+              <div
+                onMouseOver={this.stopGlobeSpin}
                 onMouseOut={this.startGlobeSpin}
-                className={this.onOrOffScreen()}>
+                className={this.onOrOffScreen()}
+              >
                 <div className="articles-index-text">
                   <div className="header-flex">
                     <h1>Top Stories in {country.name}</h1>
@@ -107,6 +110,7 @@ export default class Articles extends React.Component{
                           saveArticle={saveArticle}
                           fetchSavedArticles={fetchSavedArticles}
                           savedArticles={savedArticles}
+                          unSaveArticle={unSaveArticle}
                           userId={currentUser.id}
                         />
                       ))

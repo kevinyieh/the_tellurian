@@ -88,10 +88,13 @@ class MainPage extends React.Component {
     return ev => {
       let cca2 = iso2 || ev.target.dataItem.dataContext.id;
       this.rotateGlobeAndFocus(cor, ev, countryTarget);
+      debugger;
       this.props
         .fetchCountry({ cca2 })
         .then((country) => {
-          if(!this.props.articles[this.props.country.cca2]) return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
+          debugger;
+          if(!this.props.articles[this.props.country.cca2]) 
+          return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
       this.setState({
         display: true,
       });

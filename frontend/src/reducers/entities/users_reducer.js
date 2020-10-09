@@ -3,7 +3,7 @@ import {
   RECEIVE_LOGOUT
 } from "../../actions/session_actions";
 import {
-  RECEIVE_SAVED_ARTICLE_IDS
+  RECEIVE_SAVED_URLS
 } from "../../actions/bookmark_actions";
 
 export default (state = {}, action) => {
@@ -17,9 +17,9 @@ export default (state = {}, action) => {
       return user;
     case(RECEIVE_LOGOUT):
       return ({});
-    case(RECEIVE_SAVED_ARTICLE_IDS):
+    case(RECEIVE_SAVED_URLS):
       const thisUser = Object.assign({}, state);
-      thisUser.savedArticleIds = action.articleIds;
+      thisUser.savedArticles = action.articleURLs;
       return thisUser;
     default: 
       return state;
