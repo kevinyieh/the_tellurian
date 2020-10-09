@@ -34,15 +34,16 @@ class ArticleItem extends React.Component {
 
   handleBookmark(e) {
      e.preventDefault();
-     //
+     this.props.saveArticle()
   }
 
   render() {
     const { article } = this.props;
+    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
-          <div className={article.imageURL ? "flex-head" : "no-image"}>
+          <div className="flex-head">
             <i
               className={`fas fa-chevron-down ${
                 this.state.collapsed ? "" : "rotate"

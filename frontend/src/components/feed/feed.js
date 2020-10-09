@@ -12,11 +12,11 @@ class Feed extends React.Component {
     super(props);
 
     this.hellos = [
+      "Hello", //English
       "Hallå", //Swedish
       "Halló", //Icelandic
       "Hallo", //Dutch German
       "Hei", //Finnish
-      "Hello", //English
       "Hola", //Spanish
       "Aloha", //Hawaiian
       "Bonjour", //French
@@ -50,24 +50,26 @@ class Feed extends React.Component {
 
   handleHello() {
     const hello = document.getElementById("hello");
-    hello.innerText = `${this.hellos[Math.floor(Math.random() * (this.hellos.length - 1))]}, ${this.props.currentUser.email}!`;
+    hello.innerText = `${this.hellos[Math.floor(Math.random() * (this.hellos.length - 1))]}`;
   }
 
   render() {
     return (
       <div className="">
-          <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}, ${this.props.currentUser.email}!`}</h3>
-          { !this.props.currentUser.savedArticleIds.length || !this.props.SavedArticles ? 
-            <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img> :
-            Object.keys(this.props.savedArticles).map(key => (
-              <div>
-                  this.props.savedArticles[key].headline
-              </div>
-              )
-            )
-          }
+        <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}`}</h3>
+        <p className="click">Click me!</p>
+
+        <h3 id="user-id">{this.props.currentUser.email}</h3>
+        {!this.props.currentUser.savedArticleIds.length ||
+        !this.props.SavedArticles ? (
+          <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img>
+        ) : (
+          Object.keys(this.props.savedArticles).map((key) => (
+            <div>this.props.savedArticles[key].headline</div>
+          ))
+        )}
       </div>
-    )
+    );
   }
 
 

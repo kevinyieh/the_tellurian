@@ -70,14 +70,27 @@ export default class Articles extends React.Component{
                   </div>
 
                   <div className="article-scroll">
-                    {articles.map((article, i) => (
-                      <ArticleItem key={i} article={article} />
-                    ))}
+                    {articles.length === 0 ? (
+                      <p className="no-news">
+                        No news today, check back with us tomorrow!
+                      </p>
+                    ) : (
+                      articles.map((article, i) => (
+                        <ArticleItem
+                          key={i}
+                          article={article}
+                          saveArticle={this.props.saveArticle}
+                        />
+                      ))
+                    )}
                   </div>
                 </div>
-                <div onClick={this.toggleHide} className={`show-right ${this.state.hidden ? "" : "tucked"}`}>
-                    <i className="fas fa-sort-up fa-rotate-270" />
-                  </div>
+                <div
+                  onClick={this.toggleHide}
+                  className={`show-right ${this.state.hidden ? "" : "tucked"}`}
+                >
+                  <i className="fas fa-sort-up fa-rotate-270" />
+                </div>
               </div>
             );
         }
