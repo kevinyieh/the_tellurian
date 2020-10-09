@@ -32,6 +32,10 @@ class Dropdown extends React.Component {
     })
   }
 
+  componentWillUnmount(){
+    document.removeEventListener('click',this.close);
+  }
+
   render() {
     if (this.props.loggedIn)
     return (

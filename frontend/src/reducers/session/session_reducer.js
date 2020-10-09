@@ -18,10 +18,7 @@ export default (state = initialState, action) => {
         user,
       };
     case RECEIVE_LOGOUT:
-      return {
-        isLoggedIn: false,
-        user: undefined,
-      };
+      return initialState;
     case RECEIVE_SAVED_ARTICLE_IDS:
       const thisUser = Object.assign({}, state.user);
       thisUser.savedArticleIds = action.articleIds;
