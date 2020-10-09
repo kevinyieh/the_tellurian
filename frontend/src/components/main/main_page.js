@@ -91,7 +91,7 @@ class MainPage extends React.Component {
       this.props
         .fetchCountry({ cca2 })
         .then((country) => {
-          return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
+          if(!this.props.articles[this.props.country.cca2]) return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
       this.setState({
         display: true,
       });
@@ -104,7 +104,6 @@ class MainPage extends React.Component {
     })
     // Set up basic map
     let map = am4core.create("chartdiv", am4maps.MapChart);
-    
     map.geodata = am4geodata_worldLow;
     map.projection = new am4maps.projections.Orthographic();
     map.panBehavior = "rotateLongLat";
@@ -147,6 +146,7 @@ class MainPage extends React.Component {
     // CREATE GO HOME BUTTOn
     let home = map.chartContainer.createChild(am4core.Button);
     home.label.text = "Reset";
+    home.marginLeft = 10;
     home.fontFamily = "Times New Roman";
     home.align = "left";
     home.events.on("hit", function(ev) {
@@ -171,10 +171,9 @@ class MainPage extends React.Component {
       articlesHidden: false
     })
   }
-
   render() {
     return (  
-      <div className="main-page">
+      <div  className="main-page">
         <FeedModal />
         <NavBarContainer 
           selectCountry={this.handleHit}
@@ -184,11 +183,13 @@ class MainPage extends React.Component {
         <CountryDataContainer
           display={this.state.display}
           hidden={this.state.countryHidden}
+          map={this.map}
         />
         <div id="chartdiv" />
         <ArticlesContainer
           display={this.state.display}
           hidden={this.state.articlesHidden}
+          map={this.map}
         />
       </div>
         

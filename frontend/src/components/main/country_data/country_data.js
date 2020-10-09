@@ -11,6 +11,8 @@ export default class CountryData extends React.Component {
     this.gdpConverter = this.gdpConverter.bind(this);
     this.currencyConverter = this.currencyConverter.bind(this);
     this.langConverter = this.langConverter.bind(this);
+    this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
+    this.startGlobeSpin = this.startGlobeSpin.bind(this);
   }
 
   componentDidMount() {
@@ -182,6 +184,12 @@ export default class CountryData extends React.Component {
       );
     }
   }
+  stopGlobeSpin(e){
+    if( this.props.map.panBehavior !== "none" ) this.props.map.panBehavior = "none";
+  }
+  startGlobeSpin(e){
+    if( this.props.map.panBehavior !== "rotateLongLat" && !this.mDown) this.props.map.panBehavior = "rotateLongLat";
+  }
 
   render() {
     const { country } = this.props;
@@ -205,7 +213,9 @@ export default class CountryData extends React.Component {
         : this.currencyConverter("No data");
 
     return (
-      <div className={this.onOrOffScreen()}>
+      <div onMouseOver={this.stopGlobeSpin} 
+          onMouseOut={this.startGlobeSpin}
+          className={this.onOrOffScreen()}>
         <div className="country-data-text">
           <div className="header-flex">
           <img className="country-flag" alt="country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${country.cca3.toLowerCase()}.svg`}></img> 

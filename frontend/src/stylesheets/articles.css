@@ -1,10 +1,10 @@
 .articles-container{
     position: absolute;
-    height: 830px;
+    height: 800px;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
-    top: 58px;
+    top: 85px;
     background-color: rgba(242, 242, 242, 0.9);
     padding: 15px 0px 15px 15px;
     font-family: 'Titillium Web', sans-serif;
@@ -34,6 +34,7 @@
 
 .articles-index-text {
     padding: 10px;
+    height: 100%;
 }
 
 .article-item {
@@ -78,19 +79,21 @@
     overflow: hidden;
     margin-left: 40px;
     font-size: 16px;
-    width: 0;
-    max-height: 0;
+    max-height: 0px;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.2s ease-in-out;
 }
 
 .article-content.display {
     width: 95%;
-    height: auto;
     max-height: 400px;
     margin-bottom: 10px;
     display: block;
     overflow: visible;
+}
+
+.header-flex {
+    height: 10%;
 }
 
 .flex-head {
@@ -114,21 +117,22 @@
     padding: 10px;
     color: #505050;
     align-self: flex-start;
-    transition: 0.2s color ease-in-out;
+    transform: rotate(0deg);
+    transition: color 0.2s  ease-in-out, transform 0.5s ease;
 }
 
 .fa-chevron-down:hover {
     cursor: pointer;
     color: #C47834;
-    transition: 0.2s color ease-in-out;
 }
 
 .fa-chevron-down.rotate {
     transform: rotate(180deg);
+    transition: transform 0.5s ease;
 }
 
 .article-scroll {
-    height: 700px;
+    height: 90%;
     overflow: scroll;
     padding-right: 15px;
 }
@@ -148,6 +152,9 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+}
+.articles-index-text.loading {
+    align-items: center;
 }
 
 .article-link {
