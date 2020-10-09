@@ -82,15 +82,13 @@
     overflow: hidden;
     margin-left: 40px;
     font-size: 16px;
-    width: 0;
-    max-height: 0;
+    max-height: 0px;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.2s ease-in-out;
 }
 
 .article-content.display {
     width: 95%;
-    height: auto;
     max-height: 400px;
     margin-bottom: 10px;
     display: block;
@@ -122,17 +120,18 @@
     padding: 10px;
     color: #505050;
     align-self: flex-start;
-    transition: 0.2s color ease-in-out;
+    transform: rotate(0deg);
+    transition: color 0.2s  ease-in-out, transform 0.5s ease;
 }
 
 .fa-chevron-down:hover {
     cursor: pointer;
     color: #C47834;
-    transition: 0.2s color ease-in-out;
 }
 
 .fa-chevron-down.rotate {
     transform: rotate(180deg);
+    transition: transform 0.5s ease;
 }
 
 .article-scroll {

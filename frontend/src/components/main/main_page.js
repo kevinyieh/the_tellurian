@@ -104,7 +104,6 @@ class MainPage extends React.Component {
     })
     // Set up basic map
     let map = am4core.create("chartdiv", am4maps.MapChart);
-    
     map.geodata = am4geodata_worldLow;
     map.projection = new am4maps.projections.Orthographic();
     map.panBehavior = "rotateLongLat";
