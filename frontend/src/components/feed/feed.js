@@ -62,7 +62,10 @@ class Feed extends React.Component {
         <h3 id="user-id">{this.props.currentUser.email}</h3>
         {!this.props.currentUser.savedArticleIds.length ||
         !this.props.SavedArticles ? (
-          <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img>
+          <div>
+            <p>No articles currently bookmarked!</p>
+            <img src="https://image.flaticon.com/icons/svg/2909/2909488.svg"></img>
+          </div>
         ) : (
           Object.keys(this.props.savedArticles).map((key) => (
             <div>this.props.savedArticles[key].headline</div>

@@ -178,6 +178,11 @@
     transition: 0.2s color ease-in-out;
 }
 
+.fa-bookmark {
+    padding: 10px;
+    transition: 0.2s color ease-in-out;
+}
+
 .fa-link:hover {
     cursor: pointer;
     color: #C47834;

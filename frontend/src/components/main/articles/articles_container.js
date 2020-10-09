@@ -1,19 +1,21 @@
 import { connect } from "react-redux";
 import Articles from "./articles";
-import { saveArticle } from '../../../actions/bookmark_actions';
+import { fetchSavedArticles, saveArticle } from "../../../actions/bookmark_actions";
 
 const mSTP = (state,ownProps) => {
     return {
-        userId: state.entities.users.id,
-        articles: state.entities.articles[state.ui.currentCountry],
-        country: state.entities.countries[state.ui.currentCountry],
-        hidden: ownProps.hidden
-    }
+      currentUser: state.session.user,
+      articles: state.entities.articles[state.ui.currentCountry],
+      savedArticles: state.entities.savedArticles,
+      country: state.entities.countries[state.ui.currentCountry],
+      hidden: ownProps.hidden,
+    };
 }
 
 const mDTP = dispatch => {
     return {
-      saveArticle: (userId, article) => dispatch(saveArticle(userId, article))
+      saveArticle: (userId, article) => dispatch(saveArticle(userId, article)),
+      fetchSavedArticles: (articleIds) => dispatch(fetchSavedArticles(articleIds)),
     };
 }
 

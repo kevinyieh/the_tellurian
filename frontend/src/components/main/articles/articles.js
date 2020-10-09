@@ -17,17 +17,27 @@ export default class Articles extends React.Component{
         this.setState({
             hidden: false
         });
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
     }
     componentWillReceiveProps(nextProps) {
       this.setState({ hidden: nextProps.hidden });  
     }
+    
     componentDidUpdate(prevProps,prevState) {
       if (prevProps.hidden !== this.props.hidden){
         this.setState({ hidden: this.props.hidden })
       }else {
         if(prevState.hidden) this.setState({ hidden: false });
       }
+
+      if (
+        prevProps.currentUser.savedArticleIds.length !==
+        this.props.currentUser.savedArticleIds.length
+      ) {
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+      }
     }
+    
     toggleHide(){
         this.setState({
             hidden: !this.state.hidden
@@ -44,7 +54,16 @@ export default class Articles extends React.Component{
     }
 
     render(){
-        const { articles, country } = this.props;
+        const {
+          articles,
+          country,
+          savedArticles,
+          saveArticle,
+          fetchSavedArticles,
+          currentUser,
+        } = this.props;
+              debugger;
+
         if (!articles) {
             return (
               <div className={`${this.onOrOffScreen()} loading`}>
@@ -79,7 +98,10 @@ export default class Articles extends React.Component{
                         <ArticleItem
                           key={i}
                           article={article}
-                          saveArticle={this.props.saveArticle}
+                          saveArticle={saveArticle}
+                          fetchSavedArticles={fetchSavedArticles}
+                          savedArticles={savedArticles}
+                          userId={currentUser.id}
                         />
                       ))
                     )}
