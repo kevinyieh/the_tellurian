@@ -23,7 +23,7 @@ class Feed extends React.Component {
       "Ciao", //Italian
       "God dag", //Danish
       "Kamusta", //Filipino
-      "Namaste", //Hindi
+      "नमस्ते", //Hindi
       "Olá", //Portugese
       "Salut", //Romanian
       "γεια", //Greek
@@ -44,7 +44,7 @@ class Feed extends React.Component {
 
   componentDidMount() {
     this.props.fetchSavedArticles(
-      this.props.currentUser.savedArticleIds
+      this.props.currentUser.savedArticles
     );
   }
 
@@ -60,7 +60,7 @@ class Feed extends React.Component {
         <p className="click">Click me!</p>
 
         <h3 id="user-id">{this.props.currentUser.email}</h3>
-        {!this.props.currentUser.savedArticleIds.length ||
+        {!this.props.currentUser.savedArticles.length ||
         !this.props.SavedArticles ? (
           <div>
             <p>No articles currently bookmarked!</p>
@@ -85,8 +85,8 @@ const mSTP = state => ({
 })
 
 const mDTP = dispatch => ({
-  fetchSavedArticles: articleIds => dispatch(fetchSavedArticles(articleIds)),
-  unSaveArticle: (userId, articleId) => dispatch(unSaveArticle(userId, articleId))
+  fetchSavedArticles: articleURLs => dispatch(fetchSavedArticles(articleURLs)),
+  unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL))
 })
 
 export default connect(mSTP, mDTP)(Feed);

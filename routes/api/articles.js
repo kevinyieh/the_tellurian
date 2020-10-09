@@ -7,7 +7,7 @@ router.post("/save", (req, res) => {
   Article.findOne({ articleURL: url })
     .then(article => {
       if (article) {
-        return res.json({ articleId: article._id });
+        return res.json({ articleURL: article.articleURL });
       } else {
             const newArticle = new Article({
               date: req.body.date,
@@ -21,7 +21,7 @@ router.post("/save", (req, res) => {
             });
             newArticle.save()
                 .then((article) => {
-                    return res.json({articleId: article._id});
+                    return res.json({articleURL: article.articleURL});
                 }, (err) => {
                     return res.status(422).json(err);
           });
@@ -40,8 +40,8 @@ router.post("/", (req, res) => {
     //         }
     //     })
 
-    const articleIds = req.body.articleIds;
-    Article.find({ _id: { $in: articleIds } })
+    const articleURLs = req.body.articleURLs;
+    Article.find({ articleURL: { $in: articleURLs } })
       .then(articles => {
         if (articles.length) {
           return res.json(articles);

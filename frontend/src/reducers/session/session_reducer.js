@@ -2,7 +2,7 @@ import {
   RECEIVE_CURRENT_USER,
   RECEIVE_LOGOUT
 } from "../../actions/session_actions";
-import { RECEIVE_SAVED_ARTICLE_IDS } from "../../actions/bookmark_actions";
+import { RECEIVE_SAVED_URLS } from "../../actions/bookmark_actions";
 
 const initialState = {
   isLoggedIn: false,
@@ -19,9 +19,9 @@ export default (state = initialState, action) => {
       };
     case RECEIVE_LOGOUT:
       return initialState;
-    case RECEIVE_SAVED_ARTICLE_IDS:
+    case RECEIVE_SAVED_URLS:
       const thisUser = Object.assign({}, state.user);
-      thisUser.savedArticleIds = action.articleIds;
+      thisUser.savedArticles = action.articleURLs;
       return {
         isLoggedIn: true,
         user: thisUser
