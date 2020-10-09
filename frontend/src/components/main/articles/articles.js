@@ -71,7 +71,6 @@ export default class Articles extends React.Component{
           fetchSavedArticles,
           currentUser,
         } = this.props;
-              debugger;
 
         if (!articles) {
             return (

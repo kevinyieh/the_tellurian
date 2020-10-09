@@ -155,8 +155,8 @@ class MainPage extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.chart) {
-      this.chart.dispose();
+    if (this.map) {
+      this.map.dispose();
     }
   }
   handleHideCountry(e){

@@ -80,12 +80,6 @@ g {
     0% {
         transform: translateY(0%) translateX(0%);
     }
-    /* 50% {
-        transform: translateY(300%) translateX(-550%) rotate(-100deg);
-    } */
-    /* 100% {
-        transform: translateY(400%) translateX(-1000%) rotate(-200deg);
-    } */
     100% {
         transform: translateY(-450%)
     }

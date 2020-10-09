@@ -30,7 +30,6 @@ class SessionForm extends React.Component {
 
   componentDidUpdate() {
     if (Object.keys(this.props.currentUser).length !== 0) {
-      debugger;
       this.props.clearErrors();
       this.props.history.push("/main");
     }
@@ -138,7 +137,6 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    debugger;
     return (
       <div className="session-form">
         <form onSubmit={this.handleSubmit}>
