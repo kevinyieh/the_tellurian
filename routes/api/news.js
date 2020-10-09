@@ -4,6 +4,7 @@ const axios = require("axios");
 const {
   nytKey,
   catcherKey,
+  newsapiKey
  } = require("../../frontend/src/config/keys");
 const { response } = require("express");
 
@@ -90,6 +91,35 @@ const catcherFetch = async (cca2) => {
     });
 };
 
+function newsapiNormalize(res) {
+  return res.data.articles.map((result) => {
+    let date = new Date(result.publishedAt);
+    date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return {
+      headline: result.title,
+      date,
+      articleURL: result.url,
+      body: result.content,
+      imageUrl: result.urlToImage,
+      source: result.soruce.name,
+      author: result.author
+    };
+  });
+}
+const newsapiFetch = async (cca2) => {
+  const code = cca2.toLowerCase();
+  return axios({
+    method: "GET",
+    url: `https://newsapi.org/v2/top-headlines?country=${code}&apiKey=${newsapiKey}`
+  })
+    .then((res) => {
+      return newsapiNormalize(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const fetchAll = async (req,res) => {
     const {cca2, countryName} = req.body;
     let articles = [];
@@ -98,6 +128,10 @@ const fetchAll = async (req,res) => {
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;
       }),
+      newsapiFetch(cca2)
+        .then((resp) => {
+          articles = resp ? articles.concat(resp) : articles;
+        }),
       catcherFetch(cca2)
         .then((resp) => {
           articles = resp ? articles.concat(resp) : articles;

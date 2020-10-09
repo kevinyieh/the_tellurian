@@ -11,7 +11,7 @@ import {
   fetchSavedArticles,
   saveArticle,
   unSaveArticle
-} from "./actions/bookmark_actions"
+} from "./actions/bookmark_actions";
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
