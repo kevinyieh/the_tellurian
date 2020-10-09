@@ -75,7 +75,7 @@ g {
 .space-shuttle-container {
     font-size: 20px;
     position: absolute;
-    top: 9px;
+    top: 6px;
     left: 13px;
     opacity: 100;
     transition: opacity 0.3s;

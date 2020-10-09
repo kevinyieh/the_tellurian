@@ -57,8 +57,16 @@ class ArticleItem extends React.Component {
   }
 
   renderHeadline(headline) {
-    if(headline.length < 90) return headline;
-    return headline.slice(0,90) + "..."
+    if(headline.length < 70) return headline;
+    return headline.slice(0,70) + "..."
+  }
+
+  renderBody(body) {
+    if(body && body.slice(body.length-6,body.length) === "chars]") {
+      debugger;
+      return body.slice(0,body.lastIndexOf("["));
+    }
+    return body;
   }
 
   render() {
@@ -94,7 +102,7 @@ class ArticleItem extends React.Component {
               this.state.collapsed ? "" : "display"
             }`}
           >
-            {article.body}
+            {this.renderBody(article.body)}
             <br></br>
             <a
               className="article-link"
