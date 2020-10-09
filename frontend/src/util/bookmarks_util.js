@@ -5,23 +5,23 @@ export const saveArticle = (userId, article) => {
     .then((res) => {
       const obj = {
         userId,
-        articleId: res.data.articleId
+        articleURL: res.data.articleURL
       }
       return axios.patch("/api/users/articles", obj)
     });
 }
 
-export const unSaveArticle = (userId, articleId) => {
+export const unSaveArticle = (userId, articleURL) => {
   const obj = {
     userId,
-    articleId
+    articleURL
   }
   return axios.patch("/api/users/articles", obj);
 }
 
-export const fetchSavedArticles = articleIds => {
+export const fetchSavedArticles = articleURLs => {
   const obj = {
-    articleIds
+    articleURLs
   }
   return axios.post("/api/articles/", obj);
 }

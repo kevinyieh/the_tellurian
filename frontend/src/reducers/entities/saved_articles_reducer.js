@@ -8,7 +8,7 @@ export default (state = {}, action) => {
     case FETCH_SAVED_ARTICLES:
       const articles = {};
       action.articles.forEach(article => {
-        articles[article._id] = article;
+        articles[article.articleURL] = article;
       })
       return articles;
     default:

@@ -14,10 +14,9 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  savedArticleIds : [
+  savedArticles : [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Article'
+      type: String
     }
   ]
 })
