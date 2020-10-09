@@ -9,27 +9,22 @@ export default class Articles extends React.Component{
         this.state = {
             hidden: false
         }
-        // this.handleHide = this.handleHide.bind(this);
         this.toggleHide = this.toggleHide.bind(this);
         // this.handleShow = this.handleShow.bind(this);
         this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
         this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
     componentDidMount() {
+      debugger;
         this.setState({
             hidden: false
         });
         this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
     }
-    componentWillReceiveProps(nextProps) {
-      this.setState({ hidden: nextProps.hidden });  
-    }
     
     componentDidUpdate(prevProps,prevState) {
-      if (prevProps.hidden !== this.props.hidden){
-        this.setState({ hidden: this.props.hidden })
-      }else {
-        if(prevState.hidden) this.setState({ hidden: false });
+      if (prevProps.country !== this.props.country){
+        this.setState({ hidden: false })
       }
 
       if (

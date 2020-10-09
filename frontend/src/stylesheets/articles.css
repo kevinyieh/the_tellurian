@@ -117,7 +117,7 @@
     padding: 10px;
     color: #505050;
     align-self: flex-start;
-    transform: rotate(0deg);
+    transform: rotate(270deg);
     transition: color 0.2s  ease-in-out, transform 0.5s ease;
 }
 
@@ -127,7 +127,7 @@
 }
 
 .fa-chevron-down.rotate {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
     transition: transform 0.5s ease;
 }
 

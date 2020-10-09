@@ -84,7 +84,7 @@ export default class NavBar extends React.Component {
         if (this.state.selected) return null;
         if (this.state.loading) return <div className="buffering"> <i className="fas fa-search" /> </div>
         if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result-container"> No results for this search </div>
-        return Object.keys(this.state.searchResults).map(key => {
+        return Object.keys(this.state.searchResults).sort((k1,k2) => k1 < k2 ? -1 : 1).map(key => {
             return (
                     <div onClick={this.handleClick} key={this.state.searchResults[key].cca2} className="search-result-container">
                         <img className="search-country-flag" 

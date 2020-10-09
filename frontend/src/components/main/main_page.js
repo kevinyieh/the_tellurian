@@ -148,7 +148,7 @@ class MainPage extends React.Component {
     activeState.properties.fill = am4core.color("#ffff66");
     // CREATE GO HOME BUTTOn
     let home = map.chartContainer.createChild(am4core.Button);
-    home.label.text = "Reset";
+    home.label.text = "Zoom Out";
     home.marginLeft = 10;
     home.fontFamily = "Times New Roman";
     home.align = "left";

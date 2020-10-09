@@ -2,7 +2,6 @@ import React from 'react';
 import copy from "copy-to-clipboard";  
 import { formatDate } from "../../../util/format_date_util";
 
-
 class ArticleItem extends React.Component {
   constructor(props) {
     super(props);
@@ -71,6 +70,19 @@ class ArticleItem extends React.Component {
     }
   }
 
+  renderHeadline(headline) {
+    if(headline.length < 70) return headline;
+    return headline.slice(0,70) + "..."
+  }
+
+  renderBody(body) {
+    if(body && body.slice(body.length-6,body.length) === "chars]") {
+      debugger;
+      return body.slice(0,body.lastIndexOf("["));
+    }
+    return body;
+  }
+
   render() {
     const { article } = this.props;
     debugger;
@@ -84,7 +96,7 @@ class ArticleItem extends React.Component {
               }`}
               onClick={this.toggleContent}
             ></i>
-            <h1 className="headline">{article.headline}</h1>
+            <h1 className="headline">{this.renderHeadline(article.headline)}</h1>
             {this.imageRender(article.imageURL)}
           </div>
 
@@ -105,7 +117,7 @@ class ArticleItem extends React.Component {
               this.state.collapsed ? "" : "display"
             }`}
           >
-            {article.body}
+            {this.renderBody(article.body)}
             <br></br>
             <a
               className="article-link"
