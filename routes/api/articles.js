@@ -15,7 +15,7 @@ router.post("/save", (req, res) => {
               imageURL:
               req.body.imageURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAwurA8BsiO6T-998tQkdMdHkfzFu-ONxzhw&usqp=CAU",
               headline: req.body.headline,
-              body: req.body.body,
+              body: req.body.body || "none",
               source: req.body.source,
               author: req.body.author || req.body.source,
             });

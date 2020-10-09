@@ -24,8 +24,7 @@ rgb(80,80,80) dark like
   max-width: 700px;
   width: calc(100% - 20px);
   margin: 70px auto 0;
-  border: 4px solid #bcc6cc;
-  box-shadow: 0 0 3px rgb(226, 131, 255);
+  box-shadow: 0 3px 30px 10px rgba(0, 0, 0, .25);
   border-radius: 15px;
   outline: none;
   opacity: 1;
@@ -37,15 +36,50 @@ rgb(80,80,80) dark like
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .modal-content img {
   opacity: .3;
 }
 
+.click {
+  margin: 0;
+  position: absolute;
+  top: 11px;
+  left: 210px;
+  box-shadow: 0 0 black;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  display: block;
+  font-size: 14px;
+  transform: rotate(-25deg);
+  color: white;
+}
+
+
 #hello {
-  color: rgb(195, 121, 52);
+  color: #f2f2f2;
   text-align: center;
-  font-size: 28px;
-  margin: 10px 0 30px;
+  font-family: 'Codystar', cursive;
+  font-size: 45px;
+  margin: 10px 0 0 0;
+}
+
+#hello:hover {
+  cursor: pointer;
+}
+
+#hello:hover + .click {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+#user-id {
+  color: #f2f2f2;
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Codystar', cursive;
+  margin: 0;
 }
