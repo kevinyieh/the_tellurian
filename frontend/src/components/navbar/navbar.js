@@ -86,12 +86,18 @@ export default class NavBar extends React.Component {
         if (Object.keys(this.state.searchResults).length < 1) return <div key="no-results" className="search-result-container"> No results for this search </div>
         return Object.keys(this.state.searchResults).map(key => {
             return (
-                    <div className="search-result-container">
-                        <img className="search-country-flag" src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}></img> 
-                        <div key={this.state.searchResults[key].cca2} className="search-result" onClick={this.handleClick}>{key}</div>
+                    <div key={this.state.searchResults[key].cca2} className="search-result-container">
+                        <img className="search-country-flag" 
+                            alt={`${this.state.searchResults[key].cca3}`}
+                            src={`https://tellurian.s3.amazonaws.com/flags/${this.state.searchResults[key].cca3.toLowerCase()}.svg`}/>
+                        <div className="search-result" onClick={this.handleClick}>{key}</div>
                     </div>
                 )}
             ).slice(0, 10)
+    }
+
+    formSubmit(e){
+        e.preventDefault();
     }
 
     render() {
@@ -99,7 +105,7 @@ export default class NavBar extends React.Component {
             <div className="navbar-spacer">
                 <div className="navbar-container">
                     <h1 className="nav-title">The Tellurian</h1>
-                    <form className="search-bar-form">
+                    <form onSubmit={this.formSubmit} className="search-bar-form">
                         <div className={`search-bar-input-container ${this.state.dropped ? "dropped" : ""}`}
                             ref={node => this.searchBar = node}
                             onBlur={this.handleClickOutside}
