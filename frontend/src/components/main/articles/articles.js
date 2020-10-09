@@ -19,7 +19,7 @@ export default class Articles extends React.Component{
         this.setState({
             hidden: false
         });
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
     }
     componentWillReceiveProps(nextProps) {
       this.setState({ hidden: nextProps.hidden });  
@@ -33,10 +33,10 @@ export default class Articles extends React.Component{
       }
 
       if (
-        prevProps.currentUser.savedArticleIds.length !==
-        this.props.currentUser.savedArticleIds.length
+        prevProps.currentUser.savedArticles.length !==
+        this.props.currentUser.savedArticles.length
       ) {
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticleIds);
+        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
       }
     }
     
