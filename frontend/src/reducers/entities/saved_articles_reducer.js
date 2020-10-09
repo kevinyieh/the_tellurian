@@ -4,7 +4,7 @@ import {
 
 export default (state = {}, action) => {
   Object.freeze(state);
-
+  debugger;
   switch(action.type) {
     case FETCH_SAVED_ARTICLES:
       const articles = {};
