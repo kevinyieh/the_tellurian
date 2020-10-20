@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from "../util/route_util";
-// import { Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import MainPageContainer from './main/main_page_container';
