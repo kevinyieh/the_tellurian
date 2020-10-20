@@ -4,6 +4,7 @@ import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import { Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import MainPageContainer from './main/main_page_container';
+import Team from './team/team.js'
 import "../stylesheets/index.css";
 
 const App = () => (
@@ -11,6 +12,7 @@ const App = () => (
     <Switch>
       <ProtectedRoute path="/main" component={MainPageContainer} />
       <AuthRoute exact path="/" component={Splash} />
+      <Route exact path="/team" component={Team} />
     </Switch>
   </div>
 );
