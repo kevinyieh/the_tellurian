@@ -45,18 +45,18 @@ class Splash extends React.Component {
                 {" "}
                 Icongeek26{" "}
               </a>{" "}
-              and
+              {' and '}
               <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
                 Freepik
               </a>
-              and
+              {' and '}
               <a
                 href="https://www.flaticon.com/authors/roundicons"
                 title="Roundicons"
               >
                 Roundicons
               </a>
-              from
+              {' from '}
               <a href="https://www.flaticon.com/" title="Flaticon">
                 www.flaticon.com
               </a>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
-import { openModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 class Dropdown extends React.Component {
   constructor(props) {
@@ -83,8 +83,11 @@ class Dropdown extends React.Component {
   }
 }
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout()),
-  openModal: () => dispatch(openModal())
+  logout: () => {
+    dispatch(logout());
+    dispatch(closeModal())
+  },
+  openModal: () => dispatch(openModal()),
 })
 
 export default connect(null, mDTP)(Dropdown)

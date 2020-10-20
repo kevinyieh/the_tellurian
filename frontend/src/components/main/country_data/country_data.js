@@ -3,7 +3,7 @@ import "../../../stylesheets/country_data.css";
 
 export default class CountryData extends React.Component {
   constructor(props) {
-    super(props); //this.props.country ==> document
+    super(props);
     this.state = {
       hidden: false,
     };
@@ -96,7 +96,11 @@ export default class CountryData extends React.Component {
      }
 
     let newGDP;
-    if (gdp.toString().split(".")[0].length > 9) {
+    let splitGDP = gdp.toString().split(".")[0].length
+    if (splitGDP > 12) {
+      let tril = gdp / 1000000000000;
+      newGDP = <p className="data">{tril.toFixed(2)} trillion</p>;
+    } else if (splitGDP > 9 && splitGDP < 13) {
       let bil = gdp / 1000000000;
       newGDP = <p className="data">{bil.toFixed(2)} billion</p>;
     } else {
@@ -156,7 +160,6 @@ export default class CountryData extends React.Component {
       );
     }
 
-    // ["{"name":"Bhutanese ngultrum","symbol":"Nu."}", "{"name":"Indian rupee","symbol":"₹"}"]
     let parsed = currencies.map((c) => JSON.parse(c));
     if (parsed.length > 1) {
       return (
@@ -246,6 +249,8 @@ export default class CountryData extends React.Component {
             {gdp}
 
             {currency}
+
+            <em className="wb-credit">Data sourced from <a href="https://data.worldbank.org/">The World Bank</a></em>
           </div>
         </div>
         <div onClick={this.toggleHide} className={`show-left ${this.state.hidden ? "" : "tucked"}`}>
