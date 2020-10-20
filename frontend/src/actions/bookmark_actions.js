@@ -28,7 +28,6 @@ export const receiveArticles = articles => {
 export const fetchSavedArticles = articleURLs => dispatch => {
   return Bookmark.fetchSavedArticles(articleURLs)
     .then(articles => {
-          debugger;
       return dispatch(receiveArticles(articles.data))
     })
     .catch(err => {
@@ -39,7 +38,6 @@ export const fetchSavedArticles = articleURLs => dispatch => {
 export const saveArticle = (userId, article) => dispatch => {
     return Bookmark.saveArticle(userId, article)
       .then((response) => {
-            debugger;
         return dispatch(receiveSavedURLs(response.data.savedURLs));
       })
       .catch((err) => {

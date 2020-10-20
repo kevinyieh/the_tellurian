@@ -1,6 +1,5 @@
 const countries = require("./countries.json");
 const worldbankresponse = (require("./response.json"));
-const fs = require('fs');
 
 let seed = {};
 

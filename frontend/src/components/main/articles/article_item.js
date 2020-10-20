@@ -77,7 +77,6 @@ class ArticleItem extends React.Component {
 
   renderBody(body) {
     if(body && body.slice(body.length-6,body.length) === "chars]") {
-      debugger;
       return body.slice(0,body.lastIndexOf("["));
     }
     return body;
@@ -85,7 +84,6 @@ class ArticleItem extends React.Component {
 
   render() {
     const { article } = this.props;
-    debugger;
     return (
       <div className="article-item">
         <div className="article-text">
