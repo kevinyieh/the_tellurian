@@ -18,11 +18,6 @@ Users also have the ability to bookmark and access saved articles on their profi
 <img display: inline-block width: "480" height ="230" src="https://tellurian.s3.amazonaws.com/bookmark_demo.gif"></img>
 </p>
 
-## Team Members
-- Team-lead: Kevin Yieh the Prodigy
-- Backend-lead: Wilson Li the List Element
-- Frontend-lead: Becca Burten the BB
-- Flex: Donald Herndon the Young Gun
 
 ## Technologies and Technical Challenges
 The Tellurian is built using React, Redux, Node.js, CSS, MongoDB, Mongoose, Express, amCharts4, and Axios.
@@ -56,28 +51,8 @@ const fetchAll = async (req,res) => {
 
 Another technical hurdle we overcame was *media query difficulty here*
 
-
-# Implementation Timeline
-### Day One
-  * KY: Interactive map will center upon click and search bar in the Nav component
-  * WL: Seeding country statistics database, including Schema/Model/Show Route and beginning News API implementation
-  * BB: Set up splash page and Frontend User Auth
-  * DH: Backend User Auth and implementing OAuth integration
- 
-### Day Two
-  * KY: 
-  * WL: 
-  * BB: 
-  * DH: 
-  
-### Day Three
-  * KY: 
-  * WL: 
-  * BB: 
-  * DH: 
-  
-### Day Four
-  * KY: News API integration backend, fetching data for index
-  * WL: News API integration backend, and db saving articles as users bookmark
-  * BB: News API integration frontend Div components to show country stats and article index
-  * DH: Div styling and animation for splash
+## Team Members
+- Team-lead: Kevin Yieh
+- Backend-lead: Wilson Li 
+- Frontend-lead: Becca Burten 
+- Flex: Donald Herndon
