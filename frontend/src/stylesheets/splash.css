@@ -38,13 +38,11 @@
     opacity: 100;
 }
 .byline {
-    /* font-family: 'Peddana', serif; */
     font-family: 'Tomorrow', sans-serif;
     font-size: 24px;
     font-style: italic;
     opacity: 0;
     transition: opacity 2s;
-    /* animation: bounce 5s linear infinite alternate; */
 }
 .byline.fade-in {
     opacity: 100;
@@ -80,7 +78,6 @@
 }
 
 .session-container {
-    /* background-color: #1A1D21; */
     background-color: rgba(26, 29, 33, 0.8);
     color: white;
     border-radius: 10px;

@@ -1,7 +1,3 @@
-//TODO:
-// stylesheets!
-// import stylesheet
-
 import React from 'react';
 import {
   connect
@@ -9,7 +5,7 @@ import {
 import {
   closeModal
 } from '../../actions/modal_actions';
-import Feed from './feed';
+import Feed from './feed_container';
 
 class Modal extends React.Component {
   render () {

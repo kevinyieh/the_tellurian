@@ -128,7 +128,6 @@ class ArticleItem extends React.Component {
               Link to article
             </a>
           </p>
-          {/* </div> */}
         </div>
       </div>
     );
