@@ -81,7 +81,7 @@ const newsapiFetch = async (cca2) => {
 const fetchAll = async (req,res) => {
   const {cca2, countryName} = req.body;
   let articles = [];
-  await Promise.allSettled([
+  await Promise.all([
     nytFetch(countryName)
       .then((resp) => {
         articles = resp ? articles.concat(resp) : articles;
