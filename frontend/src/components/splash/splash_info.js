@@ -13,8 +13,8 @@ const SplashInfo = (props) => {
                 <p>    1.  an inhabitant of the earth.</p>
             </div>
             <p>You are a tellurian, as are we. And we want to know what’s happening on our planet, and where. Here, you will catch up on today’s news anywhere in world, and get all the relevant  context you need on that location. The world is your oyster.</p>
-            <div className="team">
-                <Link to="/team">Team Tellurian</Link>
+            <div className="team-redirect">
+                <Link className="team-redirect" to="/team">Team Tellurian</Link>
             </div>
             <div className="quote">“No matter what people tell you, words and ideas can change the world.” - Robin Williams</div>
             {props.children}
