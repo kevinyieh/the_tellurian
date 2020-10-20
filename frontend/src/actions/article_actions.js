@@ -1,4 +1,3 @@
-// HAVE ONE FILE WITH ALL NEWS API FETCHES
 import NewsFetchAPI from "../util/news_fetch_util";
 
 export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES";

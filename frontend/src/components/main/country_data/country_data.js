@@ -3,7 +3,7 @@ import "../../../stylesheets/country_data.css";
 
 export default class CountryData extends React.Component {
   constructor(props) {
-    super(props); //this.props.country ==> document
+    super(props);
     this.state = {
       hidden: false,
     };
@@ -160,7 +160,6 @@ export default class CountryData extends React.Component {
       );
     }
 
-    // ["{"name":"Bhutanese ngultrum","symbol":"Nu."}", "{"name":"Indian rupee","symbol":"₹"}"]
     let parsed = currencies.map((c) => JSON.parse(c));
     if (parsed.length > 1) {
       return (

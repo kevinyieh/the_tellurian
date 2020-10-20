@@ -10,12 +10,10 @@ export default class Articles extends React.Component{
             hidden: false
         }
         this.toggleHide = this.toggleHide.bind(this);
-        // this.handleShow = this.handleShow.bind(this);
         this.stopGlobeSpin = this.stopGlobeSpin.bind(this);
         this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
     componentDidMount() {
-      debugger;
         this.setState({
             hidden: false
         });
@@ -40,11 +38,6 @@ export default class Articles extends React.Component{
             hidden: !this.state.hidden
         })
     }
-    // handleShow(){
-    //   this.setState({
-    //       hidden: false
-    //   })
-    // }
 
     onOrOffScreen(){
       return `articles-container ${this.state.hidden ? "off-screen" : this.props.display ? "on-screen" : "off-screen"}`;
@@ -128,29 +121,3 @@ export default class Articles extends React.Component{
         }
     }
 }
-
-// "US":{
-//             [
-//                 {
-//                     headline: News headline here,
-//                     body: News body here,
-//                     date: 10/10/20
-//                     articleURL: https://NYTIMESURLHERE.com,
-//                     imageURL: https://NYTIMESIMAGEURLHERE.com
-//                 },
-//                 {
-//                     headline: News headline here,
-//                 body: News body here,
-//                     date: 10/10/20
-//                     articleURL: https://NYTIMESURLHERE.com,
-//                     imageURL: https://NYTIMESIMAGEURLHERE.com
-//                 },
-//                 {
-//                     headline: News headline here,
-//                     body: News body here,
-//                     date: 10/10/20
-//                     articleURL: https://NYTIMESURLHERE.com,
-//                     imageURL: https://NYTIMESIMAGEURLHERE.com
-//                 }
-//             ]
-//         }

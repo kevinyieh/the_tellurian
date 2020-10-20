@@ -34,8 +34,8 @@
 }
 
 .session-form button:hover {
-        cursor: pointer;
-        background-color: #C47834;
-        transition: background-color 0.5s;
-        transition-timing-function: ease-out;
-    }
+    cursor: pointer;
+    background-color: #C47834;
+    transition: background-color 0.5s;
+    transition-timing-function: ease-out;
+}

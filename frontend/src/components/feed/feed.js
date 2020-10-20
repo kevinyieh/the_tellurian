@@ -1,9 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {fetchSavedArticles, unSaveArticle } from "../../actions/bookmark_actions";
 import ArticleItem from '../main/articles/article_item';
 
-class Feed extends React.Component {
+export default class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = { articlesFetched: false }
@@ -38,7 +36,6 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     this.props
       .fetchSavedArticles(this.props.currentUser.savedArticles)
       .then(() => this.setState({ articlesFetched: true }));
@@ -56,9 +53,7 @@ class Feed extends React.Component {
       fetchSavedArticles,
       unSaveArticle,
     } = this.props;
-    debugger;
     const myArticles = Object.values(savedArticles);
-    debugger;
 
     return (
       <div className="">
@@ -95,15 +90,3 @@ class Feed extends React.Component {
     );
   }
 }
-
-const mSTP = state => ({
-  savedArticles: state.entities.savedArticles,
-  currentUser: state.session.user
-})
-
-const mDTP = dispatch => ({
-  fetchSavedArticles: articleURLs => fetchSavedArticles(articleURLs)(dispatch),
-  unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL))
-})
-
-export default connect(mSTP, mDTP)(Feed);
