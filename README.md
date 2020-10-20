@@ -7,10 +7,14 @@
 
 
 ## Functionality and MVP
-Logged in users will interface with an interactive globe, where they can select countries to view country statistics and breaking news stories sourced from various news APIs(NYT, newsAPI, newscatcher). Users also have the ability to bookmark and access saved articles on their profile, or navigate to the news source for further reading. A search bar is available to aid users in quickly locating countries of interest. 
+Logged in users will interface with an interactive globe, where they can select countries to view country statistics and breaking news stories sourced from various news APIs(NYT, newsAPI, newscatcher). A search bar is available to aid users in quickly locating countries of interest. 
 
 <p align="center">
 <img display: inline-block width: "480" height="230" src ="https://tellurian.s3.amazonaws.com/demo_gif_small.gif"></img>
+</p>
+
+Users also have the ability to bookmark and access saved articles on their profile, or navigate to the news source for further reading. 
+<p align="center">
 <img display: inline-block width: "480" height ="230" src="https://tellurian.s3.amazonaws.com/bookmark_demo.gif"></img>
 </p>
 

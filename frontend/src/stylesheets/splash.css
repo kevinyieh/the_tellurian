@@ -95,9 +95,21 @@
     font-style: italic;
 }
 
+.team-redirect {
+    color: #C47834;
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 0.5px 0.5px white;
+}
+
+.team-redirect:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 .credits a {
     font-family: sans-serif;
     text-decoration: none;
     color: #c47834;
     letter-spacing: 1px;
 }
+
