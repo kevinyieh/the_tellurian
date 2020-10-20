@@ -21,7 +21,6 @@ class ArticleItem extends React.Component {
 
   imageRender(url) {
     let image = this.props.article.imageURL;
-    debugger;
     if (!image && !url) {
       return null;
     } else {
