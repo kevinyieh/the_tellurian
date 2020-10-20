@@ -1,7 +1,7 @@
 # The Tellurian
 
 ## Background and Overview
-The Tellurian is an aggregate world news source where users can find and save breaking news stories from around the globe.
+[The Tellurian](http://the-tellurian.herokuapp.com/#/) is an aggregate world news source where users can find and save breaking news stories from around the globe.
 
 
 ## Functionality and MVP
