@@ -124,3 +124,17 @@
     left: -420px;
     transition: left 2s;
 }
+
+.wb-credit {
+    text-align: right;
+}
+
+.wb-credit a {
+    color: #C47834;
+    text-decoration: none;
+}
+
+.wb-credit a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
