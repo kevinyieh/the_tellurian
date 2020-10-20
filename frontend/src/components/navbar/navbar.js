@@ -33,6 +33,13 @@ export default class NavBar extends React.Component {
                 this.setState({ dropped: false })
             })
         }
+        if(prevProps.currentCountry !== this.props.currentCountry) {
+            if(this.state.search !== this.props.currentCountry){
+                this.setState({
+                    search: this.props.currentCountry
+                })
+            }
+        }
     }
 
     componentWillUnmount(){

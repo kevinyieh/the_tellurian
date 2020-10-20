@@ -53,26 +53,46 @@ class MainPage extends React.Component {
     this.handleHideArticles = this.handleHideArticles.bind(this);
     this.handleHideCountry = this.handleHideCountry.bind(this);
   }
+// TODO: USE BUILT IN ROTATE ANIMATION AND ADJUST ZOOM BASED ON LAND AREA 
+
+  // async rotateHelp(long,lat,map){
+  //   if(this.animation) this.animation.stop();
+  //   this.animation = await map.animate([{
+  //     property: "deltaLongitude",
+  //     to: long
+  //   }, {
+  //     property: "deltaLatitude",
+  //     to: lat
+  //   }], 500);
+  //   return null;
+  // }
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
     const map = this.map;
     const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
-    const inc = 0.26;
-    
-    const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
+    const inc = 0.2;
+    // this.rotateHelp(deltaLongitude,deltaLatitude,map).then( () => {
+    //     const objToFocus = countryTarget ? countryTarget : ev.target;
+    //     map.zoomToMapObject(objToFocus);
+    //     if(this.selected) this.selected.isActive = false;
+    //     this.selected = objToFocus;
+    //     this.selected.isActive = true;
+    // })
 
+    const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
     const latInc = deltaLatCalc(map.deltaLatitude,deltaLatitude,inc);
   
-    if (this.intervalId) clearInterval(this.intervalId);
-    this.intervalId = setInterval(() => {
+    if (this.intervalId) cancelAnimationFrame(this.intervalId);
+    const rotateGlobe = (timestamp) => {
       if((!closeEnough(map.deltaLongitude,deltaLongitude,longInc) || !closeEnough(map.deltaLatitude,deltaLatitude, latInc))
       ){
         map.deltaLongitude += longInc;
         map.deltaLatitude += latInc;
+        this.intervalId = requestAnimationFrame(rotateGlobe);
       }else{
-        clearInterval(this.intervalId);
+        cancelAnimationFrame(this.intervalId);
         this.intervalId = null;
         const objToFocus = countryTarget ? countryTarget : ev.target;
         map.zoomToMapObject(objToFocus);
@@ -80,7 +100,9 @@ class MainPage extends React.Component {
         this.selected = objToFocus;
         this.selected.isActive = true;
       }
-    },15);
+    }
+    this.intervalId = requestAnimationFrame(rotateGlobe);
+
   }
 
   handleHit(cor,iso2){
@@ -88,11 +110,9 @@ class MainPage extends React.Component {
     return ev => {
       let cca2 = iso2 || ev.target.dataItem.dataContext.id;
       this.rotateGlobeAndFocus(cor, ev, countryTarget);
-      debugger;
       this.props
         .fetchCountry({ cca2 })
         .then((country) => {
-          debugger;
           if(!this.props.articles[this.props.country.cca2]) 
           return this.props.fetchArticles(this.props.country.cca2, this.props.country.name)});
       this.setState({
@@ -106,6 +126,7 @@ class MainPage extends React.Component {
       display: false
     })
     // Set up basic map
+    am4core.options.autoSetClassName = true;
     let map = am4core.create("chartdiv", am4maps.MapChart);
     map.geodata = am4geodata_worldLow;
     map.projection = new am4maps.projections.Orthographic();

@@ -15,7 +15,6 @@ export default class Articles extends React.Component{
         this.startGlobeSpin = this.startGlobeSpin.bind(this);
     }
     componentDidMount() {
-      debugger;
         this.setState({
             hidden: false
         });

@@ -126,3 +126,29 @@
     left: -420px;
     transition: left 2s;
 }
+
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+      .country-data-container {
+        width: 90%;
+        height: 30%;
+        z-index: 50;
+        top: 10%;
+        /* top: 85px; */
+      }
+      .country-data-text {
+        height: 100%;
+      }
+      .country-data-container.on-screen {
+        left: 0;
+        transition: left 2s;
+    }
+    .country-data-container.off-screen {
+        left: -90%;
+        transition: left 2s;
+    }
+}

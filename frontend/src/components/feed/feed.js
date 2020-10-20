@@ -38,7 +38,6 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     this.props
       .fetchSavedArticles(this.props.currentUser.savedArticles)
       .then(() => this.setState({ articlesFetched: true }));
@@ -56,9 +55,7 @@ class Feed extends React.Component {
       fetchSavedArticles,
       unSaveArticle,
     } = this.props;
-    debugger;
     const myArticles = Object.values(savedArticles);
-    debugger;
 
     return (
       <div className="">

@@ -40,15 +40,16 @@ router.post("/", (req, res) => {
     //             return res.status(404).json({ article: 'Article not found' });
     //         }
     //     })
-
     const articleURLs = req.body.articleURLs;
     Article.find({ articleURL: { $in: articleURLs } })
       .then(articles => {
         if (articles.length) {
           return res.json(articles);
-        } else {
-          return res.status(404).json({ articles: 'No articles found' })
-        }
+        } 
+      },
+      error => {
+        console.log("ERROR");
+        return res.status(404).json( { articles: "Articles not found"})
       })
       
 });
