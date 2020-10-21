@@ -40,6 +40,11 @@ export default class NavBar extends React.Component {
                 })
             }
         }
+        if(prevProps.display !== this.props.display && !this.props.display) {
+            this.setState({
+                search: ""
+            });
+        }
     }
 
     componentWillUnmount(){

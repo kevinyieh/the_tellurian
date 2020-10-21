@@ -207,6 +207,7 @@ class MainPage extends React.Component {
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
           map={this.map}
+          display={this.state.display}
         />
         <CountryDataContainer
           display={this.state.display}
