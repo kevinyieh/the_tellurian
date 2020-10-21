@@ -21,6 +21,7 @@
 }
 
 .burger-drop-button {
+  position: relative;
   outline: none;
   border-radius: 30px;
   width: 60px;
@@ -45,10 +46,12 @@
   flex-direction: column;
   align-items: center;
   font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .logout-button:hover {
   background-color: rgb(255, 0, 0);
+  transition: background-color 0.2s ease-in-out;
 }
 
 .logout-button i{
@@ -73,6 +76,30 @@
   filter: invert(1) brightness(3) drop-shadow(0 0 1px rgb(226, 131, 255));
 }
 
+.about-button {
+  background: rgb(230,230,230);
+  background: radial-gradient(circle, rgba(230,230,230,1) 0%, rgba(195,121,52,1) 40%, rgba(80,80,80,1) 100%);
+  transition: background 0.5s ease-in-out;
+}
+
+.about-button img {
+  height: 38px;
+  width: 42px;
+  filter: invert(0);
+  transition: filter 0.2s ease-in-out;
+}
+
+.about-button:hover {
+  background: rgb(0,0,0);
+  background: radial-gradient(circle, rgba(0,0,0,1) 5%, rgba(195,121,52,1) 100%);
+  transition: background 0.5s ease-in-out;
+}
+
+.about-button:hover img {
+  filter: invert(.7);
+  transition: filter 0.2s ease-in-out;
+}
+
 .git-button {
   background-color: rgb(80,80,80);
 }
@@ -80,11 +107,13 @@
 .git-button a {
   font-size: 38px;
   color: rgb(195, 121, 52);
+  transition: color 0.2s ease-in-out;
   -webkit-text-stroke: 1px #f2f2f2;
 }
 
 .git-button:hover a{
   color: #F2B544;
+  transition: color 0.2s ease-in-out;
 }
 
 @keyframes shine { 
@@ -99,7 +128,7 @@
   border-radius: 6px;
   display:flex;
   z-index:0;
-  overflow:hidden;
+  /* overflow:hidden; */
   background:linear-gradient( to bottom, #bcc6cc, #eee, #bcc6cc);
 
   outline: none;
@@ -115,20 +144,23 @@
   
   transition: color .2s;
 }
-  
-.gradient:after {
-  content:'';
-  top:0;
-  transform:translateX(100%) rotate(30deg);
-  width:300%;
-  height:300%;
+
+.burger-drop-button:hover .infos {
+  display: block;
+}
+
+.infos {
+  display: none;
+  font-weight: 700;
   position: absolute;
-  z-index:1;
-  animation: shine 9s infinite ease-in;
-  background:
-    linear-gradient( to right, 
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.8) 50%,
-      rgba(128,186,232,0) 99%,
-      rgba(128,186,232,0) 100%);
+  top: 0px;
+  right: 70px;
+  top: 5px;
+  padding: 3px;
+  width: 60px;
+  text-align: center;
+  background-color: #000;
+  color: #c37934;
+  border-radius: 5px;
+  border: 1px solid #F2B544;
 }
