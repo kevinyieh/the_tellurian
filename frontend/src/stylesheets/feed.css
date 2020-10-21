@@ -1,10 +1,3 @@
-/* 
-rgb(255,255,101) yellow
-rgb(195, 121, 52) orange
-
-rgb(80,80,80) dark like
-*/
-
 .modal-background {
   position: fixed;
   top: 0;
@@ -22,7 +15,6 @@ rgb(80,80,80) dark like
 .modal-dialog {
   position: relative;
   background-color: rgba(242, 242, 242, 1);
-  /* background-image: url("https://cabins-seeds.s3.amazonaws.com/smooth_stars.gif"); */
   background-position: center;
   max-width: 700px;
   width: calc(100% - 20px);
@@ -35,7 +27,6 @@ rgb(80,80,80) dark like
 
 .modal-content {
   padding: 10px;
-  /* background: rgba(255, 255, 255, 0.5); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,10 +36,6 @@ rgb(80,80,80) dark like
   overflow: scroll;
   margin-bottom: 20px;
 }
-
-/* .modal-content img {
-  opacity: .3;
-} */
 
 .click {
   margin: 0;

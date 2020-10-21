@@ -90,6 +90,7 @@ export default class NavBar extends React.Component {
             dropped: false
         })
         this.props.selectCountry(cor, iso2)();
+        this.setState({ search: "" });
     }
 
     renderDropDown() {

@@ -7,10 +7,4 @@ const mSTP = state => {
     }
 }
 
-const mDTP = dispatch => {
-    return {
-
-    }
-}
-
-export default connect(mSTP,mDTP)(CountryData);
+export default connect(mSTP)(CountryData);

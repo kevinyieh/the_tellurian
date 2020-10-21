@@ -1,6 +1,7 @@
 .articles-container{
     position: absolute;
-    height: 800px;
+    /* height: 800px; */
+    height: 85%;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
@@ -103,14 +104,6 @@
     max-height: 150px;
     margin-top: 10px;
 }
-
-/* .no-image {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    max-height: 150px;
-    margin-top: 10px;
-} */
 
 .fa-chevron-down {
     font-size: 20px;

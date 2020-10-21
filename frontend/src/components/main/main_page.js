@@ -23,7 +23,6 @@ const deltaLongCalc = (current,destination,inc) => {
     return current > destination ?  
           -Math.abs(current - destination) * inc : Math.abs(destination - current) * inc;
   }else {
-    // Can simplify expression, but clearer this way
     let crossDist = sign(destination) === 1 ? 180 - destination + (current + 180) : destination + 180 + (180 - current);
     let crossDirection = sign(destination) === 1 ? -1 : 1;
     return crossDist < Math.abs(current - destination) ? 
@@ -163,6 +162,7 @@ class MainPage extends React.Component {
     hs.properties.fill = am4core.color("#e4bd9a");
     // ACTIVE STATE COLOR
     let activeState = polygonTemplate.states.create("active");
+<<<<<<< HEAD
     activeState.properties.fill = am4core.color("#ffff66");
     // CREATE GO HOME BUTTOn
     this.resetButton = map.chartContainer.createChild(am4core.Button);
@@ -171,6 +171,16 @@ class MainPage extends React.Component {
     this.resetButton.fontFamily = "Times New Roman";
     this.resetButton.align = "left";
     this.resetButton.events.on("hit", (ev) => {
+=======
+    activeState.properties.fill = am4core.color("#F2B544");
+    // CREATE GO HOME BUTTON
+    let home = map.chartContainer.createChild(am4core.Button);
+    home.label.text = "Zoom Out";
+    home.marginLeft = 10;
+    home.fontFamily = "Times New Roman";
+    home.align = "left";
+    home.events.on("hit", function(ev) {
+>>>>>>> master
       map.goHome();
       this.setState({
         display: false
@@ -188,13 +198,11 @@ class MainPage extends React.Component {
     }
   }
   handleHideCountry(e){
-    // e.preventDefault();
     this.setState({
       countryHidden: false
     })
   }
   handleHideArticles(e){
-    // e.preventDefault();
     this.setState({
       articlesHidden: false
     })
