@@ -56,7 +56,7 @@ export default class Feed extends React.Component {
     const myArticles = Object.values(savedArticles);
 
     return (
-      <div className="">
+      <div className="feed-modal">
         <h3 id="hello" onClick={this.handleHello}>{`${this.hellos[0]}`}</h3>
         {/* <p className="click">Click me!</p> */}
         <img

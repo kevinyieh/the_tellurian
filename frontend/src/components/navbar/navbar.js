@@ -140,7 +140,10 @@ export default class NavBar extends React.Component {
                             </div>
                         </div>
                     </form>
-                    <BurgerDrop loggedIn={this.props.loggedIn} />
+                    <BurgerDrop 
+                    loggedIn={this.props.loggedIn} 
+                    map ={this.props.map}
+                    />
                 </div>
             </div>
 

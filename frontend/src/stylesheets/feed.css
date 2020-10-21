@@ -37,6 +37,10 @@
   margin-bottom: 20px;
 }
 
+.feed-modal {
+  user-select: none;
+}
+
 .click {
   margin: 0;
   position: absolute;

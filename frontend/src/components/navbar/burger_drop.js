@@ -11,6 +11,7 @@ class Dropdown extends React.Component {
     }
     this.show = this.show.bind(this);
     this.close = this.close.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
   }
 
   close() {
@@ -36,6 +37,11 @@ class Dropdown extends React.Component {
     document.removeEventListener('click',this.close);
   }
 
+  handleOpenModal() {
+    this.props.map.panBehavior = undefined;
+    this.props.openModal();
+  }
+
   render() {
     if (this.props.loggedIn)
     return (
@@ -55,7 +61,7 @@ class Dropdown extends React.Component {
           <div className="burger-drop-menu gradient">
             <button 
               className="burger-drop-button profile-button"
-              onClick={this.props.openModal}>
+              onClick={this.handleOpenModal}>
               <img
                 src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
                 alt="profile"

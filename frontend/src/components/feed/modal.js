@@ -8,14 +8,26 @@ import {
 import Feed from './feed_container';
 
 class Modal extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  handleCloseModal() {
+    this.props.closeModal();
+    this.props.map.panBehavior = "rotateLongLat";
+  }
+
   render () {
     if (!this.props.modal) return null;
     return (
       <div className={'modal-background'}
-        onClick={this.props.closeModal}>
+        onMouseDown={this.handleCloseModal}>
         <div className="modal-dialog"
-          onClick={e => e.stopPropagation()}>
-          <div className="modal-content">
+          onMouseDown={e => e.stopPropagation()}>
+          <div className="modal-content"
+            onMouseDown={e => e.stopPropagation()}>
             <Feed />
           </div>
         </div>

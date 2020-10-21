@@ -199,7 +199,9 @@ activeState.properties.fill = am4core.color("#F2B544");
   render() {
     return (  
       <div  className="main-page">
-        <FeedModal />
+        <FeedModal 
+          map={this.map}
+        />
         <NavBarContainer 
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
