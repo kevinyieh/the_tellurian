@@ -32,6 +32,11 @@ export default class Articles extends React.Component{
       ) {
         this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
       }
+      if (prevProps.hidden !== this.props.hidden){
+        this.setState({ hidden: this.props.hidden })
+      }else {
+        if(prevState.hidden) this.setState({ hidden: false });
+      }
     }
     
     toggleHide(){

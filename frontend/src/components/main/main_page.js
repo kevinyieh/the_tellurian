@@ -122,9 +122,6 @@ class MainPage extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      display: false
-    })
     // Set up basic map
     am4core.options.autoSetClassName = true;
     let map = am4core.create("chartdiv", am4maps.MapChart);
@@ -168,14 +165,21 @@ class MainPage extends React.Component {
     let activeState = polygonTemplate.states.create("active");
     activeState.properties.fill = am4core.color("#ffff66");
     // CREATE GO HOME BUTTOn
-    let home = map.chartContainer.createChild(am4core.Button);
-    home.label.text = "Zoom Out";
-    home.marginLeft = 10;
-    home.fontFamily = "Times New Roman";
-    home.align = "left";
-    home.events.on("hit", function(ev) {
+    this.resetButton = map.chartContainer.createChild(am4core.Button);
+    this.resetButton.label.text = "Reset";
+    this.resetButton.marginLeft = 10;
+    this.resetButton.fontFamily = "Times New Roman";
+    this.resetButton.align = "left";
+    this.resetButton.events.on("hit", (ev) => {
       map.goHome();
+      this.setState({
+        display: false
+      })
+      if (this.selected) this.selected.isActive = false;
     });
+    this.setState({
+      display: false
+    })
   }
 
   componentWillUnmount() {
