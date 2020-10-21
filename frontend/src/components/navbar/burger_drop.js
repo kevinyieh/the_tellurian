@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
@@ -60,6 +61,18 @@ class Dropdown extends React.Component {
                 src="https://cabins-seeds.s3.amazonaws.com/alien_head.png"
                 alt="profile"
               />
+              <p className="infos">Profile</p>
+            </button>
+            <button
+              className="burger-drop-button about-button below">
+              <Link
+                to="/team">
+                  <img
+                    src="https://cabins-seeds.s3.amazonaws.com/tellurians.svg"
+                    alt="about"
+                  />
+              </Link>
+              <p className="infos">About us</p>
             </button>
             <button className="burger-drop-button below git-button">
               <a
@@ -69,12 +82,14 @@ class Dropdown extends React.Component {
               >
                 <i className="fab fa-github"></i>
               </a>
+              <p className="infos">Github</p>
             </button>
             <button
               className="burger-drop-button below logout-button"
               onClick={this.props.logout}
             >
               EJECT<i className="fas fa-sign-out-alt"></i>
+              <p className="infos">Log out</p>
             </button>
           </div>
         ) : null}
