@@ -142,7 +142,7 @@ class MainPage extends React.Component {
     hs.properties.fill = am4core.color("#e4bd9a");
     // ACTIVE STATE COLOR
     let activeState = polygonTemplate.states.create("active");
-    activeState.properties.fill = am4core.color("#ffff66");
+    activeState.properties.fill = am4core.color("#F2B544");
     // CREATE GO HOME BUTTON
     let home = map.chartContainer.createChild(am4core.Button);
     home.label.text = "Zoom Out";
