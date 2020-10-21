@@ -1,12 +1,43 @@
+.team-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* margin-bottom: -10px; */
+    /* z-index: 2; */
+    letter-spacing: 0.5px;
+    color: white;
+    background-image: url('https://cabins-seeds.s3.amazonaws.com/smooth_stars.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+    /* height: 10px; */
+}
+
 .team-page {
     margin: auto;
     width: 75%;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+#team-back {
+    margin-top: 20px;
+    justify-self: flex-start;
+    font-size: 30px;
+    color: white;
+}
+
+#team-back:hover {
+    cursor: pointer;
+    color: rgba(196, 120, 52);
+}
+
 .team-title {
+    margin-top: 0px;
     font-family: 'Codystar', cursive;
     font-size: 60px;
     text-align: center;
@@ -20,12 +51,18 @@
 
 .teammate {
     background-color: rgba(26, 29, 33, 0.8);
+    transition: background-color 0.2s ease-in-out;
     color: white;
     border-radius: 10px;
     width: 300px;
     padding: 40px;
     text-align: center;
     margin: 30px;
+}
+
+.teammate:hover {
+    background-color:rgba(196, 120, 52, 0.8);
+    transition: background-color 0.2s ease-in-out;
 }
 
 .personal-links {
@@ -43,4 +80,9 @@
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;
+}
+
+.zoom-pic {
+    width: inherit;
+    margin: auto;
 }

@@ -1,6 +1,7 @@
 .articles-container{
     position: absolute;
-    height: 800px;
+    /* height: 800px; */
+    height: 85%;
     width: 650px;
     border-radius: 10px;
     z-index: 50;
