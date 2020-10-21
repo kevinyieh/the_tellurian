@@ -128,7 +128,19 @@
     transition: left 2s;
 }
 
-<<<<<<< HEAD
+.wb-credit {
+    text-align: right;
+}
+
+.wb-credit a {
+    color: #C47834;
+    text-decoration: none;
+}
+
+.wb-credit a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 @media only screen 
   and (min-device-width: 320px) 
@@ -153,18 +165,4 @@
         left: -90%;
         transition: left 2s;
     }
-=======
-.wb-credit {
-    text-align: right;
-}
-
-.wb-credit a {
-    color: #C47834;
-    text-decoration: none;
-}
-
-.wb-credit a:hover {
-    text-decoration: underline;
-    cursor: pointer;
->>>>>>> master
 }
