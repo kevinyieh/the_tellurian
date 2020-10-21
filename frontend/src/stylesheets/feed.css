@@ -37,6 +37,10 @@
   margin-bottom: 20px;
 }
 
+.feed-modal {
+  user-select: none;
+}
+
 .click {
   margin: 0;
   position: absolute;
@@ -79,7 +83,6 @@
   margin: 10px 0 0 0;
   line-height: 1;
   padding-left: 20px;
-  user-select: none;
 }
 
 #hello:hover {
