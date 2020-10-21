@@ -104,7 +104,7 @@ class Team extends React.Component {
                         alt="github"
                         src={require("./connect/github_logo.png")}
                         /></a>
-                        <a href="www.linkedin.com/in/kevin-yieh"><img
+                        <a href="https://www.linkedin.com/in/kevin-yieh"><img
                         className="personal-link-logo"
                         alt="linkedin"
                         src={require("./connect/linkedin_logo.png")}
