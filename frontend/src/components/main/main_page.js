@@ -162,8 +162,7 @@ class MainPage extends React.Component {
     hs.properties.fill = am4core.color("#e4bd9a");
     // ACTIVE STATE COLOR
     let activeState = polygonTemplate.states.create("active");
-<<<<<<< HEAD
-    activeState.properties.fill = am4core.color("#ffff66");
+activeState.properties.fill = am4core.color("#F2B544");
     // CREATE GO HOME BUTTOn
     this.resetButton = map.chartContainer.createChild(am4core.Button);
     this.resetButton.label.text = "Reset";
@@ -171,16 +170,6 @@ class MainPage extends React.Component {
     this.resetButton.fontFamily = "Times New Roman";
     this.resetButton.align = "left";
     this.resetButton.events.on("hit", (ev) => {
-=======
-    activeState.properties.fill = am4core.color("#F2B544");
-    // CREATE GO HOME BUTTON
-    let home = map.chartContainer.createChild(am4core.Button);
-    home.label.text = "Zoom Out";
-    home.marginLeft = 10;
-    home.fontFamily = "Times New Roman";
-    home.align = "left";
-    home.events.on("hit", function(ev) {
->>>>>>> master
       map.goHome();
       this.setState({
         display: false
