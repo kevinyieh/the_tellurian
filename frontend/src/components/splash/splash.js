@@ -49,6 +49,7 @@ class Splash extends React.Component {
               <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
                 Freepik
               </a>
+              <br/>
               {' and '}
               <a
                 href="https://www.flaticon.com/authors/roundicons"

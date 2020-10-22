@@ -39,7 +39,7 @@ class Dropdown extends React.Component {
   }
 
   handleOpenModal() {
-    this.props.map.panBehavior = undefined;
+    this.props.map.panBehavior = "none";
     this.props.openModal();
   }
 

@@ -26,11 +26,13 @@ export const receiveArticles = articles => {
 }
 
 export const fetchSavedArticles = articleURLs => dispatch => {
+  debugger;
   return Bookmark.fetchSavedArticles(articleURLs)
     .then(articles => {
       return dispatch(receiveArticles(articles.data))
     })
     .catch(err => {
+      debugger;
       return dispatch(receiveBookMarkErrors(err))
     })
 }

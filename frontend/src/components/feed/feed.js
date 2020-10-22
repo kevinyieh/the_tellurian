@@ -66,26 +66,28 @@ export default class Feed extends React.Component {
         />
 
         <h3 id="user-id">{currentUser.email}</h3>
-        {!currentUser.savedArticles.length || !savedArticles ? (
-          <div>
-            <p className="no-bookmarks">No articles currently bookmarked!</p>
-            <img
-              src="https://image.flaticon.com/icons/svg/2909/2909488.svg"
-              alt="bookmark-article"
-            ></img>
-          </div>
-        ) : (
-          myArticles.map((article, i) => (
-            <ArticleItem
-              key={i}
-              article={article}
-              fetchSavedArticles={fetchSavedArticles}
-              unSaveArticle={unSaveArticle}
-              savedArticles={savedArticles}
-              userId={currentUser.id}
-            />
-          ))
-        )}
+        <div className="feed-scroll">
+          {!currentUser.savedArticles.length || !savedArticles ? (
+            <div>
+              <p className="no-bookmarks">No articles currently bookmarked!</p>
+              <img
+                src="https://image.flaticon.com/icons/svg/2909/2909488.svg"
+                alt="bookmark-article"
+              ></img>
+            </div>
+          ) : (
+            myArticles.map((article, i) => (
+              <ArticleItem
+                key={i}
+                article={article}
+                fetchSavedArticles={fetchSavedArticles}
+                unSaveArticle={unSaveArticle}
+                savedArticles={savedArticles}
+                userId={currentUser.id}
+              />
+            ))
+          )}
+        </div>
       </div>
     );
   }
