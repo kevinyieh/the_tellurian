@@ -32,7 +32,6 @@ router.post("/save", (req, res) => {
 
 router.post("/", (req, res) => {
   const articleURLs = req.body.articleURLs;
-  debugger;
   Article.find({ articleURL: { $in: articleURLs } })
     .then(articles => {
       if (articles.length) {
