@@ -18,8 +18,8 @@ const mDTP = dispatch => {
       fetchCountry: (country) => dispatch(fetchCountry(country)),
       fetchArticles: (cca2, countryName) =>
         dispatch(fetchArticles(cca2, countryName)),
-      fetchSavedArticles: (articleURLs) =>
-        fetchSavedArticles(articleURLs)(dispatch),
+      fetchSavedArticles: (userId) =>
+        fetchSavedArticles(userId)(dispatch),
     };
 };
 

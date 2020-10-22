@@ -37,7 +37,7 @@ export default class Feed extends React.Component {
 
   componentDidMount() {
     this.props
-      .fetchSavedArticles(this.props.currentUser.savedArticles)
+      .fetchSavedArticles(this.props.currentUser.id)
       .then(() => this.setState({ articlesFetched: true }));
   }
 
@@ -51,7 +51,7 @@ export default class Feed extends React.Component {
       currentUser,
       savedArticles,
       fetchSavedArticles,
-      unSaveArticle,
+      unSaveArticle
     } = this.props;
     const myArticles = Object.values(savedArticles);
 
@@ -66,7 +66,7 @@ export default class Feed extends React.Component {
         />
 
         <h3 id="user-id">{currentUser.email}</h3>
-        {!currentUser.savedArticles.length || !savedArticles ? (
+        {!Object.keys(savedArticles).length ? (
           <div>
             <p className="no-bookmarks">No articles currently bookmarked!</p>
             <img
@@ -77,11 +77,11 @@ export default class Feed extends React.Component {
         ) : (
           myArticles.map((article, i) => (
             <ArticleItem
-              key={i}
+              key={article.articleURL}
               article={article}
               fetchSavedArticles={fetchSavedArticles}
               unSaveArticle={unSaveArticle}
-              savedArticles={savedArticles}
+              savedArticles={Object.values(savedArticles).map(a => a.articleURL)}
               userId={currentUser.id}
             />
           ))

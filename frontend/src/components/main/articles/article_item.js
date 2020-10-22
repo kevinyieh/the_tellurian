@@ -14,6 +14,20 @@ class ArticleItem extends React.Component {
     this.renderBookmark = this.renderBookmark.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.savedArticles.includes(this.props.article.articleURL)) {
+      this.setState({ bookmarked: true });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props && (this.props.savedArticles.includes(this.props.article.articleURL))) {
+      this.setState({ bookmarked: true });
+    } else if (prevProps !== this.props && (!this.props.savedArticles.includes(this.props.article.articleURL))) {
+      this.setState({ bookmarked: false });
+    }
+  }
+
   toggleContent(e) {
     e.preventDefault();
     this.setState({ collapsed: !this.state.collapsed });
@@ -46,23 +60,22 @@ class ArticleItem extends React.Component {
   unsaveBookmark(e) {
     e.preventDefault();
     this.props.unSaveArticle(this.props.userId, this.props.article.articleURL);
-    //  this.setState({ bookmarked: !this.state.bookmarked });
+    this.setState({ bookmarked: false });
   }
 
   saveBookmark(e) {
     e.preventDefault();
     this.props.saveArticle(this.props.userId, this.props.article);
-    //  this.setState({ bookmarked: !this.state.bookmarked });
+    this.setState({ bookmarked: true });
   }
 
   renderBookmark() {
-    const { savedArticles, article } = this.props;
-    let myArticles = Object.values(savedArticles);
-    let found;
-    myArticles.forEach((a) =>
-      a.articleURL === article.articleURL ? (found = true) : null
-    );
-    if (myArticles && found) {
+    // const { savedArticles, article } = this.props;
+    // let myArticles = Object.values(savedArticles);
+    // myArticles.forEach((a) => {
+    //   if (a.articleURL === article.articleURL) this.setState({ bookmarked: true });
+    // });
+    if (this.state.bookmarked) {
       return <i className="fas fa-bookmark" onClick={this.unsaveBookmark}></i>;
     } else {
       return <i className="far fa-bookmark" onClick={this.saveBookmark}></i>;

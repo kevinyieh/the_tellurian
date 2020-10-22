@@ -2,14 +2,7 @@ import * as Bookmark from "../util/bookmarks_util";
 
 export const FETCH_SAVED_ARTICLES = "FETCH_SAVED_ARTICLES";
 export const RECEIVE_BOOKMARK_ERRORS = "RECEIVE_BOOKMARK_ERRORS";
-export const RECEIVE_SAVED_URLS = "RECEIVE_SAVED_URLS"
-
-export const receiveSavedURLs = articleURLs => {
-    return {
-        type: RECEIVE_SAVED_URLS,
-        articleURLs
-    }
-}
+export const REMOVE_UNSAVED_ARTICLE = "REMOVE_UNSAVED_ARTICLE";
 
 export const receiveBookMarkErrors = errors => {
   return {
@@ -25,8 +18,15 @@ export const receiveArticles = articles => {
   }
 }
 
-export const fetchSavedArticles = articleURLs => dispatch => {
-  return Bookmark.fetchSavedArticles(articleURLs)
+export const removeUnsavedArticle = articleURL => {
+  return {
+    type: REMOVE_UNSAVED_ARTICLE,
+    articleURL
+  }
+}
+
+export const fetchSavedArticles = userId => dispatch => {
+  return Bookmark.fetchSavedArticles(userId)
     .then(articles => {
       return dispatch(receiveArticles(articles.data))
     })
@@ -37,9 +37,6 @@ export const fetchSavedArticles = articleURLs => dispatch => {
 
 export const saveArticle = (userId, article) => dispatch => {
     return Bookmark.saveArticle(userId, article)
-      .then((response) => {
-        return dispatch(receiveSavedURLs(response.data.savedURLs));
-      })
       .catch((err) => {
         return dispatch(receiveBookMarkErrors(err));
       });
@@ -47,8 +44,8 @@ export const saveArticle = (userId, article) => dispatch => {
 
 export const unSaveArticle = (userId, articleURL) => dispatch => {
     return Bookmark.unSaveArticle(userId, articleURL)
-    .then((response) => {
-      return dispatch(receiveSavedURLs(response.data.savedURLs));
+    .then(response => {
+      return dispatch(removeUnsavedArticle(response.data.articleURL));
     })
     .catch((err) => {
       return dispatch(receiveBookMarkErrors(err));

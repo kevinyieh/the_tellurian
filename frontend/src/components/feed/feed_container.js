@@ -8,7 +8,7 @@ const mSTP = state => ({
 })
 
 const mDTP = dispatch => ({
-  fetchSavedArticles: articleURLs => fetchSavedArticles(articleURLs)(dispatch),
+  fetchSavedArticles: userId => fetchSavedArticles(userId)(dispatch),
   unSaveArticle: (userId, articleURL) => dispatch(unSaveArticle(userId, articleURL))
 })
 
