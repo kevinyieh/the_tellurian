@@ -52,26 +52,46 @@ class MainPage extends React.Component {
     this.handleHideArticles = this.handleHideArticles.bind(this);
     this.handleHideCountry = this.handleHideCountry.bind(this);
   }
+// TODO: USE BUILT IN ROTATE ANIMATION AND ADJUST ZOOM BASED ON LAND AREA 
+
+  // async rotateHelp(long,lat,map){
+  //   if(this.animation) this.animation.stop();
+  //   this.animation = await map.animate([{
+  //     property: "deltaLongitude",
+  //     to: long
+  //   }, {
+  //     property: "deltaLatitude",
+  //     to: lat
+  //   }], 500);
+  //   return null;
+  // }
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
     const map = this.map;
     const coords = cor ? cor : map.svgPointToGeo(ev.svgPoint);
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
-    const inc = 0.26;
-    
-    const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
+    const inc = 0.2;
+    // this.rotateHelp(deltaLongitude,deltaLatitude,map).then( () => {
+    //     const objToFocus = countryTarget ? countryTarget : ev.target;
+    //     map.zoomToMapObject(objToFocus);
+    //     if(this.selected) this.selected.isActive = false;
+    //     this.selected = objToFocus;
+    //     this.selected.isActive = true;
+    // })
 
+    const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
     const latInc = deltaLatCalc(map.deltaLatitude,deltaLatitude,inc);
   
-    if (this.intervalId) clearInterval(this.intervalId);
-    this.intervalId = setInterval(() => {
+    if (this.intervalId) cancelAnimationFrame(this.intervalId);
+    const rotateGlobe = (timestamp) => {
       if((!closeEnough(map.deltaLongitude,deltaLongitude,longInc) || !closeEnough(map.deltaLatitude,deltaLatitude, latInc))
       ){
         map.deltaLongitude += longInc;
         map.deltaLatitude += latInc;
+        this.intervalId = requestAnimationFrame(rotateGlobe);
       }else{
-        clearInterval(this.intervalId);
+        cancelAnimationFrame(this.intervalId);
         this.intervalId = null;
         const objToFocus = countryTarget ? countryTarget : ev.target;
         map.zoomToMapObject(objToFocus);
@@ -79,7 +99,9 @@ class MainPage extends React.Component {
         this.selected = objToFocus;
         this.selected.isActive = true;
       }
-    },15);
+    }
+    this.intervalId = requestAnimationFrame(rotateGlobe);
+
   }
 
   handleHit(cor,iso2){
@@ -99,10 +121,8 @@ class MainPage extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      display: false
-    })
     // Set up basic map
+    am4core.options.autoSetClassName = true;
     let map = am4core.create("chartdiv", am4maps.MapChart);
     map.geodata = am4geodata_worldLow;
     map.projection = new am4maps.projections.Orthographic();
@@ -142,16 +162,23 @@ class MainPage extends React.Component {
     hs.properties.fill = am4core.color("#e4bd9a");
     // ACTIVE STATE COLOR
     let activeState = polygonTemplate.states.create("active");
-    activeState.properties.fill = am4core.color("#F2B544");
-    // CREATE GO HOME BUTTON
-    let home = map.chartContainer.createChild(am4core.Button);
-    home.label.text = "Zoom Out";
-    home.marginLeft = 10;
-    home.fontFamily = "Times New Roman";
-    home.align = "left";
-    home.events.on("hit", function(ev) {
+activeState.properties.fill = am4core.color("#F2B544");
+    // CREATE GO HOME BUTTOn
+    this.resetButton = map.chartContainer.createChild(am4core.Button);
+    this.resetButton.label.text = "Reset";
+    this.resetButton.marginLeft = 10;
+    this.resetButton.fontFamily = "Times New Roman";
+    this.resetButton.align = "left";
+    this.resetButton.events.on("hit", (ev) => {
       map.goHome();
+      this.setState({
+        display: false
+      })
+      if (this.selected) this.selected.isActive = false;
     });
+    this.setState({
+      display: false
+    })
   }
 
   componentWillUnmount() {
@@ -179,6 +206,7 @@ class MainPage extends React.Component {
           selectCountry={this.handleHit}
           polygonSeries={this.polygonSeries}
           map={this.map}
+          display={this.state.display}
         />
         <CountryDataContainer
           display={this.state.display}
