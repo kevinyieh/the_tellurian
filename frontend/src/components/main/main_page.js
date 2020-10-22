@@ -52,19 +52,6 @@ class MainPage extends React.Component {
     this.handleHideArticles = this.handleHideArticles.bind(this);
     this.handleHideCountry = this.handleHideCountry.bind(this);
   }
-// TODO: USE BUILT IN ROTATE ANIMATION AND ADJUST ZOOM BASED ON LAND AREA 
-
-  // async rotateHelp(long,lat,map){
-  //   if(this.animation) this.animation.stop();
-  //   this.animation = await map.animate([{
-  //     property: "deltaLongitude",
-  //     to: long
-  //   }, {
-  //     property: "deltaLatitude",
-  //     to: lat
-  //   }], 500);
-  //   return null;
-  // }
 
   rotateGlobeAndFocus(cor,ev,countryTarget) {
     const map = this.map;
@@ -72,13 +59,6 @@ class MainPage extends React.Component {
     const deltaLongitude = -coords.longitude;
     const deltaLatitude = -coords.latitude;
     const inc = 0.2;
-    // this.rotateHelp(deltaLongitude,deltaLatitude,map).then( () => {
-    //     const objToFocus = countryTarget ? countryTarget : ev.target;
-    //     map.zoomToMapObject(objToFocus);
-    //     if(this.selected) this.selected.isActive = false;
-    //     this.selected = objToFocus;
-    //     this.selected.isActive = true;
-    // })
 
     const longInc = deltaLongCalc(map.deltaLongitude,deltaLongitude,inc);
     const latInc = deltaLatCalc(map.deltaLatitude,deltaLatitude,inc);
