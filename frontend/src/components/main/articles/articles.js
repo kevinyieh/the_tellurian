@@ -21,7 +21,6 @@ export default class Articles extends React.Component{
     }
     
     componentDidUpdate(prevProps,prevState) {
-      debugger;
       if (prevProps.country !== this.props.country){
         this.setState({ hidden: false })
       }
@@ -45,7 +44,6 @@ export default class Articles extends React.Component{
     }
 
     render(){
-      debugger;
         const {
           articles,
           country,
