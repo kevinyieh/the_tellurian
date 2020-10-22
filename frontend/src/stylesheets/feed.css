@@ -23,6 +23,8 @@
   border-radius: 15px;
   outline: none;
   opacity: 1;
+  height: 80%;
+  /* padding-bottom: 10px; */
 }
 
 .modal-content {
@@ -31,14 +33,15 @@
   flex-direction: column;
   align-items: center;
   font-family: 'Titillium Web', sans-serif;
-  overflow: scroll;
+  /* overflow: scroll; */
   width: inherit;
-  overflow: scroll;
   margin-bottom: 20px;
+  height: 90%;
 }
 
 .feed-modal {
   user-select: none;
+  height: 100%;
 }
 
 .click {
@@ -96,4 +99,28 @@
   font-family: 'Codystar', cursive;
   margin: 0;
   padding-left: 20px;
+}
+
+
+.feed-scroll {
+  overflow-y: scroll;
+  height: 95%;
+  margin-top: 10px;
+}
+
+.feed-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 15px;
+}
+
+.feed-scroll::-webkit-scrollbar-track:vertical {
+background: #f1f1f1; 
+}
+
+.feed-scroll::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+.feed-scroll::-webkit-scrollbar-thumb:hover {
+background: #555; 
 }

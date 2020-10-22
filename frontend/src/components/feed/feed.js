@@ -66,6 +66,7 @@ export default class Feed extends React.Component {
         />
 
         <h3 id="user-id">{currentUser.email}</h3>
+        <div className="feed-scroll">
         {!Object.keys(savedArticles).length ? (
           <div>
             <p className="no-bookmarks">No articles currently bookmarked!</p>
@@ -86,6 +87,7 @@ export default class Feed extends React.Component {
             />
           ))
         )}
+        </div>
       </div>
     );
   }

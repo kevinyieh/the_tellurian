@@ -18,13 +18,6 @@ export const receiveArticles = articles => {
   }
 }
 
-export const removeUnsavedArticle = articleURL => {
-  return {
-    type: REMOVE_UNSAVED_ARTICLE,
-    articleURL
-  }
-}
-
 export const fetchSavedArticles = userId => dispatch => {
   return Bookmark.fetchSavedArticles(userId)
     .then(articles => {
