@@ -70,11 +70,6 @@ class ArticleItem extends React.Component {
   }
 
   renderBookmark() {
-    // const { savedArticles, article } = this.props;
-    // let myArticles = Object.values(savedArticles);
-    // myArticles.forEach((a) => {
-    //   if (a.articleURL === article.articleURL) this.setState({ bookmarked: true });
-    // });
     if (this.state.bookmarked) {
       return <i className="fas fa-bookmark" onClick={this.unsaveBookmark}></i>;
     } else {

@@ -19,12 +19,6 @@ export const unSaveArticle = (userId, articleURL) => {
   return axios.patch("/api/users/articles", obj);
 }
 
-// export const fetchSavedArticles = articleURLs => {
-//   const obj = {
-//     articleURLs
-//   }
-//   return axios.post("/api/articles/", obj);
-// }
 
 export const fetchSavedArticles = userId => {
   const obj = {
@@ -32,11 +26,3 @@ export const fetchSavedArticles = userId => {
   }
   return axios.post("/api/users/articles", obj);
 }
-
-// export const fetchUsersArticles = async (userId) => {
-//   const obj = {
-//     userId
-//   }
-//   const result = await axios.post("/api/users/articles");
-//   return result.savedArticles;
-// }
