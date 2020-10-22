@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
+const Article = require('../../models/Article');
 const jwt = require('jsonwebtoken');
 const keys = require('../../frontend/src/config/keys');
 const passport = require('passport');
@@ -37,7 +38,7 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
             .then((user) => {
-              const payload = { id: user.id, email: user.email, savedArticles: user.savedArticles  };
+              const payload = { id: user.id, email: user.email };
                 jwt.sign(
                   payload,
                   keys.secretOrKey,
@@ -78,7 +79,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, email: user.email, savedArticles: user.savedArticles };
+            const payload = { id: user.id, email: user.email };
             jwt.sign(
               payload,
               keys.secretOrKey,
@@ -107,7 +108,19 @@ router.patch('/articles', (req, res) => {
       }
       user.save()
         .then(savedUser => {
-          return res.json({ savedURLs: savedUser.savedArticles});
+          return res.json({ articleURL });
+        })
+    })
+})
+
+router.post('/articles', (req, res) => {
+  const userId = req.body.userId;
+  User.findById(userId)
+    .then(user => {
+      const articleURLs = user.savedArticles;
+      Article.find({ articleURL: { $in: articleURLs } })
+        .then(articles => {
+          return res.json(articles);
         })
     })
 })
