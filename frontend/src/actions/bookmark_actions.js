@@ -24,7 +24,6 @@ export const fetchSavedArticles = userId => dispatch => {
       return dispatch(receiveArticles(articles.data))
     })
     .catch(err => {
-      debugger;
       return dispatch(receiveBookMarkErrors(err))
     })
 }
