@@ -120,11 +120,7 @@ router.post('/articles', (req, res) => {
       const articleURLs = user.savedArticles;
       Article.find({ articleURL: { $in: articleURLs } })
         .then(articles => {
-          if (articles.length) {
-            return res.json(articles);
-          } else {
-            return res.status(404).json({ articles: 'No articles found' })
-          }
+          return res.json(articles);
         })
     })
 })
