@@ -24,6 +24,11 @@ export default class Articles extends React.Component{
       if (prevProps.country !== this.props.country){
         this.setState({ hidden: false })
       }
+      if (prevProps.display !== this.props.display){
+        this.setState({ hidden: this.props.hidden })
+      }else {
+        if(prevState.display) this.setState({ hidden: false });
+      }
     }
     
     toggleHide(){

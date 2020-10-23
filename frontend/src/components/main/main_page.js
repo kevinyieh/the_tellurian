@@ -45,8 +45,6 @@ class MainPage extends React.Component {
     
     this.state = {
       display: false,
-      countryHidden: false,
-      articlesHidden: false
     }
     this.handleHit = this.handleHit.bind(this);
     this.handleHideArticles = this.handleHideArticles.bind(this);
@@ -190,13 +188,11 @@ activeState.properties.fill = am4core.color("#F2B544");
         />
         <CountryDataContainer
           display={this.state.display}
-          hidden={this.state.countryHidden}
           map={this.map}
         />
         <div id="chartdiv" />
         <ArticlesContainer
           display={this.state.display}
-          hidden={this.state.articlesHidden}
           map={this.map}
         />
       </div>
