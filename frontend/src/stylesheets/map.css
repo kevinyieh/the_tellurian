@@ -48,9 +48,11 @@ g {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    width: 500px;
 }
 
 .search-bar-input-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     overflow: visible;
@@ -69,6 +71,7 @@ g {
     min-height: 50px;
     top: 0px;
     padding-top: 12px;
+    width: 500px;
 }
 
 .space-shuttle-container {
@@ -104,7 +107,7 @@ g {
 }
 
 .search-bar-input {
-    width: 500px;
+    width: 100%;
     height: 36px;
     font-size: 20px;
     font-family: inherit;
@@ -139,7 +142,10 @@ g {
     font-weight: 550;
     border-radius: 10px;
     transition: background-color 0.2s;
-    text-indent: 40px;
+}
+
+.search-result {
+    padding-left: 20px;
 }
 
 .search-result-container:hover {
@@ -222,5 +228,19 @@ body, ul, li, div {
   and (orientation: portrait) {
       g.amcharts-Button-group {
           transform: translate(5%,90%);
+      }
+      .nav-title {
+          display: none;
+      }
+      .search-bar-form {
+        width: 75%;
+        font-size: 12px;
+      }
+      .search-bar-input-container.dropped {
+          width: 75%;
+          max-height: 300px
+      }
+      .search-dropdown {
+          overflow-y: scroll;
       }
 }
