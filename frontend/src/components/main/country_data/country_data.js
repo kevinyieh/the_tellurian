@@ -22,10 +22,10 @@ export default class CountryData extends React.Component {
   }
 
   componentDidUpdate(prevProps,prevState) {
-    if (prevProps.hidden !== this.props.hidden){
+    if (prevProps.display !== this.props.display){
       this.setState({ hidden: this.props.hidden })
     }else {
-      if(prevState.hidden) this.setState({ hidden: false });
+      if(prevState.display) this.setState({ hidden: false });
     }
   }
 

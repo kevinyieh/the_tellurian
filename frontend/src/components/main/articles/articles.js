@@ -17,24 +17,17 @@ export default class Articles extends React.Component{
         this.setState({
             hidden: false
         });
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
+        this.props.fetchSavedArticles(this.props.currentUser.id);
     }
     
     componentDidUpdate(prevProps,prevState) {
       if (prevProps.country !== this.props.country){
         this.setState({ hidden: false })
       }
-
-      if (
-        prevProps.currentUser.savedArticles.length !==
-        this.props.currentUser.savedArticles.length
-      ) {
-        this.props.fetchSavedArticles(this.props.currentUser.savedArticles);
-      }
-      if (prevProps.hidden !== this.props.hidden){
+      if (prevProps.display !== this.props.display){
         this.setState({ hidden: this.props.hidden })
       }else {
-        if(prevState.hidden) this.setState({ hidden: false });
+        if(prevState.display) this.setState({ hidden: false });
       }
     }
     
@@ -103,11 +96,11 @@ export default class Articles extends React.Component{
                     ) : (
                       articles.map((article, i) => (
                         <ArticleItem
-                          key={i}
+                          key={article.articleURL}
                           article={article}
                           saveArticle={saveArticle}
                           fetchSavedArticles={fetchSavedArticles}
-                          savedArticles={savedArticles}
+                          savedArticles={Object.values(savedArticles).map(a => a.articleURL)}
                           unSaveArticle={unSaveArticle}
                           userId={currentUser.id}
                         />

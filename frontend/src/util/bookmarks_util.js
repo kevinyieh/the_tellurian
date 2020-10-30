@@ -19,9 +19,10 @@ export const unSaveArticle = (userId, articleURL) => {
   return axios.patch("/api/users/articles", obj);
 }
 
-export const fetchSavedArticles = articleURLs => {
+
+export const fetchSavedArticles = userId => {
   const obj = {
-    articleURLs
+    userId
   }
-  return axios.post("/api/articles/", obj);
+  return axios.post("/api/users/articles", obj);
 }
