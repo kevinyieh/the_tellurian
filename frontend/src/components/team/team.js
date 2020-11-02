@@ -32,17 +32,17 @@ class Team extends React.Component {
                     <h2>Donald Herndon</h2>
                     <h3>Flex</h3>
                     <div className="personal-links">
-                        <a href="https://github.com/herndal"><img
+                        <a href="https://github.com/herndal" target="_blank"><img
                         className="personal-link-logo"
                         alt="github"
                         src={require("./connect/github_logo.png")}
                         /></a>
-                        <a href="https://www.linkedin.com/in/donald-herndon-8364b01a5/"><img
+                        <a href="https://www.linkedin.com/in/donald-herndon-8364b01a5/" target="_blank"><img
                         className="personal-link-logo"
                         alt="linkedin"
                         src={require("./connect/linkedin_logo.png")}
                         /></a>
-                        <a href="https://angel.co/u/donald-herndon"><img
+                        <a href="https://angel.co/u/donald-herndon" target="_blank"><img
                         className="personal-link-logo"
                         alt="angelist"
                         src={require("./connect/angelist_logo.png")}
@@ -53,17 +53,17 @@ class Team extends React.Component {
                     <h2>Wilson Li</h2>
                     <h3>Backend Lead</h3>
                     <div className="personal-links">
-                        <a href="https://github.com/ligokdoon"><img
+                        <a href="https://github.com/ligokdoon" target="_blank"><img
                         className="personal-link-logo"
                         alt="github"
                         src={require("./connect/github_logo.png")}
                         /></a>
-                        <a href="https://www.linkedin.com/in/wilsonli117/"><img
+                        <a href="https://www.linkedin.com/in/wilsonli117/" target="_blank"><img
                         className="personal-link-logo"
                         alt="linkedin"
                         src={require("./connect/linkedin_logo.png")}
                         /></a>
-                        <a href="https://angel.co/u/wilson-li-13"><img
+                        <a href="https://angel.co/u/wilson-li-13" target="_blank"><img
                         className="personal-link-logo"
                         alt="angelist"
                         src={require("./connect/angelist_logo.png")}
@@ -77,17 +77,17 @@ class Team extends React.Component {
                     <h2>Becca Burten</h2>
                     <h3>Frontend Lead</h3>
                     <div className="personal-links">
-                        <a href="https://github.com/beccaburten/"><img
+                        <a href="https://github.com/beccaburten/" target="_blank"><img
                         className="personal-link-logo"
                         alt="github"
                         src={require("./connect/github_logo.png")}
                         /></a>
-                        <a href="https://www.linkedin.com/in/beccaburten/"><img
+                        <a href="https://www.linkedin.com/in/beccaburten/" target="_blank"><img
                         className="personal-link-logo"
                         alt="linkedin"
                         src={require("./connect/linkedin_logo.png")}
                         /></a>
-                        <a href="https://angel.co/u/becca-burten"><img
+                        <a href="https://angel.co/u/becca-burten" target="_blank"><img
                         className="personal-link-logo"
                         alt="angelist"
                         src={require("./connect/angelist_logo.png")}
@@ -99,17 +99,17 @@ class Team extends React.Component {
                     <h2>Kevin Yieh</h2>
                     <h3>Team Lead</h3>
                     <div className="personal-links">
-                        <a href="https://github.com/kevinyieh?tab=repositories"><img
+                        <a href="https://github.com/kevinyieh?tab=repositories" target="_blank"><img
                         className="personal-link-logo"
                         alt="github"
                         src={require("./connect/github_logo.png")}
                         /></a>
-                        <a href="https://www.linkedin.com/in/kevin-yieh"><img
+                        <a href="https://www.linkedin.com/in/kevin-yieh" target="_blank"><img
                         className="personal-link-logo"
                         alt="linkedin"
                         src={require("./connect/linkedin_logo.png")}
                         /></a>
-                        <a href="https://angel.co/u/kevin-yieh"><img
+                        <a href="https://angel.co/u/kevin-yieh" target="_blank"><img
                         className="personal-link-logo"
                         alt="angelist"
                         src={require("./connect/angelist_logo.png")}
