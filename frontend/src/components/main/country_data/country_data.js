@@ -22,6 +22,9 @@ export default class CountryData extends React.Component {
   }
 
   componentDidUpdate(prevProps,prevState) {
+    if (prevProps.country !== this.props.country){
+      this.setState({ hidden: false })
+    }
     if (prevProps.display !== this.props.display){
       this.setState({ hidden: this.props.hidden })
     }else {
